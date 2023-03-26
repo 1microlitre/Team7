@@ -224,4 +224,13 @@ export default class TileMap {
     }
     return enemies;
   }
+
+  didWin() {
+    return this.#dotsLeft() === 0;
+  }
+
+  #dotsLeft() {
+    return this.map.flat().filter((tile) => tile === 0).length;
+    //Flat transforms 2D arrays into a "flat"/single layer array
+  }
 }

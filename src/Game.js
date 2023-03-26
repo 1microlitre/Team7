@@ -16,9 +16,20 @@ const gameWinSound = new Audio("../sound/gameWin.wav");
 
 function gameLoop() {
   tileMap.draw(ctx);
-  pacman.draw(ctx, pause());
+  drawGameEnd();
+  pacman.draw(ctx, pause(), enemies);
   enemies.forEach((enemy) => enemy.draw(ctx, pause(), pacman));
   checkGameOver();
+  checkGameWin();
+}
+
+function checkGameWin() {
+  if (!gameWin) {
+    gameWin = tileMap.didWin(); //KARLO: What this does is let the game area (where the dots are) determine if the player won. We want something different.
+    if (gameWin) {
+      gameWinSound.play();
+    }
+  }
 }
 
 function checkGameOver() {
@@ -37,7 +48,27 @@ function isGameOver() {
 }
 
 function pause() {
-  return !pacman.madeFirstMove || gameOver;
+  return !pacman.madeFirstMove || gameOver || gameWin;
+}
+
+function drawGameEnd() {
+  if (gameOver || gameWin) {
+    let text = "You Win!";
+    if (gameOver) {
+      text = "Game Over";
+    }
+
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, canvas.height / 3.2, canvas.width, 80);
+    ctx.font = "80px courier sans";
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+    gradient.addColorStop("0", "magenta");
+    gradient.addColorStop("0.5", "blue");
+    gradient.addColorStop("1.0", "red");
+
+    ctx.fillStyle = gradient;
+    ctx.fillText(text, 10, canvas.height / 2);
+  }
 }
 
 tileMap.setCanvasSize(canvas);
