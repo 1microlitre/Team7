@@ -9,17 +9,30 @@ export default class TileMap {
     this.yellowDot = new Image();
     this.yellowDot.src = "../images/yellowDot.png";
 
+    this.pinkDot = new Image();
+    this.pinkDot.src = "../images/pinkdot.png";
+
     this.wall = new Image();
     this.wall.src = "../images/wall.png";
+
+    this.powerDot = this.pinkDot;
+    this.powerDotAnimationTimerDefault = 50;
+    this.powerDotAnimationTimer = this.powerDotAnimationTimerDefault;
   }
 
-  //KARLO: Map layout. 1-Walls, 0-Dots, 4-pacman, 5 - empty space, 6 - enemy
+  //KARLO: Map layout.
+  //1-Walls,
+  //0-Dots,
+  //4-pacman,
+  //5 - empty space,
+  //6 - enemy
+  //7 - power dot
   map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 7, 0, 0, 4, 0, 0, 0, 0, 0, 0, 7, 1],
     [1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1],
     [1, 0, 1, 6, 0, 0, 0, 0, 0, 0, 1, 0, 1],
-    [1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1],
+    [1, 0, 1, 7, 1, 1, 1, 0, 1, 0, 1, 0, 1],
     [1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1],
     [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1],
     [1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1],
@@ -37,6 +50,8 @@ export default class TileMap {
           //KARLO: 'column' first before 'row' here. Not sure why,but apparently we should keep it like this.
         } else if (tile === 0) {
           this.#drawDot(ctx, column, row, this.tileSize);
+        } else if (tile === 7) {
+          this.#drawPowerDot(ctx, column, row, this.tileSize);
         } else {
           this.#drawBlank(ctx, column, row, this.tileSize);
         }
@@ -74,6 +89,19 @@ export default class TileMap {
   #drawBlank(ctx, column, row, size) {
     ctx.fillStyle = "black";
     ctx.fillRect(column * this.tileSize, row * this.tileSize, size, size);
+  }
+
+  #drawPowerDot(ctx, column, row, size) {
+    this.powerDotAnimationTimer--;
+    if (this.powerDotAnimationTimer === 0) {
+      this.powerDotAnimationTimer = this.powerDotAnimationTimerDefault;
+      if (this.powerDot === this.pinkDot) {
+        this.powerDot = this.yellowDot;
+      } else {
+        this.powerDot = this.pinkDot;
+      }
+    }
+    ctx.drawImage(this.powerDot, column * size, row * size, size, size);
   }
 
   //---End of drawing canvas section----
@@ -152,6 +180,20 @@ export default class TileMap {
     if (Number.isInteger(row) && Number.isInteger(column)) {
       if (this.map[row][column] === 0) {
         this.map[row][column] = 5;
+        return true;
+      }
+    }
+    return false;
+  }
+
+  eatPowerDot(x, y) {
+    const row = y / this.tileSize;
+    const column = x / this.tileSize;
+    if (Number.isInteger(row) && Number.isInteger(column)) {
+      const tile = this.map[row][column];
+      if (tile === 7) {
+        this.map[row][column] = 5;
+
         return true;
       }
     }
