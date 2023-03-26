@@ -14,6 +14,9 @@ export default class Pacman {
     this.pacmanAnimationTimerDefault = 10;
     this.pacmanAnimationTimer = null;
 
+    this.pacmanRotation = this.Rotation.right;
+    this.wakaSound = new Audio("../sound/waka.wav");
+
     document.addEventListener("keydown", this.#keydown);
 
     this.#loadPacmanImages();
@@ -27,16 +30,41 @@ export default class Pacman {
   this
   */
 
+  Rotation = {
+    right: 0,
+    down: 1,
+    left: 2,
+    up: 3,
+  };
+
   draw(ctx) {
     this.#move();
     this.#animate();
+    this.#eatDot();
+    const size = this.tileSize / 2;
+
+    ctx.save();
+    ctx.translate(this.x + size, this.y + size);
+    ctx.rotate((this.pacmanRotation * 90 * Math.PI) / 180);
     ctx.drawImage(
+      this.pacmanImages[this.pacmanImageIndex],
+      -size,
+      -size,
+      this.tileSize,
+      this.tileSize
+    );
+
+    ctx.restore();
+
+    //KARLO: Lines 40-54 are necessary if you want to have Pacman rotate to achieve the flipping effect when it moves to the opposite direction.
+
+    /*ctx.drawImage(
       this.pacmanImages[this.pacmanImageIndex],
       this.x,
       this.y,
       this.tileSize,
       this.tileSize
-    );
+    );*/
   }
 
   #loadPacmanImages() {
@@ -119,7 +147,7 @@ export default class Pacman {
       )
     ) {
       this.pacmanAnimationTimer = null;
-      this.pacmanAnimationIndex = 1;
+      this.pacmanImageIndex = 0; //KARLO: This means that when Pacman collides with the wall, its mouth closes.
       return;
     } else if (
       this.currentMovingDirection != null &&
@@ -131,15 +159,19 @@ export default class Pacman {
     switch (this.currentMovingDirection) {
       case MovingDirection.up:
         this.y -= this.velocity;
+        this.pacmanRotation = this.Rotation.up;
         break;
       case MovingDirection.down:
         this.y += this.velocity;
+        this.pacmanRotation = this.Rotation.down;
         break;
       case MovingDirection.left:
         this.x -= this.velocity;
+        this.pacmanRotation = this.Rotation.left;
         break;
       case MovingDirection.right:
         this.x += this.velocity;
+        this.pacmanRotation = this.Rotation.right;
         break;
     }
   }
@@ -154,6 +186,12 @@ export default class Pacman {
       this.pacmanImageIndex++;
       if (this.pacmanImageIndex == this.pacmanImages.length)
         this.pacmanImageIndex = 0;
+    }
+  }
+
+  #eatDot() {
+    if (this.tileMap.eatDot(this.x, this.y)) {
+      //this.wakaSound.play();
     }
   }
 }
