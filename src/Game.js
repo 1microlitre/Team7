@@ -8,9 +8,12 @@ const ctx = canvas.getContext("2d");
 const tileMap = new TileMap(tileSize);
 const pacman = tileMap.getPacman(velocity);
 const enemies = tileMap.getEnemies(velocity);
+const scoreDisplay = document.querySelector("#score");
 
+let score = 0;
 let gameOver = false;
 let gameWin = false;
+
 const gameOverSound = new Audio("../sound/gameOver.wav");
 const gameWinSound = new Audio("../sound/gameWin.wav");
 

@@ -177,6 +177,7 @@ export default class TileMap {
   eatDot(x, y) {
     const row = y / this.tileSize;
     const column = x / this.tileSize;
+
     if (Number.isInteger(row) && Number.isInteger(column)) {
       if (this.map[row][column] === 0) {
         this.map[row][column] = 5;
@@ -189,11 +190,15 @@ export default class TileMap {
   eatPowerDot(x, y) {
     const row = y / this.tileSize;
     const column = x / this.tileSize;
+    const scoreDisplay = document.querySelector("#score");
+
+    var score = 0;
     if (Number.isInteger(row) && Number.isInteger(column)) {
       const tile = this.map[row][column];
+      score += 10;
       if (tile === 7) {
         this.map[row][column] = 5;
-
+        scoreDisplay.innerHTML = score;
         return true;
       }
     }
@@ -204,7 +209,6 @@ export default class TileMap {
 
   getEnemies(velocity) {
     const enemies = [];
-
     for (let row = 0; row < this.map.length; row++) {
       for (let column = 0; column < this.map[row].length; column++) {
         const tile = this.map[row][column];
