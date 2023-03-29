@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (layout[i] === 3) {
         gridSquare[i].classList.add("pacmanRight");
       } else if (layout[i] === 5) {
-        gridSquare[i].classList.add("food");
+        gridSquare[i].classList.add("pill");
       } else if (layout[i] === 6) {
         gridSquare[i].classList.add("warp");
       } else if (layout[i] === 4) {
@@ -710,9 +710,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   // counts down the time for the timer AND reduces score per time interval
   function countDown() {
-    if (time == 296) {
+    /*if (time == 296) {
       gridSquare[49].classList.add("pill");
-    }
+    }*/
     time = time - 1;
     timer.innerHTML = time;
     if (time % 5 == 0) {
