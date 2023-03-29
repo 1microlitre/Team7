@@ -1,6 +1,6 @@
 // THESE VALUES CAN BE SET TO ALTER THE GAME
-// set how long the pills work for (ms)
-const pilltime = 6000;
+// set how long the powerups work for (ms)
+const poweruptime = 6000;
 // Set how many miliseconds between each time the ghosts move
 const ghostTimePerMove = 300;
 // Defining the ghosts paramters.
@@ -94,7 +94,7 @@ const ghosts = [ghostOne, ghostTwo, ghostThree, ghostFour];
 // wall = 1
 // pacman = 3
 // ghosts = 4
-// pill = 5
+// powerup = 5
 // WARP = 6
 const layout = [
   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 5,
@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
    }*/
   });
 
-  // const layoutClasses = ['', 'wall', 'food', 'pacmanRight', 'pill', 'warp', 'ghostOne', 'ghostTwo', 'ghostThree', 'ghostFour']
+  // const layoutClasses = ['', 'wall', 'food', 'pacmanRight', 'powerup', 'warp', 'ghostOne', 'ghostTwo', 'ghostThree', 'ghostFour']
   //This function assings the correct classes depending on the layout above.
   function assignGrid(ghostOne, ghostTwo, ghostThree, ghostFour) {
     infoBox.innerHTML = "Click ↑";
@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (layout[i] === 3) {
         gridSquare[i].classList.add("pacmanRight");
       } else if (layout[i] === 5) {
-        gridSquare[i].classList.add("pill");
+        gridSquare[i].classList.add("powerup");
       } else if (layout[i] === 6) {
         gridSquare[i].classList.add("warp");
       } else if (layout[i] === 4) {
@@ -303,11 +303,11 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
     }
-    // colliding with pill ------------------------------------------
-    if (gridSquare[pacIndex].classList.contains("pill")) {
-      gridSquare[pacIndex].classList.remove("pill");
+    // colliding with powerup ------------------------------------------
+    if (gridSquare[pacIndex].classList.contains("powerup")) {
+      gridSquare[pacIndex].classList.remove("powerup");
       for (let i = 0; i < ghosts.length; i++) {
-        pilltaken(ghosts[i]);
+        poweruptaken(ghosts[i]);
       }
       setTimeout(function () {
         for (let i = 0; i < 16; i++) {
@@ -328,7 +328,7 @@ document.addEventListener("DOMContentLoaded", () => {
         caughtIdFour = setInterval(function () {
           pacCaught(ghostFour);
         }, 60);
-      }, pilltime);
+      }, poweruptime);
     }
     // The next 2 if statments allow for warping from each side of the map
     if (pacIndex === 141) {
@@ -548,7 +548,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   // This function is run many times a second checking if a ghost
   // has caught pacman
-  function pacCaught(ghost) {
+  /*function pacCaught(ghost) {
     console.log("is it catching?");
     if (gridSquare[pacIndex] === gridSquare[ghost.ghostIndex]) {
       gridSquare[pacIndex].classList.remove("pacmanRight");
@@ -575,8 +575,38 @@ document.addEventListener("DOMContentLoaded", () => {
       infoBox.innerHTML = "PacMan Died.";
       start.style.backgroundColor = "red";
     }
+  }*/
+
+  // Function for reducing score when hit by monsters.
+  function pacCaught(ghostOne) {
+    console.log("is it catching?");
+    if (gridSquare[pacIndex] === gridSquare[ghostOne.ghostIndex]) {
+      scoreNumber = scoreNumber - 40;
+    }
   }
-  // Calling the caught functon for each ghost
+
+  function pacCaught(ghostTwo) {
+    console.log("is it catching?");
+    if (gridSquare[pacIndex] === gridSquare[ghostTwo.ghostIndex]) {
+      scoreNumber = scoreNumber - 60;
+    }
+  }
+
+  function pacCaught(ghostThree) {
+    console.log("is it catching?");
+    if (gridSquare[pacIndex] === gridSquare[ghostThree.ghostIndex]) {
+      scoreNumber = scoreNumber - 90;
+    }
+  }
+
+  function pacCaught(ghostFour) {
+    console.log("is it catching?");
+    if (gridSquare[pacIndex] === gridSquare[ghostFour.ghostIndex]) {
+      scoreNumber = scoreNumber - 10;
+    }
+  }
+
+  // Calling the caught function for each ghost
   let caughtIdOne = setInterval(function () {
     pacCaught(ghostOne);
   }, 60);
@@ -633,8 +663,8 @@ document.addEventListener("DOMContentLoaded", () => {
       chooseAndMove(ghostFour);
     }, ghostTimePerMove);
   }
-  // This function is run when pacman takes a pill
-  function pilltaken(ghost) {
+  // This function is run when pacman takes a powerup
+  function poweruptaken(ghost) {
     ghost.bias = 2;
     gridSquare[ghost.ghostIndex].classList.remove("ghostDead");
     gridSquare[ghost.ghostIndex].classList.remove(ghost.ghostClass);
@@ -645,8 +675,8 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(caughtIdThree);
       clearInterval(caughtIdFour);
     }
-    // this reverses the ghosts direction once Pman has taken the pills
-    ghost.lastDirection = -ghost.lastDirection;
+    // this reverses the ghosts direction once Pman has taken the powerups
+    /*ghost.lastDirection = -ghost.lastDirection;
     gridSquare[ghost.ghostIndex].classList.remove("ghostFlee");
     ghost.ghostIndex = ghost.ghostIndex - ghost.directionMove;
     gridSquare[ghost.ghostIndex].classList.add("ghostFlee");
@@ -669,21 +699,21 @@ document.addEventListener("DOMContentLoaded", () => {
         clearInterval(pacKillIdThree);
         clearInterval(pacKillIdFour);
       }
-      pillWareoff(ghost);
-    }, pilltime);
+      powerupWareoff(ghost);
+    }, poweruptime);
   }
-  // When a pill is taken the function is run a number of times a second
+  // When a powerup is taken the function is run a number of times a second
   // to check to see if pacman has killed a ghost
-  function pacKill(ghost) {
+  /*function pacKill(ghost) {
     console.log("can pac kill");
     for (let i = 0; i < 16; i++) {
       clearInterval(caughtIdOne);
       clearInterval(caughtIdTwo);
       clearInterval(caughtIdThree);
       clearInterval(caughtIdFour);
-    }
+    }*/
     // so pacMan can kill ghost
-    if (gridSquare[pacIndex] === gridSquare[ghost.ghostIndex]) {
+    /*if (gridSquare[pacIndex] === gridSquare[ghost.ghostIndex]) {
       scoreNumber = scoreNumber + 200;
       infoBox.innerHTML = "Ghost \n +200 Points";
       gridSquare[ghost.ghostIndex].classList.remove("ghostFlee");
@@ -694,10 +724,10 @@ document.addEventListener("DOMContentLoaded", () => {
       ghost.ghostIndex = ghost.ghostIndex - ghost.directionMove;
       gridSquare[ghost.ghostIndex].classList.add("ghostDead");
       ghost.bias = 3;
-    }
+    }*/
   }
   // this resets the ghosts to hunt pacman and stop pac man from killing
-  function pillWareoff(ghost) {
+  /*function powerupWareoff(ghost) {
     ghost.bias = 1;
     gridSquare[ghost.ghostIndex].classList.remove("ghostDead");
     gridSquare[ghost.ghostIndex].classList.remove("ghostFlee");
@@ -707,17 +737,21 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(caughtIdThree);
       clearInterval(caughtIdFour);
     }
-  }
-  // counts down the time for the timer AND reduces score per time interval
+  }*/
+  // Counts down the time for the timer, reduces score per time interval, and sets apperance of power-ups
   function countDown() {
-    /*if (time == 296) {
-      gridSquare[49].classList.add("pill");
-    }*/
     time = time - 1;
     timer.innerHTML = time;
     if (time % 5 == 0) {
       scoreNumber = scoreNumber - 10;
       score.innerHTML = scoreNumber;
+    }
+    if (time == 296) {
+      gridSquare[49].classList.add("powerup");
+    }
+    if (time == 290) {
+      gridSquare[49].classList.remove("powerup");
+      gridSquare[52].classList.add("powerup");
     }
   }
 
