@@ -711,7 +711,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // counts down the time for the timer AND reduces score per time interval
   function countDown() {
     if (time == 296) {
-      gridSquare[51].classList.add("pill");
+      gridSquare[49].classList.add("pill");
     }
     time = time - 1;
     timer.innerHTML = time;
