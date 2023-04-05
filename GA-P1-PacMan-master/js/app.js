@@ -15,9 +15,9 @@ let pacIndex = 250;
 // players points
 let scoreNumber = 0;
 // The time played
-let time = 300;
+let time = 45;
 // Id to ended the timer
-let countDownid;
+let CountUpid;
 // Ids to stop the ghosts from moving
 let ghostMoveIdOne;
 let ghostMoveIdTwo;
@@ -96,6 +96,7 @@ const ghosts = [ghostOne, ghostTwo, ghostThree, ghostFour];
 // ghosts = 4
 // powerup = 5
 // WARP = 6
+// GATE = 7
 const layout = [
   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 5,
   2, 2, 2, 2, 2, 2, 2, 2, 2, 5, 2, 2, 2, 1, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2,
@@ -149,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
       start.style.backgroundColor = "red";
       // if it says play again? run the game 1st > time
     } /*else if (start.innerHTML === "Play Again?") {
-      countDownid = setInterval(countDown, 1000);
+      CountUpid = setInterval(CountUp, 1000);
       for (let i = 0; i < 16; i++) {
         clearInterval(caughtIdOne);
         clearInterval(caughtIdTwo);
@@ -236,7 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(ghostMoveIdTwo);
       clearInterval(ghostMoveIdThree);
       clearInterval(ghostMoveIdFour);
-      clearInterval(countDownid);
+      clearInterval(CountUpid);
       gridSquare[pacIndex].classList.remove("pacmanUp");
       gridSquare[pacIndex].classList.remove("pacmanRight");
       gridSquare[pacIndex].classList.remove("pacmanDown");
@@ -428,7 +429,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // This function is only used once to start the game and set the ghosts moving.
   function startGame() {
     pacSoundId = setInterval(pacSound, 650);
-    countDownid = setInterval(countDown, 1000);
+    CountUpid = setInterval(CountUp, 30000);
     ghostMoveIdOne = setInterval(function () {
       chooseAndMove(ghostOne);
     }, ghostTimePerMove);
@@ -558,7 +559,7 @@ document.addEventListener("DOMContentLoaded", () => {
       pacDied(ghost);
       death.play();
       clearInterval(pacSoundId);
-      clearInterval(countDownid);
+      clearInterval(CountUpid);
       for (let i = 0; i < 16; i++) {
         clearInterval(caughtIdOne);
         clearInterval(caughtIdTwo);
@@ -632,7 +633,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(ghostMoveIdThree);
     clearInterval(ghostMoveIdFour);
     pacIndex = null;
-    clearInterval(countDownid);
+    clearInterval(CountUpid);
   }
   // this function is run after everything is set back to 0 inorder to play again
   function startReset(ghost) {
@@ -739,10 +740,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }*/
   // Counts down the time for the timer, reduces score per time interval, and sets apperance of power-ups
-  function countDown() {
-    time = time - 1;
+  function CountUp() {
+    time = time + 1;
     timer.innerHTML = time;
-    if (time % 5 == 0) {
+    if (time % 1 == 0) {
       scoreNumber = scoreNumber - 10;
       score.innerHTML = scoreNumber;
     }
