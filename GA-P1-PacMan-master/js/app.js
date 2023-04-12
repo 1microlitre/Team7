@@ -15,9 +15,11 @@ let pacIndex = 250;
 // players points
 let scoreNumber = 0;
 // The time played
-let time = 45;
+let time = 21;
+let time2 = 0;
 // Id to ended the timer
 let CountUpid;
+let CountUp2id;
 // Ids to stop the ghosts from moving
 let ghostMoveIdOne;
 let ghostMoveIdTwo;
@@ -131,6 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const infoBox = document.querySelector(".infoBox");
   const score = document.querySelector(".score");
   const timer = document.querySelector(".timer");
+  const timer2 = document.querySelector(".timer2");
   const start = document.querySelector(".start");
   const highScore = document.querySelector(".highScore");
   const left = document.querySelector(".left");
@@ -238,6 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(ghostMoveIdThree);
       clearInterval(ghostMoveIdFour);
       clearInterval(CountUpid);
+      clearInterval(CountUp2id);
       gridSquare[pacIndex].classList.remove("pacmanUp");
       gridSquare[pacIndex].classList.remove("pacmanRight");
       gridSquare[pacIndex].classList.remove("pacmanDown");
@@ -429,7 +433,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // This function is only used once to start the game and set the ghosts moving.
   function startGame() {
     pacSoundId = setInterval(pacSound, 650);
-    CountUpid = setInterval(CountUp, 30000);
+    CountUpid = setInterval(CountUp, 1000);
+    CountUp2id = setInterval(CountUp2, 1000);
     ghostMoveIdOne = setInterval(function () {
       chooseAndMove(ghostOne);
     }, ghostTimePerMove);
@@ -634,6 +639,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(ghostMoveIdFour);
     pacIndex = null;
     clearInterval(CountUpid);
+    clearInterval(CountUp2id);
   }
   // this function is run after everything is set back to 0 inorder to play again
   function startReset(ghost) {
@@ -739,11 +745,14 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(caughtIdFour);
     }
   }*/
-  // Counts down the time for the timer, reduces score per time interval, and sets apperance of power-ups
+  // KARLO: Counts down the time for the Year in Age, affects score per time interval, and sets apperance of power-ups
   function CountUp() {
     time = time + 1;
     timer.innerHTML = time;
-    if (time % 1 == 0) {
+    if (time < 28 && time % 1 == 0) {
+      scoreNumber = scoreNumber + 10;
+      score.innerHTML = scoreNumber;
+    } else if (time >= 28 && time % 1 == 0) {
       scoreNumber = scoreNumber - 10;
       score.innerHTML = scoreNumber;
     }
@@ -753,6 +762,17 @@ document.addEventListener("DOMContentLoaded", () => {
     if (time == 290) {
       gridSquare[49].classList.remove("powerup");
       gridSquare[52].classList.add("powerup");
+    }
+  }
+
+  // KARLO: Counts down the time for the Months in Age, resets its everytime it reaches 12.
+  function CountUp2() {
+    if (time2 > 0) {
+      time2 = time2 + 1;
+      timer2.innerHTML = time2;
+    } else if (time2 == 12) {
+      time2 = 0;
+      timer2.innerHTML = time2;
     }
   }
 
@@ -768,6 +788,7 @@ document.addEventListener("DOMContentLoaded", () => {
     time = 0;
     score.innerHTML = scoreNumber;
     timer.innerHTML = time;
+    timer2.innerHTML = time2;
     gridSquare[ghost.ghostIndex].classList.remove("ghostDead");
     gridSquare[ghost.ghostIndex].classList.remove("ghostFlee");
     gridSquare[ghost.ghostIndex].classList.remove(ghost.ghostClass);
