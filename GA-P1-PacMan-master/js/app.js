@@ -18,12 +18,12 @@ let scoreNumber = 0;
 let scoreTarget = 2000;
 // The time played
 let time = 21;
-let time2 = 0;
-let time3 = 0;
+let time2 = 1;
+let time3 = 1;
 let time4 = 28;
 // Id to ended the timer
 let CountUpid;
-let CountUp2id;
+/*let CountUp2id;*/
 let CountDownid;
 // Ids to stop the ghosts from moving
 let ghostMoveIdOne;
@@ -251,7 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(ghostMoveIdThree);
       clearInterval(ghostMoveIdFour);
       clearInterval(CountUpid);
-      clearInterval(CountUp2id);
+      /*clearInterval(CountUp2id);*/
       clearInterval(CountDownid);
       gridSquare[pacIndex].classList.remove("pacmanUp");
       gridSquare[pacIndex].classList.remove("pacmanRight");
@@ -476,7 +476,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function startGame() {
     pacSoundId = setInterval(pacSound, 650);
     CountUpid = setInterval(CountUp, 60000);
-    CountUp2id = setInterval(CountUp2, 5000);
+    /*CountUp2id = setInterval(CountUp2, 5000);*/
     CountUp2id = setInterval(CountUp3, 1000);
     CountDownid = setInterval(CountDown, 1000);
     ghostMoveIdOne = setInterval(function () {
@@ -683,7 +683,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(ghostMoveIdFour);
     pacIndex = null;
     clearInterval(CountUpid);
-    clearInterval(CountUp2id);
+    /*clearInterval(CountUp2id);*/
     clearInterval(CountUp3id);
     clearInterval(Countdownid);
   }
@@ -793,6 +793,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }*/
   // KARLO: Counts up the time for the Year in Age, affects score per time interval, and sets apperance of power-ups
   function CountUp() {
+    time = time + 1;
+    timer.innerHTML = time;
     if (time < 28 && time % 1 == 0) {
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
@@ -800,52 +802,52 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber - 10;
       score.innerHTML = scoreNumber;
     }
-    if (time % 24 == 0) {
+    if (time == 24) {
       gridSquare[49].classList.add("powerup");
     }
-    if (time % 26 == 0) {
+    if (time == 26) {
       gridSquare[49].classList.remove("powerup");
       gridSquare[52].classList.add("powerup");
+    }
+    if (time == 29) {
+      CountDown();
     }
   }
 
   // KARLO: Counts up the time for the Months in Age, resets its everytime it reaches 12.
-  function CountUp2() {
+  /*function CountUp2() {
     if (time2 < 12) {
       time2 = time2 + 1;
       timer2.innerHTML = time2;
-    } else {
-      time = time + 1;
-      timer.innerHTML = time;
-      time2 = 0;
+    } else if (time2 == 12) {
+      time2 = 1;
       timer2.innerHTML = time2;
     }
-  }
+  }*/
 
   // KARLO: Counts up the time for the Days in Age, resets its everytime it reaches 12.
   function CountUp3() {
-    if (time3 < 30) {
+    if (time3 == 1) {
+      time3 = time3 + 5;
+    } else if (time3 < 30) {
       time3 = time3 + 6;
-      timer3.innerHTML = time3;
-    } else if (time3 == 30) {
-      time3 = 0;
-      timer3.innerHTML = time3;
+    } else if (time3 >= 30) {
+      time3 = 1;
       if (time2 < 12) {
-        time = time + 1;
+        time2 = time2 + 1;
         timer2.innerHTML = time2;
-      } else if (time2 > 12) {
-        time2 = 0;
+      } else if (time2 == 12) {
+        time2 = 1;
         timer2.innerHTML = time2;
       }
     }
+    timer3.innerHTML = time3;
   }
 
   // KARLO: Counts down the visa expiration.
   function CountDown() {
-    if (time % 22 == 0) {
-      time4 = time4 - 1;
-      timer4.innerHTML = time4;
-    }
+    time4 = time4 - 1;
+    timer4.innerHTML = time4;
   }
 
   // this runs a hard reset on eveything clearing all the timers
