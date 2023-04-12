@@ -14,12 +14,17 @@ const directions = [-1, -width, 1, width];
 let pacIndex = 250;
 // players points
 let scoreNumber = 0;
+// target points
+let scoreTarget = 2000;
 // The time played
 let time = 21;
 let time2 = 0;
+let time3 = 0;
+let time4 = 28;
 // Id to ended the timer
 let CountUpid;
 let CountUp2id;
+let CountDownid;
 // Ids to stop the ghosts from moving
 let ghostMoveIdOne;
 let ghostMoveIdTwo;
@@ -95,18 +100,20 @@ const ghosts = [ghostOne, ghostTwo, ghostThree, ghostFour];
 // empty = 0
 // wall = 1
 // pacman = 3
-// ghosts = 4
+// ghost1 = 4
 // powerup = 5
-// WARP = 6
-// GATE = 7
+// Gate = 6
+// ghost2 = 7
+// ghost3 = 8
+// ghost4 = 9
 const layout = [
   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 5,
   2, 2, 2, 2, 2, 2, 2, 2, 2, 5, 2, 2, 2, 1, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2,
   1, 2, 1, 1, 1, 1, 2, 1, 1, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1,
   2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2, 2, 2,
   2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 0,
-  0, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 6, 6, 2, 1, 2, 1, 1, 0, 0, 0, 0, 1, 1, 2, 1,
-  2, 6, 6, 1, 1, 1, 1, 2, 1, 2, 1, 1, 8, 7, 4, 9, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1,
+  0, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 0, 0, 0, 0, 1, 1, 2, 1,
+  2, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 8, 7, 4, 9, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1,
   1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2,
   2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
   1, 1, 1, 1, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 1,
@@ -134,6 +141,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const score = document.querySelector(".score");
   const timer = document.querySelector(".timer");
   const timer2 = document.querySelector(".timer2");
+  const timer3 = document.querySelector(".timer3");
+  const timer4 = document.querySelector(".timer4");
   const start = document.querySelector(".start");
   const highScore = document.querySelector(".highScore");
   const left = document.querySelector(".left");
@@ -201,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (layout[i] === 5) {
         gridSquare[i].classList.add("powerup");
       } else if (layout[i] === 6) {
-        gridSquare[i].classList.add("warp");
+        gridSquare[i].classList.add("gate");
       } else if (layout[i] === 4) {
         gridSquare[i].classList.add("ghostOne");
         ghostOne.ghostIndex = i;
@@ -217,8 +226,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   }
-  // Calling the assignGrid fucntion
+  // Calling the assignGrid function
   assignGrid(ghostOne, ghostTwo, ghostThree, ghostFour);
+
   // This counts to see how much food is left before you complete the level
   function checkWin() {
     // let foodAmount = (layout.filter(x => x === 2)).length
@@ -242,6 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(ghostMoveIdFour);
       clearInterval(CountUpid);
       clearInterval(CountUp2id);
+      clearInterval(CountDownid);
       gridSquare[pacIndex].classList.remove("pacmanUp");
       gridSquare[pacIndex].classList.remove("pacmanRight");
       gridSquare[pacIndex].classList.remove("pacmanDown");
@@ -256,6 +267,37 @@ document.addEventListener("DOMContentLoaded", () => {
       time = time + 0;
     }
   }
+
+  //KARLO: Condition for winning the game
+  /*function checkWin() {
+    if (scoreNumber >= scoreTarget && gridSquare[pacIndex].classList.contains("gate") {
+      highScoreNumber = scoreNumber;
+      highScoreTime = time;
+      infoBox.innerHTML = "YOU WIN!";
+    }
+    /*if (foodAmount === 0) {
+      clearInterval(pacSoundId);
+      for (let i = 0; i < 16; i++) {
+        clearInterval(caughtIdOne);
+        clearInterval(caughtIdTwo);
+        clearInterval(caughtIdThree);
+        clearInterval(caughtIdFour);
+      }
+      clearInterval(ghostMoveIdOne);
+      clearInterval(ghostMoveIdTwo);
+      clearInterval(ghostMoveIdThree);
+      clearInterval(ghostMoveIdFour);
+      clearInterval(CountUpid);
+      clearInterval(CountUp2id);
+      gridSquare[pacIndex].classList.remove("pacmanUp");
+      gridSquare[pacIndex].classList.remove("pacmanRight");
+      gridSquare[pacIndex].classList.remove("pacmanDown");
+      gridSquare[pacIndex].classList.remove("pacmanLeft");
+      start.innerHTML = "Play Again?";
+      infoBox.innerHTML = "YOU WIN!";
+  
+    }
+  }*/
 
   //Calling the checkWin to run at a set interval 200ms
   setInterval(checkWin, 200);
@@ -336,7 +378,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }, poweruptime);
     }
     // The next 2 if statments allow for warping from each side of the map
-    if (pacIndex === 141) {
+    /*if (pacIndex === 141) {
       gridSquare[pacIndex].classList.remove("pacmanUp");
       gridSquare[pacIndex].classList.remove("pacmanRight");
       gridSquare[pacIndex].classList.remove("pacmanDown");
@@ -351,7 +393,7 @@ document.addEventListener("DOMContentLoaded", () => {
       gridSquare[pacIndex].classList.remove("pacmanLeft");
       pacIndex = 142;
       gridSquare[pacIndex].classList.add("pacmanRight");
-    }
+    }*/
   }
   // Preventing arrow keys from scrolling
   function preventDefultScroll(e) {
@@ -433,8 +475,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // This function is only used once to start the game and set the ghosts moving.
   function startGame() {
     pacSoundId = setInterval(pacSound, 650);
-    CountUpid = setInterval(CountUp, 1000);
-    CountUp2id = setInterval(CountUp2, 1000);
+    CountUpid = setInterval(CountUp, 60000);
+    CountUp2id = setInterval(CountUp2, 5000);
+    CountUp2id = setInterval(CountUp3, 1000);
+    CountDownid = setInterval(CountDown, 1000);
     ghostMoveIdOne = setInterval(function () {
       chooseAndMove(ghostOne);
     }, ghostTimePerMove);
@@ -640,6 +684,8 @@ document.addEventListener("DOMContentLoaded", () => {
     pacIndex = null;
     clearInterval(CountUpid);
     clearInterval(CountUp2id);
+    clearInterval(CountUp3id);
+    clearInterval(Countdownid);
   }
   // this function is run after everything is set back to 0 inorder to play again
   function startReset(ghost) {
@@ -745,10 +791,8 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(caughtIdFour);
     }
   }*/
-  // KARLO: Counts down the time for the Year in Age, affects score per time interval, and sets apperance of power-ups
+  // KARLO: Counts up the time for the Year in Age, affects score per time interval, and sets apperance of power-ups
   function CountUp() {
-    time = time + 1;
-    timer.innerHTML = time;
     if (time < 28 && time % 1 == 0) {
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
@@ -756,23 +800,51 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber - 10;
       score.innerHTML = scoreNumber;
     }
-    if (time == 296) {
+    if (time % 24 == 0) {
       gridSquare[49].classList.add("powerup");
     }
-    if (time == 290) {
+    if (time % 26 == 0) {
       gridSquare[49].classList.remove("powerup");
       gridSquare[52].classList.add("powerup");
     }
   }
 
-  // KARLO: Counts down the time for the Months in Age, resets its everytime it reaches 12.
+  // KARLO: Counts up the time for the Months in Age, resets its everytime it reaches 12.
   function CountUp2() {
-    if (time2 > 0) {
+    if (time2 < 12) {
       time2 = time2 + 1;
       timer2.innerHTML = time2;
-    } else if (time2 == 12) {
+    } else {
+      time = time + 1;
+      timer.innerHTML = time;
       time2 = 0;
       timer2.innerHTML = time2;
+    }
+  }
+
+  // KARLO: Counts up the time for the Days in Age, resets its everytime it reaches 12.
+  function CountUp3() {
+    if (time3 < 30) {
+      time3 = time3 + 6;
+      timer3.innerHTML = time3;
+    } else if (time3 == 30) {
+      time3 = 0;
+      timer3.innerHTML = time3;
+      if (time2 < 12) {
+        time = time + 1;
+        timer2.innerHTML = time2;
+      } else if (time2 > 12) {
+        time2 = 0;
+        timer2.innerHTML = time2;
+      }
+    }
+  }
+
+  // KARLO: Counts down the visa expiration.
+  function CountDown() {
+    if (time % 22 == 0) {
+      time4 = time4 - 1;
+      timer4.innerHTML = time4;
     }
   }
 
@@ -789,6 +861,8 @@ document.addEventListener("DOMContentLoaded", () => {
     score.innerHTML = scoreNumber;
     timer.innerHTML = time;
     timer2.innerHTML = time2;
+    timer3.innerHTML = time3;
+    timer4.innerHTML = time4;
     gridSquare[ghost.ghostIndex].classList.remove("ghostDead");
     gridSquare[ghost.ghostIndex].classList.remove("ghostFlee");
     gridSquare[ghost.ghostIndex].classList.remove(ghost.ghostClass);
