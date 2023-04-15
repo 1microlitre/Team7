@@ -13,17 +13,18 @@ const directions = [-1, -width, 1, width];
 // pacman position
 let pacIndex = 250;
 // players points
-let scoreNumber = 0;
+let scoreNumber = 700;
 // target points
 let scoreTarget = 2000;
 // The time played
-let time = 21;
+let time = 26;
 let time2 = 1;
 let time3 = 1;
 let time4 = 28;
 // Id to ended the timer
 let CountUpid;
 /*let CountUp2id;*/
+let CountUp3id;
 let CountDownid;
 // Ids to stop the ghosts from moving
 let ghostMoveIdOne;
@@ -107,22 +108,45 @@ const ghosts = [ghostOne, ghostTwo, ghostThree, ghostFour];
 // ghost3 = 8
 // ghost4 = 9
 const layout = [
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 5,
-  2, 2, 2, 2, 2, 2, 2, 2, 2, 5, 2, 2, 2, 1, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2,
-  1, 2, 1, 1, 1, 1, 2, 1, 1, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1,
-  2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2, 2, 2,
-  2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 0,
-  0, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 0, 0, 0, 0, 1, 1, 2, 1,
-  2, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 8, 7, 4, 9, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1,
-  1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2,
-  2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1, 1, 1, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 1,
-  1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 2, 2, 2,
-  2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 2, 1, 1, 2,
-  1, 1, 1, 1, 2, 1, 2, 1, 1, 2, 1, 2, 5, 2, 2, 1, 2, 2, 2, 2, 1, 2, 2, 5, 2, 1,
-  2, 1, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 2, 1, 1, 2, 2, 2,
-  2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+  //Next
+  1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1,
+  //Next
+  1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 2, 1,
+  //Next
+  1, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 2, 1,
+  //Next
+  1, 2, 1, 2, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1,
+  //Next
+  1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1,
+  //Next
+  1, 1, 1, 2, 1, 2, 1, 1, 1, 0, 0, 1, 1, 1, 2, 1, 2, 1, 1, 1,
+  //Next
+  1, 1, 1, 2, 1, 2, 1, 1, 0, 0, 0, 0, 1, 1, 2, 1, 2, 1, 1, 1,
+  //Next
+  1, 1, 1, 2, 1, 2, 1, 1, 8, 7, 4, 9, 1, 1, 2, 1, 2, 1, 1, 1,
+  //Next
+  1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1,
+  //Next
+  1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1,
+  //Next
+  1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1,
+  //Next
+  1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 3, 1, 2, 2, 2, 2, 2, 2, 2, 1,
+  //Next
+  1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1,
+  //Next
+  1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1,
+  //Next
+  1, 2, 1, 2, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1,
+  //Next
+  1, 2, 1, 2, 5, 2, 2, 1, 2, 2, 2, 2, 1, 2, 2, 5, 2, 1, 2, 1,
+  //Next
+  1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 2, 1,
+  //Next
+  1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1,
+  //Next
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -250,7 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(ghostMoveIdTwo);
       clearInterval(ghostMoveIdThree);
       clearInterval(ghostMoveIdFour);
-      clearInterval(CountUpid);
+      /*clearInterval(CountUpid);*/
       /*clearInterval(CountUp2id);*/
       clearInterval(CountDownid);
       gridSquare[pacIndex].classList.remove("pacmanUp");
@@ -475,9 +499,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // This function is only used once to start the game and set the ghosts moving.
   function startGame() {
     pacSoundId = setInterval(pacSound, 650);
-    CountUpid = setInterval(CountUp, 60000);
+    CountUpid = setInterval(CountUp, 72000);
     /*CountUp2id = setInterval(CountUp2, 5000);*/
-    CountUp2id = setInterval(CountUp3, 1000);
+    CountUp3id = setInterval(CountUp3, 1000);
     CountDownid = setInterval(CountDown, 1000);
     ghostMoveIdOne = setInterval(function () {
       chooseAndMove(ghostOne);
@@ -791,21 +815,19 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(caughtIdFour);
     }
   }*/
-  // KARLO: Counts up the time for the Year in Age, affects score per time interval, and sets apperance of power-ups
+  // KARLO: Counts up the Year in Age, affects score by change in year, and sets appearance of power-ups
   function CountUp() {
-    time = time + 1;
-    timer.innerHTML = time;
-    if (time < 28 && time % 1 == 0) {
+    if (time < 28) {
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
-    } else if (time >= 28 && time % 1 == 0) {
+    } else if (time >= 28) {
       scoreNumber = scoreNumber - 10;
       score.innerHTML = scoreNumber;
     }
-    if (time == 24) {
+    if (time == 27) {
       gridSquare[49].classList.add("powerup");
     }
-    if (time == 26) {
+    if (time == 28) {
       gridSquare[49].classList.remove("powerup");
       gridSquare[52].classList.add("powerup");
     }
@@ -831,14 +853,16 @@ document.addEventListener("DOMContentLoaded", () => {
       time3 = time3 + 5;
     } else if (time3 < 30) {
       time3 = time3 + 6;
-    } else if (time3 >= 30) {
+    } else if ((time3 = 30)) {
       time3 = 1;
       if (time2 < 12) {
         time2 = time2 + 1;
         timer2.innerHTML = time2;
-      } else if (time2 == 12) {
+      } else {
         time2 = 1;
         timer2.innerHTML = time2;
+        time = time + 1;
+        timer.innerHTML = time;
       }
     }
     timer3.innerHTML = time3;
