@@ -20,6 +20,7 @@ let scoreTarget = 2000;
 let time = 26;
 let time2 = 1;
 let time3 = 15;
+/*let time4 = 28;*/
 let time5 = 0;
 // Id to ended the timer
 let CountUpid;
@@ -31,6 +32,7 @@ let ghostMoveIdOne;
 let ghostMoveIdTwo;
 let ghostMoveIdThree;
 let ghostMoveIdFour;
+let ghostMoveIdFive;
 // Id to stop the pac audio sounds
 let pacSoundId;
 // Used to set the games highscore
@@ -93,8 +95,19 @@ const ghostFour = {
   lastDirection: 0,
   bias: 1,
 };
+const ghostFive = {
+  ghostIndex: 150,
+  ghostClass: "ghostFive",
+  goodDirections: [],
+  goodPositions: [],
+  directionStore: [],
+  directionMove: -1,
+  positionMove: null,
+  lastDirection: 0,
+  bias: 1,
+};
 // An array of the 4 ghosts
-const ghosts = [ghostOne, ghostTwo, ghostThree, ghostFour];
+const ghosts = [ghostOne, ghostTwo, ghostThree, ghostFour, ghostFive];
 
 // creating the grid and allocating each div a class
 // ASSIGN A CLASS A NUMBER.
@@ -107,6 +120,7 @@ const ghosts = [ghostOne, ghostTwo, ghostThree, ghostFour];
 // ghost2 = 7
 // ghost3 = 8
 // ghost4 = 9
+// ghost5 = 9
 /* See lines 246 to 289 for the number assignments 
       } else if (layout[i] === 9) {
         gridSquare[i].classList.add("ghostFour");
@@ -144,7 +158,7 @@ const layout = [
   //Next
   1, 2, 1, 2, 1, 2, 1, 1, 1, 0, 0, 1, 1, 1, 2, 1, 2, 1, 2, 1,
   //Next
-  1, 2, 1, 2, 1, 2, 1, 1, 0, 0, 0, 0, 1, 1, 2, 1, 2, 1, 2, 1,
+  1, 2, 1, 2, 1, 2, 1, 1, 0, 18, 0, 0, 1, 1, 2, 1, 2, 1, 2, 1,
   //Next
   1, 2, 1, 2, 1, 2, 1, 1, 8, 7, 4, 9, 1, 1, 2, 1, 2, 1, 2, 1,
   //Next
@@ -244,7 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // const layoutClasses = ['', 'wall', 'food', 'pacmanRight', 'heart', 'warp', 'ghostOne', 'ghostTwo', 'ghostThree', 'ghostFour']
   //This function assings the correct classes depending on the layout above.
-  function assignGrid(ghostOne, ghostTwo, ghostThree, ghostFour) {
+  function assignGrid(ghostOne, ghostTwo, ghostThree, ghostFour, ghostFive) {
     infoBox.innerHTML = "Click ↑";
     for (let i = 0; i < layout.length; i++) {
       // gridSquare[i].classList.add(layoutClasses[layout[i]])
@@ -268,6 +282,9 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (layout[i] === 9) {
         gridSquare[i].classList.add("ghostFour");
         ghostFour.ghostIndex = i;
+      } else if (layout[i] === 18) {
+        gridSquare[i].classList.add("ghostFive");
+        ghostFive.ghostIndex = i;
       } else if (layout[i] === 10) {
         gridSquare[i].classList.add("book");
       } else if (layout[i] === 11) {
@@ -288,7 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   // Calling the assignGrid function
-  assignGrid(ghostOne, ghostTwo, ghostThree, ghostFour);
+  assignGrid(ghostOne, ghostTwo, ghostThree, ghostFour, ghostFive);
 
   // This counts to see how much food is left before you complete the level
   function checkWin() {
@@ -306,11 +323,13 @@ document.addEventListener("DOMContentLoaded", () => {
         clearInterval(caughtIdTwo);
         clearInterval(caughtIdThree);
         clearInterval(caughtIdFour);
+        clearInterval(caughtIdFive);
       }
       clearInterval(ghostMoveIdOne);
       clearInterval(ghostMoveIdTwo);
       clearInterval(ghostMoveIdThree);
       clearInterval(ghostMoveIdFour);
+      clearInterval(ghostMoveIdFive);
       clearInterval(CountUpid);
       /*clearInterval(CountUp2id);*/
       clearInterval(CountUp3id);
@@ -425,6 +444,7 @@ document.addEventListener("DOMContentLoaded", () => {
           clearInterval(caughtIdTwo);
           clearInterval(caughtIdThree);
           clearInterval(caughtIdFour);
+          clearInterval(caughtIdFive);
         }
         caughtIdOne = setInterval(function () {
           pacCaught(ghostOne);
@@ -437,6 +457,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 60);
         caughtIdFour = setInterval(function () {
           pacCaught(ghostFour);
+        }, 60);
+        caughtIdFive = setInterval(function () {
+          pacCaught(ghostFive);
         }, 60);
       }, hearttime);
     }
@@ -510,6 +533,13 @@ document.addEventListener("DOMContentLoaded", () => {
         ghost.goodDirections.push(null);
       } else if (
         gridSquare[ghost.ghostIndex + directions[i]].classList.contains(
+          "ghostFive"
+        ) &&
+        ghost.goodDirections.length > 2
+      ) {
+        ghost.goodDirections.push(null);
+      } else if (
+        gridSquare[ghost.ghostIndex + directions[i]].classList.contains(
           "ghostFlee"
         ) &&
         ghost.goodDirections.length > 2
@@ -554,6 +584,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }, ghostTimePerMove);
     ghostMoveIdFour = setInterval(function () {
       chooseAndMove(ghostFour);
+    }, ghostTimePerMove);
+    ghostMoveIdFive = setInterval(function () {
+      chooseAndMove(ghostFive);
     }, ghostTimePerMove);
   }
   // this functions moves the ghosts by removing the class chaning the ghost
@@ -693,29 +726,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function for reducing score when hit by monsters.
   function pacCaught(ghostOne) {
-    console.log("is it catching?");
+    /*console.log("is it catching?");*/
     if (gridSquare[pacIndex] === gridSquare[ghostOne.ghostIndex]) {
       scoreNumber = scoreNumber - 40;
     }
   }
 
   function pacCaught(ghostTwo) {
-    console.log("is it catching?");
+    /*console.log("is it catching?");*/
     if (gridSquare[pacIndex] === gridSquare[ghostTwo.ghostIndex]) {
       scoreNumber = scoreNumber - 60;
     }
   }
 
   function pacCaught(ghostThree) {
-    console.log("is it catching?");
+    /*console.log("is it catching?");*/
     if (gridSquare[pacIndex] === gridSquare[ghostThree.ghostIndex]) {
       scoreNumber = scoreNumber - 90;
     }
   }
 
   function pacCaught(ghostFour) {
-    console.log("is it catching?");
+    /*console.log("is it catching?");*/
     if (gridSquare[pacIndex] === gridSquare[ghostFour.ghostIndex]) {
+      scoreNumber = scoreNumber - 10;
+    }
+  }
+
+  function pacCaught(ghostFive) {
+    /*console.log("is it catching?");*/
+    if (gridSquare[pacIndex] === gridSquare[ghostFive.ghostIndex]) {
       scoreNumber = scoreNumber - 10;
     }
   }
@@ -733,6 +773,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let caughtIdFour = setInterval(function () {
     pacCaught(ghostFour);
   }, 60);
+  let caughtIdFive = setInterval(function () {
+    pacCaught(ghostFive);
+  }, 60);
   //This function if run when pacman is caught by a ghost and dies
   function pacDied() {
     for (let i = 0; i < 16; i++) {
@@ -740,11 +783,13 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(caughtIdTwo);
       clearInterval(caughtIdThree);
       clearInterval(caughtIdFour);
+      clearInterval(caughtIdFive);
     }
     clearInterval(ghostMoveIdOne);
     clearInterval(ghostMoveIdTwo);
     clearInterval(ghostMoveIdThree);
     clearInterval(ghostMoveIdFour);
+    clearInterval(ghostMoveIdFive);
     pacIndex = null;
     clearInterval(CountUpid);
     /*clearInterval(CountUp2id);*/
@@ -759,6 +804,7 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(caughtIdTwo);
       clearInterval(caughtIdThree);
       clearInterval(caughtIdFour);
+      clearInterval(caughtIdFive);
     }
     reset(ghost);
     clearInterval(pacSoundId);
@@ -768,6 +814,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(ghostMoveIdTwo);
     clearInterval(ghostMoveIdThree);
     clearInterval(ghostMoveIdFour);
+    clearInterval(ghostMoveIdFive);
     ghostMoveIdOne = setInterval(function () {
       chooseAndMove(ghostOne);
     }, ghostTimePerMove);
@@ -779,6 +826,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }, ghostTimePerMove);
     ghostMoveIdFour = setInterval(function () {
       chooseAndMove(ghostFour);
+    }, ghostTimePerMove);
+    ghostMoveIdFive = setInterval(function () {
+      chooseAndMove(ghostFive);
     }, ghostTimePerMove);
   }
   // This function is run when pacman takes a heart
@@ -792,6 +842,7 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(caughtIdTwo);
       clearInterval(caughtIdThree);
       clearInterval(caughtIdFour);
+      clearInterval(caughtIdFive);
     }
     // this reverses the ghosts direction once Pman has taken the hearts
     /*ghost.lastDirection = -ghost.lastDirection;
@@ -890,57 +941,65 @@ document.addEventListener("DOMContentLoaded", () => {
   function CountDown2() {
     time5 = time5 + 1;
     console.log(timer5);
-    /*timer5.innerHTML = time5;*/
+    timer5.innerHTML = time5;
     if (time5 == 10) {
-      gridSquare[30].classList.add("book");
+      gridSquare[29].classList.add("book");
     }
     if (time5 == 20) {
-      gridSquare[30].classList.remove("book");
-      gridSquare[77].classList.add("book");
+      gridSquare[29].classList.remove("book");
+      gridSquare[78].classList.add("book");
     }
     if (time5 == 30) {
-      gridSquare[77].classList.remove("book");
-      gridSquare[359].classList.add("paperdoc");
+      gridSquare[78].classList.remove("book");
+      gridSquare[358].classList.add("paperdoc");
     }
     if (time5 == 40) {
-      gridSquare[359].classList.remove("paperdoc");
-      gridSquare[278].classList.add("letter1");
+      gridSquare[358].classList.remove("paperdoc");
+      gridSquare[277].classList.add("letter1");
     }
     if (time5 == 50) {
-      gridSquare[278].classList.remove("letter1");
-      gridSquare[186].classList.add("heart1");
+      gridSquare[277].classList.remove("letter1");
+      gridSquare[185].classList.add("heart1");
     }
     if (time5 == 60) {
-      gridSquare[186].classList.remove("heart1");
-      gridSquare[254].classList.add("heart2");
+      gridSquare[185].classList.remove("heart1");
+      gridSquare[253].classList.add("heart2");
     }
     if (time5 == 70) {
-      gridSquare[254].classList.remove("heart2");
-      gridSquare[368].classList.add("heart2");
+      gridSquare[253].classList.remove("heart2");
+      gridSquare[367].classList.add("heart2");
     }
     if (time5 == 80) {
-      gridSquare[368].classList.remove("heart2");
-      gridSquare[290].classList.add("badge1");
+      gridSquare[367].classList.remove("heart2");
+      gridSquare[289].classList.add("badge1");
     }
     if (time5 == 90) {
-      gridSquare[290].classList.remove("badge1");
-      gridSquare[337].classList.add("letter2");
+      gridSquare[289].classList.remove("badge1");
+      gridSquare[336].classList.add("letter2");
     }
-    if (time51 == 100) {
-      gridSquare[337].classList.remove("letter2");
-      gridSquare[107].classList.add("lottery");
+    if (time5 == 100) {
+      gridSquare[336].classList.remove("letter2");
+      gridSquare[106].classList.add("lottery");
     }
     if (time5 == 110) {
-      gridSquare[107].classList.remove("lottery");
+      gridSquare[106].classList.remove("lottery");
+      gridSquare[170].classList.add("gate");
     }
+    if (time5 == 118) {
+      gridSquare[170].classList.remove("gate");
+    }
+  }
 
-    // KARLO: This set specifically for visa expiration.
-    if (time5 == 71) {
-      let time4 = 28;
-      let CountDownid;
-      CountDownid = setInterval(CountDown, 1000);
-      function CountDown() {
-        time4 = time4 - 1;
+  // KARLO: specifically for visa expiration.
+  let time4 = 120;
+  let CountDownId;
+  CountDownId = setInterval(CountDown, 1000);
+  function CountDown() {
+    time4 = time4 - 1;
+    if (time4 == 29) {
+      CountDown3Id = setInterval(CountDown3, 1000);
+      function CountDown3() {
+        time4 = time4;
         timer4.innerHTML = time4;
       }
     }
@@ -953,6 +1012,7 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(caughtIdTwo);
       clearInterval(caughtIdThree);
       clearInterval(caughtIdFour);
+      clearInterval(caughtIdFive);
     }
     scoreNumber = 0;
     time = 0;
@@ -972,11 +1032,13 @@ document.addEventListener("DOMContentLoaded", () => {
     gridSquare[ghostTwo.ghostIndex].classList.remove("ghostTwo");
     gridSquare[ghostThree.ghostIndex].classList.remove("ghostThree");
     gridSquare[ghostFour.ghostIndex].classList.remove("ghostFour");
+    gridSquare[ghostFive.ghostIndex].classList.remove("ghostFive");
     ghostOne.ghostIndex = 170;
     ghostTwo.ghostIndex = 169;
     ghostOne.ghostIndex = 168;
     ghostTwo.ghostIndex = 171;
+    ghostOne.ghostIndex = 150;
     ghost.bias = 1;
-    assignGrid(ghostOne, ghostTwo, ghostThree, ghostFour);
+    assignGrid(ghostOne, ghostTwo, ghostThree, ghostFour, ghostFive);
   }
 });

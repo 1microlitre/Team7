@@ -158,7 +158,7 @@ timer {
   background-image: radial-gradient(white 15%, transparent 20%);
 }
 .gate {
-  background-color: #00004d;
+  background-color: #62ff00;
   border: 1px solid black;
 }
 .pacman {
@@ -187,7 +187,7 @@ timer {
 }
 .ghostOne {
   /*background-color: red;*/
-  background-image: url("/images/ghost.png");
+  background-image: url("../images/monsters/beavercyan.png");
   border: 2px solid black;
   /*border-radius: 15px 15px 0 0;*/
 
@@ -196,28 +196,40 @@ timer {
   background-size: 20px 20px;
 }
 .ghostTwo {
-  background-color: #00ffff;
+  /*background-color: #00ffff;*/
+  background-image: url("../images/monsters/beaverorange.png");
   border: 2px solid black;
-  border-radius: 15px 15px 0 0;
+  /*border-radius: 15px 15px 0 0;
   background-image: radial-gradient(black 20%, transparent 20%);
-  background-position: 10px 0, 10px 10px;
-  background-size: 10px 20px;
+  background-position: 10px 0, 10px 10px;*/
+  background-size: 20px 20px;
 }
 .ghostThree {
-  background-color: #ffa31a;
+  /*background-color: #ffa31a;*/
+  background-image: url("../images/monsters/beaverpink.png");
   border: 2px solid black;
-  border-radius: 15px 15px 0 0;
+  /*border-radius: 15px 15px 0 0;
   background-image: radial-gradient(black 20%, transparent 20%);
-  background-position: 10px 0, 10px 10px;
-  background-size: 10px 20px;
+  background-position: 10px 0, 10px 10px;*/
+  background-size: 20px 20px;
 }
 .ghostFour {
-  background-color: pink;
+  /*background-color: pink;*/
+  background-image: url("../images/monsters/beaverking.png");
   border: 2px solid black;
-  border-radius: 15px 15px 0 0;
+  /*border-radius: 15px 15px 0 0;
   background-image: radial-gradient(black 20%, transparent 20%);
-  background-position: 10px 0, 10px 10px;
-  background-size: 10px 20px;
+  background-position: 10px 0, 10px 10px;*/
+  background-size: 20px 20px;
+}
+.ghostFive {
+  /*background-color: pink;*/
+  background-image: url("../images/monsters/beaverking.png");
+  border: 2px solid black;
+  /*border-radius: 15px 15px 0 0;
+  background-image: radial-gradient(black 20%, transparent 20%);
+  background-position: 10px 0, 10px 10px;*/
+  background-size: 20px 20px;
 }
 .ghostFlee {
   background-color: white;
