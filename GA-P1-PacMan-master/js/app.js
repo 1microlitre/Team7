@@ -868,17 +868,30 @@ document.addEventListener("DOMContentLoaded", () => {
     if (time5 == 71) {
       gridSquare[30].classList.add("book");
     }
-    if (time5 == 143) {
+    if (time5 == 165) {
       gridSquare[30].classList.remove("book");
       gridSquare[61].classList.add("paperdoc");
     }
-    if (time5 == 143) {
-      gridSquare[30].classList.remove("book");
-      gridSquare[61].classList.add("paperdoc");
+    if (time5 == 237) {
+      gridSquare[30].classList.remove("paperdoc");
+      gridSquare[61].classList.add("letter");
     }
-    if (time5 == 143) {
-      gridSquare[30].classList.remove("book");
-      gridSquare[61].classList.add("paperdoc");
+    if (time5 == 251) {
+      gridSquare[61].classList.add("heart");
+    }
+    if (time5 == 323) {
+      gridSquare[61].classList.remove("heart");
+    }
+    if (time5 == 309) {
+      gridSquare[30].classList.remove("letter");
+      gridSquare[61].classList.add("letter2");
+    }
+    if (time5 == 381) {
+      gridSquare[30].classList.remove("letter2");
+      gridSquare[61].classList.add("lottery");
+    }
+    if (time5 == 417) {
+      gridSquare[30].classList.remove("lottery");
     }
 
     // KARLO: This set specifically for visa expiration.
