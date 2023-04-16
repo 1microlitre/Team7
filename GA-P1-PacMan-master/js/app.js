@@ -1,6 +1,6 @@
 // THESE VALUES CAN BE SET TO ALTER THE GAME
-// set how long the powerups work for (ms)
-const poweruptime = 6000;
+// set how long the hearts work for (ms)
+const hearttime = 6000;
 // Set how many miliseconds between each time the ghosts move
 const ghostTimePerMove = 300;
 // Defining the ghosts paramters.
@@ -20,12 +20,12 @@ let scoreTarget = 2000;
 let time = 26;
 let time2 = 1;
 let time3 = 1;
-let time4 = 28;
+let time5 = 0;
 // Id to ended the timer
 let CountUpid;
 /*let CountUp2id;*/
 let CountUp3id;
-let CountDownid;
+let CountDown2id;
 // Ids to stop the ghosts from moving
 let ghostMoveIdOne;
 let ghostMoveIdTwo;
@@ -102,7 +102,7 @@ const ghosts = [ghostOne, ghostTwo, ghostThree, ghostFour];
 // wall = 1
 // pacman = 3
 // ghost1 = 4
-// powerup = 5
+// heart = 5
 // Gate = 6
 // ghost2 = 7
 // ghost3 = 8
@@ -120,13 +120,13 @@ const layout = [
   //Next
   1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1,
   //Next
-  1, 1, 1, 2, 1, 2, 1, 1, 1, 0, 0, 1, 1, 1, 2, 1, 2, 1, 1, 1,
+  1, 2, 1, 2, 1, 2, 1, 1, 1, 0, 0, 1, 1, 1, 2, 1, 2, 1, 2, 1,
   //Next
-  1, 1, 1, 2, 1, 2, 1, 1, 0, 0, 0, 0, 1, 1, 2, 1, 2, 1, 1, 1,
+  1, 2, 1, 2, 1, 2, 1, 1, 0, 0, 0, 0, 1, 1, 2, 1, 2, 1, 2, 1,
   //Next
-  1, 1, 1, 2, 1, 2, 1, 1, 8, 7, 4, 9, 1, 1, 2, 1, 2, 1, 1, 1,
+  1, 2, 1, 2, 1, 2, 1, 1, 8, 7, 4, 9, 1, 1, 2, 1, 2, 1, 2, 1,
   //Next
-  1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1,
+  1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1,
   //Next
   1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1,
   //Next
@@ -167,6 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const timer2 = document.querySelector(".timer2");
   const timer3 = document.querySelector(".timer3");
   const timer4 = document.querySelector(".timer4");
+  const timer5 = document.querySelector(".timer5");
   const start = document.querySelector(".start");
   const highScore = document.querySelector(".highScore");
   const left = document.querySelector(".left");
@@ -219,7 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
    }*/
   });
 
-  // const layoutClasses = ['', 'wall', 'food', 'pacmanRight', 'powerup', 'warp', 'ghostOne', 'ghostTwo', 'ghostThree', 'ghostFour']
+  // const layoutClasses = ['', 'wall', 'food', 'pacmanRight', 'heart', 'warp', 'ghostOne', 'ghostTwo', 'ghostThree', 'ghostFour']
   //This function assings the correct classes depending on the layout above.
   function assignGrid(ghostOne, ghostTwo, ghostThree, ghostFour) {
     infoBox.innerHTML = "Click ↑";
@@ -231,8 +232,6 @@ document.addEventListener("DOMContentLoaded", () => {
         gridSquare[i].classList.add("food");
       } else if (layout[i] === 3) {
         gridSquare[i].classList.add("pacmanRight");
-      } else if (layout[i] === 5) {
-        gridSquare[i].classList.add("powerup");
       } else if (layout[i] === 6) {
         gridSquare[i].classList.add("gate");
       } else if (layout[i] === 4) {
@@ -247,6 +246,18 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (layout[i] === 9) {
         gridSquare[i].classList.add("ghostFour");
         ghostFour.ghostIndex = i;
+      } else if (layout[i] === 10) {
+        gridSquare[i].classList.add("heart");
+      } else if (layout[i] === 11) {
+        gridSquare[i].classList.add("letter");
+      } else if (layout[i] === 12) {
+        gridSquare[i].classList.add("letter2");
+      } else if (layout[i] === 13) {
+        gridSquare[i].classList.add("lottery");
+      } else if (layout[i] === 14) {
+        gridSquare[i].classList.add("paperdoc");
+      } else if (layout[i] === 15) {
+        gridSquare[i].classList.add("book");
       }
     }
   }
@@ -274,9 +285,11 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(ghostMoveIdTwo);
       clearInterval(ghostMoveIdThree);
       clearInterval(ghostMoveIdFour);
-      /*clearInterval(CountUpid);*/
+      clearInterval(CountUpid);
       /*clearInterval(CountUp2id);*/
-      clearInterval(CountDownid);
+      clearInterval(CountUp3id);
+      clearInterval(CountDown2id);
+      /*clearInterval(CountDownid);*/
       gridSquare[pacIndex].classList.remove("pacmanUp");
       gridSquare[pacIndex].classList.remove("pacmanRight");
       gridSquare[pacIndex].classList.remove("pacmanDown");
@@ -374,11 +387,11 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
     }
-    // colliding with powerup ------------------------------------------
-    if (gridSquare[pacIndex].classList.contains("powerup")) {
-      gridSquare[pacIndex].classList.remove("powerup");
+    // colliding with heart ------------------------------------------
+    if (gridSquare[pacIndex].classList.contains("heart")) {
+      gridSquare[pacIndex].classList.remove("heart");
       for (let i = 0; i < ghosts.length; i++) {
-        poweruptaken(ghosts[i]);
+        hearttaken(ghosts[i]);
       }
       setTimeout(function () {
         for (let i = 0; i < 16; i++) {
@@ -399,7 +412,7 @@ document.addEventListener("DOMContentLoaded", () => {
         caughtIdFour = setInterval(function () {
           pacCaught(ghostFour);
         }, 60);
-      }, poweruptime);
+      }, hearttime);
     }
     // The next 2 if statments allow for warping from each side of the map
     /*if (pacIndex === 141) {
@@ -502,7 +515,8 @@ document.addEventListener("DOMContentLoaded", () => {
     CountUpid = setInterval(CountUp, 72000);
     /*CountUp2id = setInterval(CountUp2, 5000);*/
     CountUp3id = setInterval(CountUp3, 1000);
-    CountDownid = setInterval(CountDown, 1000);
+    CountDown2id = setInterval(CountDown2, 1000);
+
     ghostMoveIdOne = setInterval(function () {
       chooseAndMove(ghostOne);
     }, ghostTimePerMove);
@@ -709,7 +723,8 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(CountUpid);
     /*clearInterval(CountUp2id);*/
     clearInterval(CountUp3id);
-    clearInterval(Countdownid);
+    clearInterval(CountDown2id);
+    /*clearInterval(CountDownid);*/
   }
   // this function is run after everything is set back to 0 inorder to play again
   function startReset(ghost) {
@@ -740,8 +755,8 @@ document.addEventListener("DOMContentLoaded", () => {
       chooseAndMove(ghostFour);
     }, ghostTimePerMove);
   }
-  // This function is run when pacman takes a powerup
-  function poweruptaken(ghost) {
+  // This function is run when pacman takes a heart
+  function hearttaken(ghost) {
     ghost.bias = 2;
     gridSquare[ghost.ghostIndex].classList.remove("ghostDead");
     gridSquare[ghost.ghostIndex].classList.remove(ghost.ghostClass);
@@ -752,7 +767,7 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(caughtIdThree);
       clearInterval(caughtIdFour);
     }
-    // this reverses the ghosts direction once Pman has taken the powerups
+    // this reverses the ghosts direction once Pman has taken the hearts
     /*ghost.lastDirection = -ghost.lastDirection;
     gridSquare[ghost.ghostIndex].classList.remove("ghostFlee");
     ghost.ghostIndex = ghost.ghostIndex - ghost.directionMove;
@@ -776,10 +791,10 @@ document.addEventListener("DOMContentLoaded", () => {
         clearInterval(pacKillIdThree);
         clearInterval(pacKillIdFour);
       }
-      powerupWareoff(ghost);
-    }, poweruptime);
+      heartWareoff(ghost);
+    }, hearttime);
   }
-  // When a powerup is taken the function is run a number of times a second
+  // When a heart is taken the function is run a number of times a second
   // to check to see if pacman has killed a ghost
   /*function pacKill(ghost) {
     console.log("can pac kill");
@@ -804,7 +819,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }*/
   }
   // this resets the ghosts to hunt pacman and stop pac man from killing
-  /*function powerupWareoff(ghost) {
+  /*function heartWareoff(ghost) {
     ghost.bias = 1;
     gridSquare[ghost.ghostIndex].classList.remove("ghostDead");
     gridSquare[ghost.ghostIndex].classList.remove("ghostFlee");
@@ -815,7 +830,7 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(caughtIdFour);
     }
   }*/
-  // KARLO: Counts up the Year in Age, affects score by change in year, and sets appearance of power-ups
+  // KARLO: Counts up the Year in Age, affects score by change in year.
   function CountUp() {
     if (time < 28) {
       scoreNumber = scoreNumber + 10;
@@ -824,30 +839,9 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber - 10;
       score.innerHTML = scoreNumber;
     }
-    if (time == 27) {
-      gridSquare[49].classList.add("powerup");
-    }
-    if (time == 28) {
-      gridSquare[49].classList.remove("powerup");
-      gridSquare[52].classList.add("powerup");
-    }
-    if (time == 29) {
-      CountDown();
-    }
   }
 
-  // KARLO: Counts up the time for the Months in Age, resets its everytime it reaches 12.
-  /*function CountUp2() {
-    if (time2 < 12) {
-      time2 = time2 + 1;
-      timer2.innerHTML = time2;
-    } else if (time2 == 12) {
-      time2 = 1;
-      timer2.innerHTML = time2;
-    }
-  }*/
-
-  // KARLO: Counts up the time for the Days in Age, resets its everytime it reaches 12.
+  // KARLO: Counts up the time for the Days (which affects Months) in Age, resets its everytime it reaches 12.
   function CountUp3() {
     if (time3 == 1) {
       time3 = time3 + 5;
@@ -868,10 +862,35 @@ document.addEventListener("DOMContentLoaded", () => {
     timer3.innerHTML = time3;
   }
 
-  // KARLO: Counts down the visa expiration.
-  function CountDown() {
-    time4 = time4 - 1;
-    timer4.innerHTML = time4;
+  // KARLO: Separate timer for powerup appearance.
+  function CountDown2() {
+    time5 = time5 + 1;
+    if (time5 == 71) {
+      gridSquare[30].classList.add("book");
+    }
+    if (time5 == 143) {
+      gridSquare[30].classList.remove("book");
+      gridSquare[61].classList.add("paperdoc");
+    }
+    if (time5 == 143) {
+      gridSquare[30].classList.remove("book");
+      gridSquare[61].classList.add("paperdoc");
+    }
+    if (time5 == 143) {
+      gridSquare[30].classList.remove("book");
+      gridSquare[61].classList.add("paperdoc");
+    }
+
+    // KARLO: This set specifically for visa expiration.
+    if (time5 == 71) {
+      let time4 = 28;
+      let CountDownid;
+      CountDownid = setInterval(CountDown, 1000);
+      function CountDown() {
+        time4 = time4 - 1;
+        timer4.innerHTML = time4;
+      }
+    }
   }
 
   // this runs a hard reset on eveything clearing all the timers
@@ -888,7 +907,6 @@ document.addEventListener("DOMContentLoaded", () => {
     timer.innerHTML = time;
     timer2.innerHTML = time2;
     timer3.innerHTML = time3;
-    timer4.innerHTML = time4;
     gridSquare[ghost.ghostIndex].classList.remove("ghostDead");
     gridSquare[ghost.ghostIndex].classList.remove("ghostFlee");
     gridSquare[ghost.ghostIndex].classList.remove(ghost.ghostClass);
