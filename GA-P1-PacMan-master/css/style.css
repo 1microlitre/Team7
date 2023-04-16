@@ -10,7 +10,10 @@ h1 {
   margin-top: 30px;
   color: yellow;
   font-family: "Press Start 2P", cursive;
-  font-size: 40px;
+  font-size: 36px;
+}
+p {
+  margin-bottom: 2px;
 }
 .game {
   text-align: center;
@@ -31,25 +34,32 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  align-items: center;
-  align-content: center;
+  /*align-items: center;
+  align-content: center;*/
   width: 35%;
 }
 .infoBox {
   color: yellow;
-  font-size: 20px;
+  font-size: 30px;
+  font-weight: bold;
   height: 8%;
   width: 100%;
-  font-family: "Press Start 2P", cursive;
-  margin-top: 30px;
+  text-transform: uppercase;
+  font-family: /*"Press Start 2P", cursive;*/ "VT323", monospace;
+  margin: 5px 0 30px;
   padding: 10px auto;
+}
+.infoBox2 {
+  font-family: /*"Press Start 2P", cursive;*/ "VT323", monospace;
+  font-size: 32px;
 }
 .start {
   color: white;
   font-family: "Press Start 2P", cursive;
   font-size: 20px;
-  height: 16%;
-  padding: 35px 10px;
+  /*height: 20%;*/
+  padding: 20px;
+  margin: 20px 0 20px;
   width: 100%;
   background-color: red;
   box-shadow: 5px 5px 0 white;
@@ -71,15 +81,25 @@ p {
   color: white;
   font-weight: bold;
 }
-timer {
-  color: white;
+.timer,
+.timer2,
+.timer3,
+.timer4 {
+  color: yellow;
   font-weight: bold;
+  font-family: /*"Press Start 2P", cursive;*/ "VT323", monospace;
+  text-transform: uppercase;
+  font-size: 32px;
+  color: yell;
 }
 .table {
   border: 2px solid white;
-  width: 80%;
-  height: 20%;
+  width: 100%;
+  height: 18%;
   font-family: "Press Start 2P", cursive;
+  margin-top: 0px;
+  padding: 5px 10px;
+  text-align: left;
 }
 .table > p {
   font-family: "Press Start 2P", cursive;
@@ -95,7 +115,8 @@ timer {
   /* border: 1px solid white; */
   margin-top: 0;
   width: 100%;
-  height: 50%;
+  height: 30%;
+  align-content: center;
   justify-content: center;
   padding: 10px 10px;
 }
@@ -103,14 +124,16 @@ timer {
 .down,
 .left,
 .right {
-  font-size: 25px;
+  font-size: 20px;
+  font-family: "VT323", monospace;
   color: white;
   font-weight: bold;
   background-color: red;
-  padding: 20px auto;
-  height: 40px;
-  padding: 5px 10px;
-  box-shadow: 5px 5px 0 white;
+  /*padding: 5px auto;*/
+  height: 25px;
+  /*padding: 2px auto;*/
+  margin: 5px auto;
+  box-shadow: 2px 2px 0 white;
 }
 .sideways {
   display: flex;
@@ -185,7 +208,7 @@ timer {
   background-color: #04a303;
   border: 0.5px solid black;
 }
-.ghostOne {
+.beaverOne {
   /*background-color: red;*/
   background-image: url("../images/monsters/beavercyan.png");
   border: 2px solid black;
@@ -195,7 +218,7 @@ timer {
   /*background-position: 10px 0, 10px 10px;*/
   background-size: 20px 20px;
 }
-.ghostTwo {
+.beaverTwo {
   /*background-color: #00ffff;*/
   background-image: url("../images/monsters/beaverorange.png");
   border: 2px solid black;
@@ -204,7 +227,7 @@ timer {
   background-position: 10px 0, 10px 10px;*/
   background-size: 20px 20px;
 }
-.ghostThree {
+.beaverThree {
   /*background-color: #ffa31a;*/
   background-image: url("../images/monsters/beaverpink.png");
   border: 2px solid black;
@@ -213,7 +236,7 @@ timer {
   background-position: 10px 0, 10px 10px;*/
   background-size: 20px 20px;
 }
-.ghostFour {
+.beaverFour {
   /*background-color: pink;*/
   background-image: url("../images/monsters/beaverking.png");
   border: 2px solid black;
@@ -222,7 +245,7 @@ timer {
   background-position: 10px 0, 10px 10px;*/
   background-size: 20px 20px;
 }
-.ghostFive {
+.beaverFive {
   /*background-color: pink;*/
   background-image: url("../images/monsters/beaverking.png");
   border: 2px solid black;
@@ -231,7 +254,7 @@ timer {
   background-position: 10px 0, 10px 10px;*/
   background-size: 20px 20px;
 }
-.ghostFlee {
+.beaverFlee {
   background-color: white;
   border: 2px solid black;
   border-radius: 15px 15px 0 0;
@@ -239,7 +262,7 @@ timer {
   background-position: 10px 0, 10px 10px;
   background-size: 10px 20px;
 }
-.ghostDead {
+.beaverDead {
   background-color: grey;
   border: 2px solid black;
   border-radius: 15px 15px 0 0;

@@ -1,13 +1,13 @@
 // THESE VALUES CAN BE SET TO ALTER THE GAME
 // set how long the hearts work for (ms)
 const hearttime = 6000;
-// Set how many miliseconds between each time the ghosts move
-const ghostTimePerMove = 150;
-// Defining the ghosts paramters.
+// Set how many miliseconds between each time the beavers move
+const beaverTimePerMove = 200;
+// Defining the beavers paramters.
 //---------------------------------------------------------------------
-// Used in algorithams to move ghosts and pacman
+// Used in algorithams to move beavers and pacman
 const width = 20;
-// Possible moves for ghost
+// Possible moves for beaver
 const directions = [-1, -width, 1, width];
 // Set starting values:
 // pacman position
@@ -27,12 +27,12 @@ let CountUpid;
 /*let CountUp2id;*/
 let CountUp3id;
 let CountDown2id;
-// Ids to stop the ghosts from moving
-let ghostMoveIdOne;
-let ghostMoveIdTwo;
-let ghostMoveIdThree;
-let ghostMoveIdFour;
-let ghostMoveIdFive;
+// Ids to stop the beavers from moving
+let beaverMoveIdOne;
+let beaverMoveIdTwo;
+let beaverMoveIdThree;
+let beaverMoveIdFour;
+let beaverMoveIdFive;
 // Id to stop the pac audio sounds
 let pacSoundId;
 // Used to set the games highscore
@@ -41,29 +41,29 @@ let highScoreNumber = 0;
 let highScoreTime = 0;
 const death = new Audio("pacman_death.wav");
 
-const ghostOne = {
-  //ghost intial starting position
-  ghostIndex: 170,
-  // ghost class name
-  ghostClass: "ghostOne",
-  // directions the ghost can move by index after removing walls
+const beaverOne = {
+  //beaver intial starting position
+  beaverIndex: 170,
+  // beaver class name
+  beaverClass: "beaverOne",
+  // directions the beaver can move by index after removing walls
   goodDirections: [],
   // The index of those possible moves
   goodPositions: [],
-  //storing ghost past moves
+  //storing beaver past moves
   directionStore: [],
-  // chosen direction to move ghost (inital start)
+  // chosen direction to move beaver (inital start)
   directionMove: -1,
-  // chosen Index position to move ghost
+  // chosen Index position to move beaver
   positionMove: null,
-  // the last direction used by ghost one.
+  // the last direction used by beaver one.
   lastDirection: 0,
-  // Bias determins the way the ghosts run 1 towards, 2 awayfrom.
+  // Bias determins the way the beavers run 1 towards, 2 awayfrom.
   bias: 1,
 };
-const ghostTwo = {
-  ghostIndex: 169,
-  ghostClass: "ghostTwo",
+const beaverTwo = {
+  beaverIndex: 169,
+  beaverClass: "beaverTwo",
   goodDirections: [],
   goodPositions: [],
   directionStore: [],
@@ -73,9 +73,9 @@ const ghostTwo = {
 
   bias: 1,
 };
-const ghostThree = {
-  ghostIndex: 168,
-  ghostClass: "ghostThree",
+const beaverThree = {
+  beaverIndex: 168,
+  beaverClass: "beaverThree",
   goodDirections: [],
   goodPositions: [],
   directionStore: [],
@@ -84,9 +84,9 @@ const ghostThree = {
   lastDirection: 0,
   bias: 1,
 };
-const ghostFour = {
-  ghostIndex: 171,
-  ghostClass: "ghostFour",
+const beaverFour = {
+  beaverIndex: 171,
+  beaverClass: "beaverFour",
   goodDirections: [],
   goodPositions: [],
   directionStore: [],
@@ -95,9 +95,9 @@ const ghostFour = {
   lastDirection: 0,
   bias: 1,
 };
-const ghostFive = {
-  ghostIndex: 150,
-  ghostClass: "ghostFive",
+const beaverFive = {
+  beaverIndex: 148,
+  beaverClass: "beaverFive",
   goodDirections: [],
   goodPositions: [],
   directionStore: [],
@@ -106,25 +106,25 @@ const ghostFive = {
   lastDirection: 0,
   bias: 1,
 };
-// An array of the 4 ghosts
-const ghosts = [ghostOne, ghostTwo, ghostThree, ghostFour, ghostFive];
+// An array of the 4 beavers
+const beavers = [beaverOne, beaverTwo, beaverThree, beaverFour, beaverFive];
 
 // creating the grid and allocating each div a class
 // ASSIGN A CLASS A NUMBER.
 // empty = 0
 // wall = 1
 // pacman = 3
-// ghost1 = 4
+// beaver1 = 4
 // heart = 5
 // Gate = 6
-// ghost2 = 7
-// ghost3 = 8
-// ghost4 = 9
-// ghost5 = 9
+// beaver2 = 7
+// beaver3 = 8
+// beaver4 = 9
+// beaver5 = 9
 /* See lines 246 to 289 for the number assignments 
       } else if (layout[i] === 9) {
-        gridSquare[i].classList.add("ghostFour");
-        ghostFour.ghostIndex = i;
+        gridSquare[i].classList.add("beaverFour");
+        beaverFour.beaverIndex = i;
       } else if (layout[i] === 10) {
         gridSquare[i].classList.add("book");
       } else if (layout[i] === 11) {
@@ -158,7 +158,7 @@ const layout = [
   //Next
   1, 2, 1, 2, 1, 2, 1, 1, 1, 0, 0, 1, 1, 1, 2, 1, 2, 1, 2, 1,
   //Next
-  1, 2, 1, 2, 1, 2, 1, 1, 0, 18, 0, 0, 1, 1, 2, 1, 2, 1, 2, 1,
+  1, 2, 1, 2, 1, 2, 1, 1, 18, 0, 0, 0, 1, 1, 2, 1, 2, 1, 2, 1,
   //Next
   1, 2, 1, 2, 1, 2, 1, 1, 8, 7, 4, 9, 1, 1, 2, 1, 2, 1, 2, 1,
   //Next
@@ -168,9 +168,9 @@ const layout = [
   //Next
   1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1,
   //Next
-  1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 3, 1, 2, 2, 2, 2, 2, 2, 2, 1,
+  1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 1,
   //Next
-  1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1,
+  1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1,
   //Next
   1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1,
   //Next
@@ -230,25 +230,25 @@ document.addEventListener("DOMContentLoaded", () => {
         clearInterval(caughtIdThree);
         clearInterval(caughtIdFour);
       }
-      for (let i = 0; i < ghosts.length; i++) {
+      for (let i = 0; i < beavers.length; i++) {
         for (let i = 0; i < 16; i++) {
           clearInterval(caughtIdOne);
           clearInterval(caughtIdTwo);
           clearInterval(caughtIdThree);
           clearInterval(caughtIdFour);
         }
-        startReset(ghosts[i]);
+        startReset(beavers[i]);
         caughtIdOne = setInterval(function () {
-          pacCaught(ghostOne);
+          pacCaught(beaverOne);
         }, 60);
         caughtIdTwo = setInterval(function () {
-          pacCaught(ghostTwo);
+          pacCaught(beaverTwo);
         }, 60);
         caughtIdThree = setInterval(function () {
-          pacCaught(ghostThree);
+          pacCaught(beaverThree);
         }, 60);
         caughtIdFour = setInterval(function () {
-          pacCaught(ghostFour);
+          pacCaught(beaverFour);
         }, 60);
         start.innerHTML = "RUN!";
         start.style.backgroundColor = "red";
@@ -256,10 +256,16 @@ document.addEventListener("DOMContentLoaded", () => {
    }*/
   });
 
-  // const layoutClasses = ['', 'wall', 'food', 'pacmanRight', 'heart', 'warp', 'ghostOne', 'ghostTwo', 'ghostThree', 'ghostFour']
+  // const layoutClasses = ['', 'wall', 'food', 'pacmanRight', 'heart', 'warp', 'beaverOne', 'beaverTwo', 'beaverThree', 'beaverFour']
   //This function assings the correct classes depending on the layout above.
-  function assignGrid(ghostOne, ghostTwo, ghostThree, ghostFour, ghostFive) {
-    infoBox.innerHTML = "Click ↑";
+  function assignGrid(
+    beaverOne,
+    beaverTwo,
+    beaverThree,
+    beaverFour,
+    beaverFive
+  ) {
+    infoBox.innerHTML = "Press button to begin";
     for (let i = 0; i < layout.length; i++) {
       // gridSquare[i].classList.add(layoutClasses[layout[i]])
       if (layout[i] === 1) {
@@ -271,20 +277,20 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (layout[i] === 6) {
         gridSquare[i].classList.add("gate");
       } else if (layout[i] === 4) {
-        gridSquare[i].classList.add("ghostOne");
-        ghostOne.ghostIndex = i;
+        gridSquare[i].classList.add("beaverOne");
+        beaverOne.beaverIndex = i;
       } else if (layout[i] === 7) {
-        gridSquare[i].classList.add("ghostTwo");
-        ghostTwo.ghostIndex = i;
+        gridSquare[i].classList.add("beaverTwo");
+        beaverTwo.beaverIndex = i;
       } else if (layout[i] === 8) {
-        gridSquare[i].classList.add("ghostThree");
-        ghostThree.ghostIndex = i;
+        gridSquare[i].classList.add("beaverThree");
+        beaverThree.beaverIndex = i;
       } else if (layout[i] === 9) {
-        gridSquare[i].classList.add("ghostFour");
-        ghostFour.ghostIndex = i;
+        gridSquare[i].classList.add("beaverFour");
+        beaverFour.beaverIndex = i;
       } else if (layout[i] === 18) {
-        gridSquare[i].classList.add("ghostFive");
-        ghostFive.ghostIndex = i;
+        gridSquare[i].classList.add("beaverFive");
+        beaverFive.beaverIndex = i;
       } else if (layout[i] === 10) {
         gridSquare[i].classList.add("book");
       } else if (layout[i] === 11) {
@@ -305,10 +311,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   // Calling the assignGrid function
-  assignGrid(ghostOne, ghostTwo, ghostThree, ghostFour, ghostFive);
+  assignGrid(beaverOne, beaverTwo, beaverThree, beaverFour, beaverFive);
 
   // This counts to see how much food is left before you complete the level
-  function checkWin() {
+  /*function checkWin() {
     // let foodAmount = (layout.filter(x => x === 2)).length
     let foodAmount = 0;
     for (let i = 0; i < 400; i++) {
@@ -325,16 +331,16 @@ document.addEventListener("DOMContentLoaded", () => {
         clearInterval(caughtIdFour);
         clearInterval(caughtIdFive);
       }
-      clearInterval(ghostMoveIdOne);
-      clearInterval(ghostMoveIdTwo);
-      clearInterval(ghostMoveIdThree);
-      clearInterval(ghostMoveIdFour);
-      clearInterval(ghostMoveIdFive);
+      clearInterval(beaverMoveIdOne);
+      clearInterval(beaverMoveIdTwo);
+      clearInterval(beaverMoveIdThree);
+      clearInterval(beaverMoveIdFour);
+      clearInterval(beaverMoveIdFive);
       clearInterval(CountUpid);
-      /*clearInterval(CountUp2id);*/
+      /*clearInterval(CountUp2id);
       clearInterval(CountUp3id);
       clearInterval(CountDown2id);
-      /*clearInterval(CountDownid);*/
+      /*clearInterval(CountDownid);
       gridSquare[pacIndex].classList.remove("pacmanUp");
       gridSquare[pacIndex].classList.remove("pacmanRight");
       gridSquare[pacIndex].classList.remove("pacmanDown");
@@ -348,10 +354,10 @@ document.addEventListener("DOMContentLoaded", () => {
       highScore.innerHTML = `${highScoreNumber}ps in ${highScoreTime}s`;
       time = time + 0;
     }
-  }
+  }/*
 
   //KARLO: Condition for winning the game
-  /*function checkWin() {
+  function checkWin() {
     if (scoreNumber >= scoreTarget && gridSquare[pacIndex].classList.contains("gate") {
       highScoreNumber = scoreNumber;
       highScoreTime = time;
@@ -365,10 +371,10 @@ document.addEventListener("DOMContentLoaded", () => {
         clearInterval(caughtIdThree);
         clearInterval(caughtIdFour);
       }
-      clearInterval(ghostMoveIdOne);
-      clearInterval(ghostMoveIdTwo);
-      clearInterval(ghostMoveIdThree);
-      clearInterval(ghostMoveIdFour);
+      clearInterval(beaverMoveIdOne);
+      clearInterval(beaverMoveIdTwo);
+      clearInterval(beaverMoveIdThree);
+      clearInterval(beaverMoveIdFour);
       clearInterval(CountUpid);
       clearInterval(CountUp2id);
       gridSquare[pacIndex].classList.remove("pacmanUp");
@@ -381,9 +387,57 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }*/
 
+  function checkWin() {
+    if (
+      scoreNumber >= scoreTarget &&
+      gridSquare[pacIndex].classList.contains("gate")
+    ) {
+      scoreNumber = scoreNumber;
+      time = 0;
+      clearInterval(beaverMoveIdOne);
+      clearInterval(beaverMoveIdTwo);
+      clearInterval(beaverMoveIdThree);
+      clearInterval(beaverMoveIdFour);
+      clearInterval(beaverMoveIdFive);
+      clearInterval(CountUpid);
+      //clearInterval(CountUp2id);
+      clearInterval(CountUp3id);
+      clearInterval(CountDown2id);
+      //clearInterval(CountDownid);
+      gridSquare[pacIndex].classList.remove("pacmanUp");
+      gridSquare[pacIndex].classList.remove("pacmanRight");
+      gridSquare[pacIndex].classList.remove("pacmanDown");
+      gridSquare[pacIndex].classList.remove("pacmanLeft");
+      infoBox.innerHTML = "YOU GET TO LIVE IN CANADA!";
+    } else if (
+      scoreNumber < scoreTarget &&
+      gridSquare[pacIndex].classList.contains("gate")
+    ) {
+      infoBox.innerHTML = "YOU DO NOT HAVE ENOUGH POINTS YET.";
+    } else if ((time4 = 0 && scoreNumber < scoreTarget)) {
+      scoreNumber = scoreNumber;
+      time = 0;
+      clearInterval(beaverMoveIdOne);
+      clearInterval(beaverMoveIdTwo);
+      clearInterval(beaverMoveIdThree);
+      clearInterval(beaverMoveIdFour);
+      clearInterval(beaverMoveIdFive);
+      clearInterval(CountUpid);
+      //clearInterval(CountUp2id);
+      clearInterval(CountUp3id);
+      clearInterval(CountDown2id);
+      //clearInterval(CountDownid);
+      gridSquare[pacIndex].classList.remove("pacmanUp");
+      gridSquare[pacIndex].classList.remove("pacmanRight");
+      gridSquare[pacIndex].classList.remove("pacmanDown");
+      gridSquare[pacIndex].classList.remove("pacmanLeft");
+      infoBox.innerHTML = "YOU DON'T DESERVE CANADA!";
+    }
+  }
+
   //Calling the checkWin to run at a set interval 200ms
   setInterval(checkWin, 200);
-  // Function to play the Ghost sounds
+  // Function to play the beaver sounds
   function pacSound() {
     const move = new Audio("pacman_chomp.wav");
     move.play();
@@ -435,8 +489,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // colliding with heart ------------------------------------------
     if (gridSquare[pacIndex].classList.contains("heart")) {
       gridSquare[pacIndex].classList.remove("heart");
-      for (let i = 0; i < ghosts.length; i++) {
-        hearttaken(ghosts[i]);
+      for (let i = 0; i < beavers.length; i++) {
+        hearttaken(beavers[i]);
       }
       setTimeout(function () {
         for (let i = 0; i < 16; i++) {
@@ -447,19 +501,19 @@ document.addEventListener("DOMContentLoaded", () => {
           clearInterval(caughtIdFive);
         }
         caughtIdOne = setInterval(function () {
-          pacCaught(ghostOne);
+          pacCaught(beaverOne);
         }, 60);
         caughtIdTwo = setInterval(function () {
-          pacCaught(ghostTwo);
+          pacCaught(beaverTwo);
         }, 60);
         caughtIdThree = setInterval(function () {
-          pacCaught(ghostThree);
+          pacCaught(beaverThree);
         }, 60);
         caughtIdFour = setInterval(function () {
-          pacCaught(ghostFour);
+          pacCaught(beaverFour);
         }, 60);
         caughtIdFive = setInterval(function () {
-          pacCaught(ghostFive);
+          pacCaught(beaverFive);
         }, 60);
       }, hearttime);
     }
@@ -487,85 +541,89 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
     }
   }
-  // -------------------- GHOST LOGIC  --------------------------------------------
-  //This function evaluates all directions the ghost can move in.
+  // -------------------- beaver LOGIC  --------------------------------------------
+  //This function evaluates all directions the beaver can move in.
   // It then removes all the moves that are into a walls
-  // and the moves into other ghosts and into warping
-  function chooseAndMove(ghost) {
+  // and the moves into other beavers and into warping
+  function chooseAndMove(beaver) {
     //  EVALUATES ALL THE CHOICES DONT CHOOSE WALL OR BACK ON ITS SELF
-    ghost.goodDirections = [];
+    beaver.goodDirections = [];
     for (let i = 0; i < directions.length; i++) {
       if (
-        gridSquare[ghost.ghostIndex + directions[i]].classList.contains("wall")
+        gridSquare[beaver.beaverIndex + directions[i]].classList.contains(
+          "wall"
+        )
       ) {
-        ghost.goodDirections.push(null);
+        beaver.goodDirections.push(null);
       } else if (
-        gridSquare[ghost.ghostIndex + directions[i]].classList.contains("warp")
+        gridSquare[beaver.beaverIndex + directions[i]].classList.contains(
+          "warp"
+        )
       ) {
-        ghost.goodDirections.push(null);
+        beaver.goodDirections.push(null);
       } else if (
-        gridSquare[ghost.ghostIndex + directions[i]].classList.contains(
-          "ghostOne"
+        gridSquare[beaver.beaverIndex + directions[i]].classList.contains(
+          "beaverOne"
         ) &&
-        ghost.goodDirections.length > 2
+        beaver.goodDirections.length > 2
       ) {
-        ghost.goodDirections.push(null);
+        beaver.goodDirections.push(null);
       } else if (
-        gridSquare[ghost.ghostIndex + directions[i]].classList.contains(
-          "ghostTwo"
+        gridSquare[beaver.beaverIndex + directions[i]].classList.contains(
+          "beaverTwo"
         ) &&
-        ghost.goodDirections.length > 2
+        beaver.goodDirections.length > 2
       ) {
-        ghost.goodDirections.push(null);
+        beaver.goodDirections.push(null);
       } else if (
-        gridSquare[ghost.ghostIndex + directions[i]].classList.contains(
-          "ghostThree"
+        gridSquare[beaver.beaverIndex + directions[i]].classList.contains(
+          "beaverThree"
         ) &&
-        ghost.goodDirections.length > 2
+        beaver.goodDirections.length > 2
       ) {
-        ghost.goodDirections.push(null);
+        beaver.goodDirections.push(null);
       } else if (
-        gridSquare[ghost.ghostIndex + directions[i]].classList.contains(
-          "ghostFour"
+        gridSquare[beaver.beaverIndex + directions[i]].classList.contains(
+          "beaverFour"
         ) &&
-        ghost.goodDirections.length > 2
+        beaver.goodDirections.length > 2
       ) {
-        ghost.goodDirections.push(null);
+        beaver.goodDirections.push(null);
       } else if (
-        gridSquare[ghost.ghostIndex + directions[i]].classList.contains(
-          "ghostFive"
+        gridSquare[beaver.beaverIndex + directions[i]].classList.contains(
+          "beaverFive"
         ) &&
-        ghost.goodDirections.length > 2
+        beaver.goodDirections.length > 2
       ) {
-        ghost.goodDirections.push(null);
+        beaver.goodDirections.push(null);
       } else if (
-        gridSquare[ghost.ghostIndex + directions[i]].classList.contains(
-          "ghostFlee"
+        gridSquare[beaver.beaverIndex + directions[i]].classList.contains(
+          "beaverFlee"
         ) &&
-        ghost.goodDirections.length > 2
+        beaver.goodDirections.length > 2
       ) {
-        ghost.goodDirections.push(null);
+        beaver.goodDirections.push(null);
       } else if (
-        gridSquare[ghost.ghostIndex + directions[i]].classList.contains(
-          "ghostDead"
+        gridSquare[beaver.beaverIndex + directions[i]].classList.contains(
+          "beaverDead"
         ) &&
-        ghost.goodDirections.length > 2
+        beaver.goodDirections.length > 2
       ) {
-        ghost.goodDirections.push(null);
-      } else if (directions[i] === -ghost.lastDirection) {
-        ghost.goodDirections.push(null);
+        beaver.goodDirections.push(null);
+      } else if (directions[i] === -beaver.lastDirection) {
+        beaver.goodDirections.push(null);
       } else {
-        ghost.goodDirections.push(directions[i]);
+        beaver.goodDirections.push(directions[i]);
       }
     }
-    ghost.goodDirections = ghost.goodDirections.filter((x) => x !== null);
+    beaver.goodDirections = beaver.goodDirections.filter((x) => x !== null);
     // choses a direction to move depending on what the bais is set to
     // and pacman locations
-    pacManBias(ghost);
+    pacManBias(beaver);
     // This calls the function that actually makes the move
-    makeTheMove(ghost);
+    makeTheMove(beaver);
   }
-  // This function is only used once to start the game and set the ghosts moving.
+  // This function is only used once to start the game and set the beavers moving.
   function startGame() {
     pacSoundId = setInterval(pacSound, 650);
     CountUpid = setInterval(CountUp, 24000);
@@ -573,55 +631,58 @@ document.addEventListener("DOMContentLoaded", () => {
     CountUp3id = setInterval(CountUp3, 1000);
     CountDown2id = setInterval(CountDown2, 1000);
 
-    ghostMoveIdOne = setInterval(function () {
-      chooseAndMove(ghostOne);
-    }, ghostTimePerMove);
-    ghostMoveIdTwo = setInterval(function () {
-      chooseAndMove(ghostTwo);
-    }, ghostTimePerMove);
-    ghostMoveIdThree = setInterval(function () {
-      chooseAndMove(ghostThree);
-    }, ghostTimePerMove);
-    ghostMoveIdFour = setInterval(function () {
-      chooseAndMove(ghostFour);
-    }, ghostTimePerMove);
-    ghostMoveIdFive = setInterval(function () {
-      chooseAndMove(ghostFive);
-    }, ghostTimePerMove);
+    beaverMoveIdOne = setInterval(function () {
+      chooseAndMove(beaverOne);
+    }, beaverTimePerMove);
+    beaverMoveIdTwo = setInterval(function () {
+      chooseAndMove(beaverTwo);
+    }, beaverTimePerMove);
+    beaverMoveIdThree = setInterval(function () {
+      chooseAndMove(beaverThree);
+    }, beaverTimePerMove);
+    beaverMoveIdFour = setInterval(function () {
+      chooseAndMove(beaverFour);
+    }, beaverTimePerMove);
+    beaverMoveIdFive = setInterval(function () {
+      chooseAndMove(beaverFive);
+    }, beaverTimePerMove);
   }
-  // this functions moves the ghosts by removing the class chaning the ghost
+  // this functions moves the beavers by removing the class chaning the beaver
   // position index and the re adding the class to the new index
-  // it is used to store all the previous moves of the ghosts
-  function makeTheMove(ghost) {
+  // it is used to store all the previous moves of the beavers
+  function makeTheMove(beaver) {
     //this find the change of index so that it is not repeated
-    ghost.directionMove = ghost.positionMove - ghost.ghostIndex;
+    beaver.directionMove = beaver.positionMove - beaver.beaverIndex;
     //Stores all previous moves
-    ghost.directionStore.push(ghost.directionMove);
+    beaver.directionStore.push(beaver.directionMove);
     //last direction is stored so that it doesn't go back on itself
-    ghost.lastDirection = ghost.directionStore[ghost.directionStore.length - 1];
-    // the class changes depending on if the ghosts is fleeing chasing or dead
-    if (ghost.bias === 2) {
-      gridSquare[ghost.ghostIndex].classList.remove("ghostFlee");
-      ghost.ghostIndex = ghost.ghostIndex + ghost.directionMove;
-      gridSquare[ghost.ghostIndex].classList.add("ghostFlee");
-    } else if (ghost.bias === 3) {
-      gridSquare[ghost.ghostIndex].classList.remove("ghostDead");
-      ghost.ghostIndex = ghost.ghostIndex + ghost.directionMove;
-      gridSquare[ghost.ghostIndex].classList.add("ghostDead");
+    beaver.lastDirection =
+      beaver.directionStore[beaver.directionStore.length - 1];
+    // the class changes depending on if the beavers is fleeing chasing or dead
+    if (beaver.bias === 2) {
+      gridSquare[beaver.beaverIndex].classList.remove("beaverFlee");
+      beaver.beaverIndex = beaver.beaverIndex + beaver.directionMove;
+      gridSquare[beaver.beaverIndex].classList.add("beaverFlee");
+    } else if (beaver.bias === 3) {
+      gridSquare[beaver.beaverIndex].classList.remove("beaverDead");
+      beaver.beaverIndex = beaver.beaverIndex + beaver.directionMove;
+      gridSquare[beaver.beaverIndex].classList.add("beaverDead");
     } else {
-      gridSquare[ghost.ghostIndex].classList.remove(ghost.ghostClass);
-      ghost.ghostIndex = ghost.ghostIndex + ghost.directionMove;
-      gridSquare[ghost.ghostIndex].classList.add(ghost.ghostClass);
+      gridSquare[beaver.beaverIndex].classList.remove(beaver.beaverClass);
+      beaver.beaverIndex = beaver.beaverIndex + beaver.directionMove;
+      gridSquare[beaver.beaverIndex].classList.add(beaver.beaverClass);
     }
   }
   // ------------------- pac move direction BIAS ----------------
   // fucntion used by the ghists to find an appropiate route to chase pacman
-  function towardsPacMan(ghost) {
-    // return all the possible new position indexs the ghost can move.
-    ghost.goodPositions = ghost.goodDirections.map((x) => x + ghost.ghostIndex);
+  function towardsPacMan(beaver) {
+    // return all the possible new position indexs the beaver can move.
+    beaver.goodPositions = beaver.goodDirections.map(
+      (x) => x + beaver.beaverIndex
+    );
     // all the possible positions are reduced down to the one that bring then
-    // ghosts position index closest to pacmans
-    const closestIndex = ghost.goodPositions.reduce(function (prev, curr) {
+    // beavers position index closest to pacmans
+    const closestIndex = beaver.goodPositions.reduce(function (prev, curr) {
       return Math.abs(curr - pacIndex) < Math.abs(prev - pacIndex)
         ? curr
         : prev;
@@ -629,7 +690,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Pacmans Modulas % width.
     const pacModulas = pacIndex % width;
     // This takes the possble indexs to move to and chnages them to modulas% width.
-    const posPositionsModulas = ghost.goodPositions.map((x) => x % width);
+    const posPositionsModulas = beaver.goodPositions.map((x) => x % width);
     // This then finds the modulas closest to the modulas of Pacman
     const closestModulas = posPositionsModulas.reduce(function (prev, curr) {
       return Math.abs(curr - pacModulas) < Math.abs(prev - pacModulas)
@@ -639,70 +700,76 @@ document.addEventListener("DOMContentLoaded", () => {
     const closestModulasIndex = posPositionsModulas.findIndex(
       (x) => x === closestModulas
     );
-    const closestModulasREAL = ghost.goodPositions[closestModulasIndex];
+    const closestModulasREAL = beaver.goodPositions[closestModulasIndex];
     // and array is made with the index and mod closest
     // one is randomly chosen at each junction where there is a choice.
     const idealmoves = [closestIndex, closestModulasREAL];
-    ghost.positionMove =
+    beaver.positionMove =
       idealmoves[Math.floor(Math.random() * idealmoves.length)];
-    return ghost.positionMove;
+    return beaver.positionMove;
   }
   // modulas is not used for the other 3 bais choices just closest pos index
-  function awayFromPacMan(ghost) {
-    ghost.goodPositions = ghost.goodDirections.map((x) => x + ghost.ghostIndex);
-    ghost.positionMove = ghost.goodPositions.reduce(function (prev, curr) {
+  function awayFromPacMan(beaver) {
+    beaver.goodPositions = beaver.goodDirections.map(
+      (x) => x + beaver.beaverIndex
+    );
+    beaver.positionMove = beaver.goodPositions.reduce(function (prev, curr) {
       return Math.abs(curr - pacIndex) > Math.abs(prev - pacIndex)
         ? curr
         : prev;
     });
-    return ghost.positionMove;
+    return beaver.positionMove;
   }
-  function outOfBox(ghost) {
-    ghost.goodPositions = ghost.goodDirections.map((x) => x + ghost.ghostIndex);
-    ghost.positionMove = ghost.goodPositions.reduce(function (prev, curr) {
+  function outOfBox(beaver) {
+    beaver.goodPositions = beaver.goodDirections.map(
+      (x) => x + beaver.beaverIndex
+    );
+    beaver.positionMove = beaver.goodPositions.reduce(function (prev, curr) {
       return Math.abs(curr - 111) < Math.abs(prev - 111) ? curr : prev;
     });
-    return ghost.positionMove;
+    return beaver.positionMove;
   }
-  function sendHome(ghost) {
-    ghost.goodPositions = ghost.goodDirections.map((x) => x + ghost.ghostIndex);
-    ghost.positionMove = ghost.goodPositions.reduce(function (prev, curr) {
+  function sendHome(beaver) {
+    beaver.goodPositions = beaver.goodDirections.map(
+      (x) => x + beaver.beaverIndex
+    );
+    beaver.positionMove = beaver.goodPositions.reduce(function (prev, curr) {
       return Math.abs(curr - 170) < Math.abs(prev - 170) ? curr : prev;
     });
-    return ghost.positionMove;
+    return beaver.positionMove;
   }
   // this function runs the approprate function based on the current bias.
-  function pacManBias(ghost) {
-    // this function get the ghosts out of the box they start in
+  function pacManBias(beaver) {
+    // this function get the beavers out of the box they start in
     if (
-      ghost.ghostIndex === 168 ||
-      ghost.ghostIndex === 169 ||
-      ghost.ghostIndex === 170 ||
-      ghost.ghostIndex === 171 ||
-      ghost.ghostIndex === 148 ||
-      ghost.ghostIndex === 149 ||
-      ghost.ghostIndex === 150 ||
-      ghost.ghostIndex === 151
+      beaver.beaverIndex === 168 ||
+      beaver.beaverIndex === 169 ||
+      beaver.beaverIndex === 170 ||
+      beaver.beaverIndex === 171 ||
+      beaver.beaverIndex === 148 ||
+      beaver.beaverIndex === 149 ||
+      beaver.beaverIndex === 150 ||
+      beaver.beaverIndex === 151
     ) {
-      outOfBox(ghost);
-    } else if (ghost.bias === 1) {
-      towardsPacMan(ghost);
-    } else if (ghost.bias === 2) {
-      awayFromPacMan(ghost);
-    } else if (ghost.bias === 3) {
-      sendHome(ghost);
+      outOfBox(beaver);
+    } else if (beaver.bias === 1) {
+      towardsPacMan(beaver);
+    } else if (beaver.bias === 2) {
+      awayFromPacMan(beaver);
+    } else if (beaver.bias === 3) {
+      sendHome(beaver);
     }
   }
-  // This function is run many times a second checking if a ghost
+  // This function is run many times a second checking if a beaver
   // has caught pacman
-  /*function pacCaught(ghost) {
+  /*function pacCaught(beaver) {
     console.log("is it catching?");
-    if (gridSquare[pacIndex] === gridSquare[ghost.ghostIndex]) {
+    if (gridSquare[pacIndex] === gridSquare[beaver.beaverIndex]) {
       gridSquare[pacIndex].classList.remove("pacmanRight");
       gridSquare[pacIndex].classList.remove("pacmanLeft");
       gridSquare[pacIndex].classList.remove("pacmanUp");
       gridSquare[pacIndex].classList.remove("pacmanDown");
-      pacDied(ghost);
+      pacDied(beaver);
       death.play();
       clearInterval(pacSoundId);
       clearInterval(CountUpid);
@@ -725,58 +792,58 @@ document.addEventListener("DOMContentLoaded", () => {
   }*/
 
   // Function for reducing score when hit by monsters.
-  function pacCaught(ghostOne) {
+  function pacCaught(beaverOne) {
     /*console.log("is it catching?");*/
-    if (gridSquare[pacIndex] === gridSquare[ghostOne.ghostIndex]) {
+    if (gridSquare[pacIndex] === gridSquare[beaverOne.beaverIndex]) {
       scoreNumber = scoreNumber - 40;
     }
   }
 
-  function pacCaught(ghostTwo) {
+  function pacCaught(beaverTwo) {
     /*console.log("is it catching?");*/
-    if (gridSquare[pacIndex] === gridSquare[ghostTwo.ghostIndex]) {
+    if (gridSquare[pacIndex] === gridSquare[beaverTwo.beaverIndex]) {
       scoreNumber = scoreNumber - 60;
     }
   }
 
-  function pacCaught(ghostThree) {
+  function pacCaught(beaverThree) {
     /*console.log("is it catching?");*/
-    if (gridSquare[pacIndex] === gridSquare[ghostThree.ghostIndex]) {
+    if (gridSquare[pacIndex] === gridSquare[beaverThree.beaverIndex]) {
       scoreNumber = scoreNumber - 90;
     }
   }
 
-  function pacCaught(ghostFour) {
+  function pacCaught(beaverFour) {
     /*console.log("is it catching?");*/
-    if (gridSquare[pacIndex] === gridSquare[ghostFour.ghostIndex]) {
+    if (gridSquare[pacIndex] === gridSquare[beaverFour.beaverIndex]) {
       scoreNumber = scoreNumber - 10;
     }
   }
 
-  function pacCaught(ghostFive) {
+  function pacCaught(beaverFive) {
     /*console.log("is it catching?");*/
-    if (gridSquare[pacIndex] === gridSquare[ghostFive.ghostIndex]) {
+    if (gridSquare[pacIndex] === gridSquare[beaverFive.beaverIndex]) {
       scoreNumber = scoreNumber - 10;
     }
   }
 
-  // Calling the caught function for each ghost
+  // Calling the caught function for each beaver
   let caughtIdOne = setInterval(function () {
-    pacCaught(ghostOne);
+    pacCaught(beaverOne);
   }, 60);
   let caughtIdTwo = setInterval(function () {
-    pacCaught(ghostTwo);
+    pacCaught(beaverTwo);
   }, 60);
   let caughtIdThree = setInterval(function () {
-    pacCaught(ghostThree);
+    pacCaught(beaverThree);
   }, 60);
   let caughtIdFour = setInterval(function () {
-    pacCaught(ghostFour);
+    pacCaught(beaverFour);
   }, 60);
   let caughtIdFive = setInterval(function () {
-    pacCaught(ghostFive);
+    pacCaught(beaverFive);
   }, 60);
-  //This function if run when pacman is caught by a ghost and dies
+  //This function if run when pacman is caught by a beaver and dies
   function pacDied() {
     for (let i = 0; i < 16; i++) {
       clearInterval(caughtIdOne);
@@ -785,11 +852,11 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(caughtIdFour);
       clearInterval(caughtIdFive);
     }
-    clearInterval(ghostMoveIdOne);
-    clearInterval(ghostMoveIdTwo);
-    clearInterval(ghostMoveIdThree);
-    clearInterval(ghostMoveIdFour);
-    clearInterval(ghostMoveIdFive);
+    clearInterval(beaverMoveIdOne);
+    clearInterval(beaverMoveIdTwo);
+    clearInterval(beaverMoveIdThree);
+    clearInterval(beaverMoveIdFour);
+    clearInterval(beaverMoveIdFive);
     pacIndex = null;
     clearInterval(CountUpid);
     /*clearInterval(CountUp2id);*/
@@ -798,7 +865,7 @@ document.addEventListener("DOMContentLoaded", () => {
     /*clearInterval(CountDownid);*/
   }
   // this function is run after everything is set back to 0 inorder to play again
-  function startReset(ghost) {
+  function startReset(beaver) {
     for (let i = 0; i < 16; i++) {
       clearInterval(caughtIdOne);
       clearInterval(caughtIdTwo);
@@ -806,37 +873,37 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(caughtIdFour);
       clearInterval(caughtIdFive);
     }
-    reset(ghost);
+    reset(beaver);
     clearInterval(pacSoundId);
     pacSoundId = setInterval(pacSound, 650);
-    //restart ghosts moving
-    clearInterval(ghostMoveIdOne);
-    clearInterval(ghostMoveIdTwo);
-    clearInterval(ghostMoveIdThree);
-    clearInterval(ghostMoveIdFour);
-    clearInterval(ghostMoveIdFive);
-    ghostMoveIdOne = setInterval(function () {
-      chooseAndMove(ghostOne);
-    }, ghostTimePerMove);
-    ghostMoveIdTwo = setInterval(function () {
-      chooseAndMove(ghostTwo);
-    }, ghostTimePerMove);
-    ghostMoveIdThree = setInterval(function () {
-      chooseAndMove(ghostThree);
-    }, ghostTimePerMove);
-    ghostMoveIdFour = setInterval(function () {
-      chooseAndMove(ghostFour);
-    }, ghostTimePerMove);
-    ghostMoveIdFive = setInterval(function () {
-      chooseAndMove(ghostFive);
-    }, ghostTimePerMove);
+    //restart beavers moving
+    clearInterval(beaverMoveIdOne);
+    clearInterval(beaverMoveIdTwo);
+    clearInterval(beaverMoveIdThree);
+    clearInterval(beaverMoveIdFour);
+    clearInterval(beaverMoveIdFive);
+    beaverMoveIdOne = setInterval(function () {
+      chooseAndMove(beaverOne);
+    }, beaverTimePerMove);
+    beaverMoveIdTwo = setInterval(function () {
+      chooseAndMove(beaverTwo);
+    }, beaverTimePerMove);
+    beaverMoveIdThree = setInterval(function () {
+      chooseAndMove(beaverThree);
+    }, beaverTimePerMove);
+    beaverMoveIdFour = setInterval(function () {
+      chooseAndMove(beaverFour);
+    }, beaverTimePerMove);
+    beaverMoveIdFive = setInterval(function () {
+      chooseAndMove(beaverFive);
+    }, beaverTimePerMove);
   }
   // This function is run when pacman takes a heart
-  function hearttaken(ghost) {
-    ghost.bias = 2;
-    gridSquare[ghost.ghostIndex].classList.remove("ghostDead");
-    gridSquare[ghost.ghostIndex].classList.remove(ghost.ghostClass);
-    gridSquare[ghost.ghostIndex].classList.add("ghostFlee");
+  function hearttaken(beaver) {
+    beaver.bias = 2;
+    gridSquare[beaver.beaverIndex].classList.remove("beaverDead");
+    gridSquare[beaver.beaverIndex].classList.remove(beaver.beaverClass);
+    gridSquare[beaver.beaverIndex].classList.add("beaverFlee");
     for (let i = 0; i < 16; i++) {
       clearInterval(caughtIdOne);
       clearInterval(caughtIdTwo);
@@ -844,22 +911,22 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(caughtIdFour);
       clearInterval(caughtIdFive);
     }
-    // this reverses the ghosts direction once Pman has taken the hearts
-    /*ghost.lastDirection = -ghost.lastDirection;
-    gridSquare[ghost.ghostIndex].classList.remove("ghostFlee");
-    ghost.ghostIndex = ghost.ghostIndex - ghost.directionMove;
-    gridSquare[ghost.ghostIndex].classList.add("ghostFlee");
+    // this reverses the beavers direction once Pman has taken the hearts
+    /*beaver.lastDirection = -beaver.lastDirection;
+    gridSquare[beaver.beaverIndex].classList.remove("beaverFlee");
+    beaver.beaverIndex = beaver.beaverIndex - beaver.directionMove;
+    gridSquare[beaver.beaverIndex].classList.add("beaverFlee");
     const pacKillIdOne = setInterval(function () {
-      pacKill(ghostOne);
+      pacKill(beaverOne);
     }, 60);
     const pacKillIdTwo = setInterval(function () {
-      pacKill(ghostTwo);
+      pacKill(beaverTwo);
     }, 60);
     const pacKillIdThree = setInterval(function () {
-      pacKill(ghostThree);
+      pacKill(beaverThree);
     }, 60);
     const pacKillIdFour = setInterval(function () {
-      pacKill(ghostFour);
+      pacKill(beaverFour);
     }, 60);
     setTimeout(function () {
       for (let i = 0; i < 4; i++) {
@@ -868,12 +935,12 @@ document.addEventListener("DOMContentLoaded", () => {
         clearInterval(pacKillIdThree);
         clearInterval(pacKillIdFour);
       }
-      heartWareoff(ghost);
+      heartWareoff(beaver);
     }, hearttime);
   }
   // When a heart is taken the function is run a number of times a second
-  // to check to see if pacman has killed a ghost
-  /*function pacKill(ghost) {
+  // to check to see if pacman has killed a beaver
+  /*function pacKill(beaver) {
     console.log("can pac kill");
     for (let i = 0; i < 16; i++) {
       clearInterval(caughtIdOne);
@@ -881,25 +948,25 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(caughtIdThree);
       clearInterval(caughtIdFour);
     }*/
-    // so pacMan can kill ghost
-    /*if (gridSquare[pacIndex] === gridSquare[ghost.ghostIndex]) {
+    // so pacMan can kill beaver
+    /*if (gridSquare[pacIndex] === gridSquare[beaver.beaverIndex]) {
       scoreNumber = scoreNumber + 200;
-      infoBox.innerHTML = "Ghost \n +200 Points";
-      gridSquare[ghost.ghostIndex].classList.remove("ghostFlee");
-      gridSquare[ghost.ghostIndex].classList.remove(ghost.ghostClass);
-      gridSquare[ghost.ghostIndex].classList.remove("ghostDead");
-      ghost.lastDirection = -ghost.lastDirection;
-      gridSquare[ghost.ghostIndex].classList.remove("ghostDead");
-      ghost.ghostIndex = ghost.ghostIndex - ghost.directionMove;
-      gridSquare[ghost.ghostIndex].classList.add("ghostDead");
-      ghost.bias = 3;
+      infoBox.innerHTML = "beaver \n +200 Points";
+      gridSquare[beaver.beaverIndex].classList.remove("beaverFlee");
+      gridSquare[beaver.beaverIndex].classList.remove(beaver.beaverClass);
+      gridSquare[beaver.beaverIndex].classList.remove("beaverDead");
+      beaver.lastDirection = -beaver.lastDirection;
+      gridSquare[beaver.beaverIndex].classList.remove("beaverDead");
+      beaver.beaverIndex = beaver.beaverIndex - beaver.directionMove;
+      gridSquare[beaver.beaverIndex].classList.add("beaverDead");
+      beaver.bias = 3;
     }*/
   }
-  // this resets the ghosts to hunt pacman and stop pac man from killing
-  /*function heartWareoff(ghost) {
-    ghost.bias = 1;
-    gridSquare[ghost.ghostIndex].classList.remove("ghostDead");
-    gridSquare[ghost.ghostIndex].classList.remove("ghostFlee");
+  // this resets the beavers to hunt pacman and stop pac man from killing
+  /*function heartWareoff(beaver) {
+    beaver.bias = 1;
+    gridSquare[beaver.beaverIndex].classList.remove("beaverDead");
+    gridSquare[beaver.beaverIndex].classList.remove("beaverFlee");
     for (let i = 0; i < 16; i++) {
       clearInterval(caughtIdOne);
       clearInterval(caughtIdTwo);
@@ -1006,7 +1073,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // this runs a hard reset on eveything clearing all the timers
-  function reset(ghost) {
+  function reset(beaver) {
     for (let i = 0; i < 4; i++) {
       clearInterval(caughtIdOne);
       clearInterval(caughtIdTwo);
@@ -1020,25 +1087,25 @@ document.addEventListener("DOMContentLoaded", () => {
     timer.innerHTML = time;
     timer2.innerHTML = time2;
     timer3.innerHTML = time3;
-    gridSquare[ghost.ghostIndex].classList.remove("ghostDead");
-    gridSquare[ghost.ghostIndex].classList.remove("ghostFlee");
-    gridSquare[ghost.ghostIndex].classList.remove(ghost.ghostClass);
+    gridSquare[beaver.beaverIndex].classList.remove("beaverDead");
+    gridSquare[beaver.beaverIndex].classList.remove("beaverFlee");
+    gridSquare[beaver.beaverIndex].classList.remove(beaver.beaverClass);
     pacIndex = 250;
-    ghost.directionStore = [];
-    ghost.goodDirections = [];
-    ghost.directionMove = -1;
-    ghost.lastDirection = 0;
-    gridSquare[ghostOne.ghostIndex].classList.remove("ghostOne");
-    gridSquare[ghostTwo.ghostIndex].classList.remove("ghostTwo");
-    gridSquare[ghostThree.ghostIndex].classList.remove("ghostThree");
-    gridSquare[ghostFour.ghostIndex].classList.remove("ghostFour");
-    gridSquare[ghostFive.ghostIndex].classList.remove("ghostFive");
-    ghostOne.ghostIndex = 170;
-    ghostTwo.ghostIndex = 169;
-    ghostOne.ghostIndex = 168;
-    ghostTwo.ghostIndex = 171;
-    ghostOne.ghostIndex = 150;
-    ghost.bias = 1;
-    assignGrid(ghostOne, ghostTwo, ghostThree, ghostFour, ghostFive);
+    beaver.directionStore = [];
+    beaver.goodDirections = [];
+    beaver.directionMove = -1;
+    beaver.lastDirection = 0;
+    gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
+    gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
+    gridSquare[beaverThree.beaverIndex].classList.remove("beaverThree");
+    gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
+    gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
+    beaverOne.beaverIndex = 170;
+    beaverTwo.beaverIndex = 169;
+    beaverOne.beaverIndex = 168;
+    beaverTwo.beaverIndex = 171;
+    beaverOne.beaverIndex = 148;
+    beaver.bias = 1;
+    assignGrid(beaverOne, beaverTwo, beaverThree, beaverFour, beaverFive);
   }
 });
