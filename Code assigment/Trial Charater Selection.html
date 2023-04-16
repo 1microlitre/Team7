@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Game Example</title>
+    <style>
+      .highlight {
+        background-color: yellow;
+        font-weight: bold;
+        animation: highlight 5s linear alternate;
+      }
+
+      @keyframes highlight {
+        0%, 100% {
+          background-color: yellow;
+        }
+        50% {
+          background-color: orange;
+        }
+      }
+
+      .gallery {
+        display: flex;
+        justify-content: center;
+      }
+
+      .gallery img {
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+        cursor: pointer;
+        border: 2px solid white;
+      }
+
+      .gallery img:hover,
+      .gallery img.selected {
+        border: 2px solid yellow;
+      }
+
+      #banner {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: black;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        font-size: 36px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Game Example</h1>
+    <p>Click the button to randomly select a game character and start the game:</p>
+    <button onclick="startGame()">Start Game</button>
+    <div class="gallery">
+      <img src="aileen.png" alt="Aileen"data-page="Aileen.html">
+      <img src="dion.png" alt="Dion"data-page="Dion.html">
+      <img src="susan.png" alt="Susan"data-page="Susan.html">
+      <img src="elsa.png" alt="Elsa"data-page="Elsa.html">
+      <img src="dave.png" alt="Dave"data-page="Dave.html">
+      <img src="ivy.png" alt="Ivy"data-page="Ivy.html">
+    </div>
+    <div id="banner"></div>
+    <script>
+      function startGame() {
+        var characters = ["Aileen", "Dion", "Susan", "Elsa", "Dave", "Ivy"];
+        var characterImages = document.querySelectorAll(".gallery img");
+        var intervalId = setInterval(() => {
+          characterImages.forEach(img => img.classList.toggle("highlight"));
+        }, 100);
+        setTimeout(() => {
+          clearInterval(intervalId);
+          var index = Math.floor(Math.random() * characters.length);
+          characterImages.forEach(img => img.classList.remove("highlight", "selected"));
+          var selectedImage = characterImages[index];
+          selectedImage.classList.add("selected", "highlight");
+          var banner = document.getElementById("banner");
+          banner.style.display = "block";
+          banner.textContent = "Get Ready!";
+          setTimeout(() => {banner.textContent = "3";}, 1000);
+          setTimeout(() => {banner.textContent = "2";}, 2000);
+          setTimeout(() => {banner.textContent = "1";}, 3000);
+          setTimeout(() => {
+            banner.textContent = "Start!";
+            banner.style.display = "none";
+            var page = selectedImage.getAttribute("data-page");
+            window.location.href = page;
+          }, 4000);
+        }, 5000);
+      }
+    </script>
+  </body>
+</html>
