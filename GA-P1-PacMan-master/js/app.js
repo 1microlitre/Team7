@@ -2,7 +2,7 @@
 // set how long the hearts work for (ms)
 const hearttime = 6000;
 // Set how many miliseconds between each time the ghosts move
-const ghostTimePerMove = 300;
+const ghostTimePerMove = 150;
 // Defining the ghosts paramters.
 //---------------------------------------------------------------------
 // Used in algorithams to move ghosts and pacman
@@ -19,7 +19,7 @@ let scoreTarget = 2000;
 // The time played
 let time = 26;
 let time2 = 1;
-let time3 = 1;
+let time3 = 15;
 let time5 = 0;
 // Id to ended the timer
 let CountUpid;
@@ -107,6 +107,28 @@ const ghosts = [ghostOne, ghostTwo, ghostThree, ghostFour];
 // ghost2 = 7
 // ghost3 = 8
 // ghost4 = 9
+/* See lines 246 to 289 for the number assignments 
+      } else if (layout[i] === 9) {
+        gridSquare[i].classList.add("ghostFour");
+        ghostFour.ghostIndex = i;
+      } else if (layout[i] === 10) {
+        gridSquare[i].classList.add("book");
+      } else if (layout[i] === 11) {
+        gridSquare[i].classList.add("paperdoc");
+      } else if (layout[i] === 12) {
+        gridSquare[i].classList.add("letter1");
+      } else if (layout[i] === 13) {
+        gridSquare[i].classList.add("heart1");
+      } else if (layout[i] === 14) {
+        gridSquare[i].classList.add("heart2");
+      } else if (layout[i] === 15) {
+        gridSquare[i].classList.add("badge1");
+      } else if (layout[i] === 16) {
+        gridSquare[i].classList.add("letter2");
+      } else if (layout[i] === 17) {
+        gridSquare[i].classList.add("letter2");
+
+*/
 const layout = [
   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
   //Next
@@ -247,17 +269,21 @@ document.addEventListener("DOMContentLoaded", () => {
         gridSquare[i].classList.add("ghostFour");
         ghostFour.ghostIndex = i;
       } else if (layout[i] === 10) {
-        gridSquare[i].classList.add("heart");
-      } else if (layout[i] === 11) {
-        gridSquare[i].classList.add("letter");
-      } else if (layout[i] === 12) {
-        gridSquare[i].classList.add("letter2");
-      } else if (layout[i] === 13) {
-        gridSquare[i].classList.add("lottery");
-      } else if (layout[i] === 14) {
-        gridSquare[i].classList.add("paperdoc");
-      } else if (layout[i] === 15) {
         gridSquare[i].classList.add("book");
+      } else if (layout[i] === 11) {
+        gridSquare[i].classList.add("paperdoc");
+      } else if (layout[i] === 12) {
+        gridSquare[i].classList.add("letter1");
+      } else if (layout[i] === 13) {
+        gridSquare[i].classList.add("heart1");
+      } else if (layout[i] === 14) {
+        gridSquare[i].classList.add("heart2");
+      } else if (layout[i] === 15) {
+        gridSquare[i].classList.add("badge1");
+      } else if (layout[i] === 16) {
+        gridSquare[i].classList.add("letter2");
+      } else if (layout[i] === 17) {
+        gridSquare[i].classList.add("letter2");
       }
     }
   }
@@ -512,7 +538,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // This function is only used once to start the game and set the ghosts moving.
   function startGame() {
     pacSoundId = setInterval(pacSound, 650);
-    CountUpid = setInterval(CountUp, 72000);
+    CountUpid = setInterval(CountUp, 24000);
     /*CountUp2id = setInterval(CountUp2, 5000);*/
     CountUp3id = setInterval(CountUp3, 1000);
     CountDown2id = setInterval(CountDown2, 1000);
@@ -843,12 +869,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // KARLO: Counts up the time for the Days (which affects Months) in Age, resets its everytime it reaches 12.
   function CountUp3() {
-    if (time3 == 1) {
-      time3 = time3 + 5;
-    } else if (time3 < 30) {
-      time3 = time3 + 6;
+    if (time3 == 15) {
+      time3 = time3 + 15;
     } else if ((time3 = 30)) {
-      time3 = 1;
+      time3 = 15;
       if (time2 < 12) {
         time2 = time2 + 1;
         timer2.innerHTML = time2;
@@ -865,33 +889,49 @@ document.addEventListener("DOMContentLoaded", () => {
   // KARLO: Separate timer for powerup appearance.
   function CountDown2() {
     time5 = time5 + 1;
-    if (time5 == 71) {
+    console.log(timer5);
+    /*timer5.innerHTML = time5;*/
+    if (time5 == 10) {
       gridSquare[30].classList.add("book");
     }
-    if (time5 == 165) {
+    if (time5 == 20) {
       gridSquare[30].classList.remove("book");
-      gridSquare[61].classList.add("paperdoc");
+      gridSquare[77].classList.add("book");
     }
-    if (time5 == 237) {
-      gridSquare[30].classList.remove("paperdoc");
-      gridSquare[61].classList.add("letter");
+    if (time5 == 30) {
+      gridSquare[77].classList.remove("book");
+      gridSquare[359].classList.add("paperdoc");
     }
-    if (time5 == 251) {
-      gridSquare[61].classList.add("heart");
+    if (time5 == 40) {
+      gridSquare[359].classList.remove("paperdoc");
+      gridSquare[278].classList.add("letter1");
     }
-    if (time5 == 323) {
-      gridSquare[61].classList.remove("heart");
+    if (time5 == 50) {
+      gridSquare[278].classList.remove("letter1");
+      gridSquare[186].classList.add("heart1");
     }
-    if (time5 == 309) {
-      gridSquare[30].classList.remove("letter");
-      gridSquare[61].classList.add("letter2");
+    if (time5 == 60) {
+      gridSquare[186].classList.remove("heart1");
+      gridSquare[254].classList.add("heart2");
     }
-    if (time5 == 381) {
-      gridSquare[30].classList.remove("letter2");
-      gridSquare[61].classList.add("lottery");
+    if (time5 == 70) {
+      gridSquare[254].classList.remove("heart2");
+      gridSquare[368].classList.add("heart2");
     }
-    if (time5 == 417) {
-      gridSquare[30].classList.remove("lottery");
+    if (time5 == 80) {
+      gridSquare[368].classList.remove("heart2");
+      gridSquare[290].classList.add("badge1");
+    }
+    if (time5 == 90) {
+      gridSquare[290].classList.remove("badge1");
+      gridSquare[337].classList.add("letter2");
+    }
+    if (time51 == 100) {
+      gridSquare[337].classList.remove("letter2");
+      gridSquare[107].classList.add("lottery");
+    }
+    if (time5 == 110) {
+      gridSquare[107].classList.remove("lottery");
     }
 
     // KARLO: This set specifically for visa expiration.

@@ -238,16 +238,24 @@ timer {
 /*.pill {
   background-image: radial-gradient(orange 30%, transparent 20%);
 }*/
-.heart {
-  background-image: url("../images/powerups/heart.png");
-  background-size: contain;
-}
 .book {
   background-image: url("../images/powerups/book.png");
   background-size: contain;
 }
-.letter {
-  background-image: url("../images/powerups/letter.png");
+.paperdoc {
+  background-image: url("../images/powerups/paperdoc.png");
+  background-size: contain;
+}
+.letter1 {
+  background-image: url("../images/powerups/letter1.png");
+  background-size: contain;
+}
+.heart1 {
+  background-image: url("../images/powerups/heart1.png");
+  background-size: contain;
+}
+.heart2 {
+  background-image: url("../images/powerups/heart2.png");
   background-size: contain;
 }
 .letter2 {
@@ -258,7 +266,7 @@ timer {
   background-image: url("../images/powerups/lottery.png");
   background-size: contain;
 }
-.paperdoc {
-  background-image: url("../images/powerups/paperdoc.png");
+.badge1 {
+  background-image: url("../images/powerups/lottery.png");
   background-size: contain;
 }
