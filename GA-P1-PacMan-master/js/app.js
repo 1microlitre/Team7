@@ -2,7 +2,7 @@
 // set how long the hearts work for (ms)
 const hearttime = 6000;
 // Set how many miliseconds between each time the beavers move
-const beaverTimePerMove = 200;
+const beaverTimePerMove = 250;
 // Defining the beavers paramters.
 //---------------------------------------------------------------------
 // Used in algorithams to move beavers and pacman
@@ -14,19 +14,22 @@ const directions = [-1, -width, 1, width];
 let pacIndex = 250;
 // players points
 let scoreNumber = 700;
-// target points
+// scoreTargetpoints
 let scoreTarget = 2000;
 // The time played
 let time = 26;
 let time2 = 1;
 let time3 = 15;
-/*let time4 = 28;*/
-let time5 = 0;
+//let time4 = 28;
+let time5 = 120;
+let time6 = 120;
+
 // Id to ended the timer
 let CountUpid;
 /*let CountUp2id;*/
 let CountUp3id;
-let CountDown2id;
+let CountDown2Id;
+let CountDownId;
 // Ids to stop the beavers from moving
 let beaverMoveIdOne;
 let beaverMoveIdTwo;
@@ -35,11 +38,34 @@ let beaverMoveIdFour;
 let beaverMoveIdFive;
 // Id to stop the pac audio sounds
 let pacSoundId;
-// Used to set the games highscore
+/*// Used to set the games highscore
 let highScoreNumber = 0;
 // the   time to go along with the high score
-let highScoreTime = 0;
+let highScoreTime = 0;*/
+const winAudio = new Audio("pacman_win.wav");
 const death = new Audio("pacman_death.wav");
+
+/*let givenTime = 120000;
+let timeLimit;
+let clockInterval;
+resetClock();
+function updateClock() {
+  var now = new Date().getTime();
+  if (now < timeLimit) {
+    //Set the displayed clock to timeLimit-now
+  } else {
+    //Time has run out
+    clearInterval(clockInterval);
+  }
+}
+function resetClock() {
+  timeLimit = new Date().getTime() + givenTime;
+  clearInterval(clockInterval);
+  clockInterval = setInterval(updateClock, 10);
+}*/
+
+/*let win = new Audio("pacman_win.wav");
+win.loop = false;*/
 
 const beaverOne = {
   //beaver intial starting position
@@ -141,7 +167,6 @@ const beavers = [beaverOne, beaverTwo, beaverThree, beaverFour, beaverFive];
         gridSquare[i].classList.add("letter2");
       } else if (layout[i] === 17) {
         gridSquare[i].classList.add("letter2");
-
 */
 const layout = [
   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -176,7 +201,7 @@ const layout = [
   //Next
   1, 2, 1, 2, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1,
   //Next
-  1, 2, 1, 2, 5, 2, 2, 1, 2, 2, 2, 2, 1, 2, 2, 5, 2, 1, 2, 1,
+  1, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 2, 1,
   //Next
   1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 2, 1,
   //Next
@@ -199,13 +224,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const gridSquare = document.querySelectorAll(".gridSquare");
   const infoBox = document.querySelector(".infoBox");
   const score = document.querySelector(".score");
+  //const scoreTarget = document.querySelector(".scoreTarget");
   const timer = document.querySelector(".timer");
   const timer2 = document.querySelector(".timer2");
   const timer3 = document.querySelector(".timer3");
   const timer4 = document.querySelector(".timer4");
   const timer5 = document.querySelector(".timer5");
+  const timer6 = document.querySelector(".timer6");
   const start = document.querySelector(".start");
-  const highScore = document.querySelector(".highScore");
+  const targetScore = document.querySelector(".targetScore");
+  /*const highScore = document.querySelector(".highScore");*/
   const left = document.querySelector(".left");
   const up = document.querySelector(".up");
   const right = document.querySelector(".right");
@@ -358,7 +386,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //KARLO: Condition for winning the game
   function checkWin() {
-    if (scoreNumber >= scoreTarget && gridSquare[pacIndex].classList.contains("gate") {
+    if (scoreNumber >= scoreTarget&& gridSquare[pacIndex].classList.contains("gate") {
       highScoreNumber = scoreNumber;
       highScoreTime = time;
       infoBox.innerHTML = "YOU WIN!";
@@ -387,63 +415,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }*/
 
-  function checkWin() {
-    if (
-      scoreNumber >= scoreTarget &&
-      gridSquare[pacIndex].classList.contains("gate")
-    ) {
-      scoreNumber = scoreNumber;
-      time = 0;
-      clearInterval(beaverMoveIdOne);
-      clearInterval(beaverMoveIdTwo);
-      clearInterval(beaverMoveIdThree);
-      clearInterval(beaverMoveIdFour);
-      clearInterval(beaverMoveIdFive);
-      clearInterval(CountUpid);
-      //clearInterval(CountUp2id);
-      clearInterval(CountUp3id);
-      clearInterval(CountDown2id);
-      //clearInterval(CountDownid);
-      gridSquare[pacIndex].classList.remove("pacmanUp");
-      gridSquare[pacIndex].classList.remove("pacmanRight");
-      gridSquare[pacIndex].classList.remove("pacmanDown");
-      gridSquare[pacIndex].classList.remove("pacmanLeft");
-      infoBox.innerHTML = "YOU GET TO LIVE IN CANADA!";
-    } else if (
-      scoreNumber < scoreTarget &&
-      gridSquare[pacIndex].classList.contains("gate")
-    ) {
-      infoBox.innerHTML = "YOU DO NOT HAVE ENOUGH POINTS YET.";
-    } else if ((time4 = 0 && scoreNumber < scoreTarget)) {
-      scoreNumber = scoreNumber;
-      time = 0;
-      clearInterval(beaverMoveIdOne);
-      clearInterval(beaverMoveIdTwo);
-      clearInterval(beaverMoveIdThree);
-      clearInterval(beaverMoveIdFour);
-      clearInterval(beaverMoveIdFive);
-      clearInterval(CountUpid);
-      //clearInterval(CountUp2id);
-      clearInterval(CountUp3id);
-      clearInterval(CountDown2id);
-      //clearInterval(CountDownid);
-      gridSquare[pacIndex].classList.remove("pacmanUp");
-      gridSquare[pacIndex].classList.remove("pacmanRight");
-      gridSquare[pacIndex].classList.remove("pacmanDown");
-      gridSquare[pacIndex].classList.remove("pacmanLeft");
-      infoBox.innerHTML = "YOU DON'T DESERVE CANADA!";
-    }
-  }
-
-  //Calling the checkWin to run at a set interval 200ms
-  setInterval(checkWin, 200);
   // Function to play the beaver sounds
   function pacSound() {
     const move = new Audio("pacman_chomp.wav");
     move.play();
   }
+
   //Function that moves packman using the arrow keys
   function movePacMan(e) {
+    let scoreTarget = 2000;
+    targetScore.innerHTML = scoreTarget;
     gridSquare[pacIndex].classList.remove("pacmanUp");
     gridSquare[pacIndex].classList.remove("pacmanRight");
     gridSquare[pacIndex].classList.remove("pacmanDown");
@@ -486,6 +467,55 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
     }
+    // colliding with powerups -----------------------
+    if (gridSquare[pacIndex].classList.contains("book")) {
+      gridSquare[pacIndex].classList.remove("book");
+      scoreNumber = scoreNumber + 30;
+      score.innerHTML = scoreNumber;
+    }
+
+    if (gridSquare[pacIndex].classList.contains("paperdoc")) {
+      gridSquare[pacIndex].classList.remove("paperdoc");
+      scoreNumber = scoreNumber + 40;
+      score.innerHTML = scoreNumber;
+    }
+
+    if (gridSquare[pacIndex].classList.contains("letter1")) {
+      gridSquare[pacIndex].classList.remove("letter1");
+      scoreNumber = scoreNumber + 40;
+      score.innerHTML = scoreNumber;
+    }
+
+    if (gridSquare[pacIndex].classList.contains("heart1")) {
+      gridSquare[pacIndex].classList.remove("heart1");
+      scoreNumber = scoreNumber + 10;
+      score.innerHTML = scoreNumber;
+    }
+
+    if (gridSquare[pacIndex].classList.contains("heart2")) {
+      gridSquare[pacIndex].classList.remove("heart2");
+      scoreNumber = scoreNumber + 10;
+      score.innerHTML = scoreNumber;
+    }
+
+    if (gridSquare[pacIndex].classList.contains("badge1")) {
+      gridSquare[pacIndex].classList.remove("badge1");
+      scoreNumber = scoreNumber + 600;
+      score.innerHTML = scoreNumber;
+    }
+
+    if (gridSquare[pacIndex].classList.contains("letter2")) {
+      gridSquare[pacIndex].classList.remove("letter2");
+      scoreNumber = scoreNumber + 200;
+      score.innerHTML = scoreNumber;
+    }
+
+    if (gridSquare[pacIndex].classList.contains("lottery")) {
+      gridSquare[pacIndex].classList.remove("lottery");
+      scoreTarget = scoreTarget - 1925;
+      document.getElementsByClassName("scoreTarget")[0].innerHTML = scoreTarget;
+    }
+
     // colliding with heart ------------------------------------------
     if (gridSquare[pacIndex].classList.contains("heart")) {
       gridSquare[pacIndex].classList.remove("heart");
@@ -629,7 +659,9 @@ document.addEventListener("DOMContentLoaded", () => {
     CountUpid = setInterval(CountUp, 24000);
     /*CountUp2id = setInterval(CountUp2, 5000);*/
     CountUp3id = setInterval(CountUp3, 1000);
-    CountDown2id = setInterval(CountDown2, 1000);
+    CountDown2Id = setInterval(CountDown2, 1000);
+    CountDownId = setInterval(CountDown2, 1000);
+    //CountDown6Id = setInterval(CountDown6, 1000);
 
     beaverMoveIdOne = setInterval(function () {
       chooseAndMove(beaverOne);
@@ -798,35 +830,30 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber - 40;
     }
   }
-
   function pacCaught(beaverTwo) {
     /*console.log("is it catching?");*/
     if (gridSquare[pacIndex] === gridSquare[beaverTwo.beaverIndex]) {
       scoreNumber = scoreNumber - 60;
     }
   }
-
   function pacCaught(beaverThree) {
     /*console.log("is it catching?");*/
     if (gridSquare[pacIndex] === gridSquare[beaverThree.beaverIndex]) {
       scoreNumber = scoreNumber - 90;
     }
   }
-
   function pacCaught(beaverFour) {
     /*console.log("is it catching?");*/
     if (gridSquare[pacIndex] === gridSquare[beaverFour.beaverIndex]) {
-      scoreNumber = scoreNumber - 10;
+      scoreNumber = scoreNumber - 450;
     }
   }
-
   function pacCaught(beaverFive) {
     /*console.log("is it catching?");*/
     if (gridSquare[pacIndex] === gridSquare[beaverFive.beaverIndex]) {
       scoreNumber = scoreNumber - 10;
     }
   }
-
   // Calling the caught function for each beaver
   let caughtIdOne = setInterval(function () {
     pacCaught(beaverOne);
@@ -862,7 +889,7 @@ document.addEventListener("DOMContentLoaded", () => {
     /*clearInterval(CountUp2id);*/
     clearInterval(CountUp3id);
     clearInterval(CountDown2id);
-    /*clearInterval(CountDownid);*/
+    clearInterval(CountDownid);
   }
   // this function is run after everything is set back to 0 inorder to play again
   function startReset(beaver) {
@@ -1004,27 +1031,27 @@ document.addEventListener("DOMContentLoaded", () => {
     timer3.innerHTML = time3;
   }
 
-  // KARLO: Separate timer for powerup appearance.
+  // KARLO: Timer for powerup appearance.
   function CountDown2() {
-    time5 = time5 + 1;
-    console.log(timer5);
+    time5 = time5 - 1;
+    console.log(time5);
     timer5.innerHTML = time5;
-    if (time5 == 10) {
+    if (time5 == 110) {
       gridSquare[29].classList.add("book");
     }
-    if (time5 == 20) {
+    if (time5 == 100) {
       gridSquare[29].classList.remove("book");
       gridSquare[78].classList.add("book");
     }
-    if (time5 == 30) {
+    if (time5 == 90) {
       gridSquare[78].classList.remove("book");
       gridSquare[358].classList.add("paperdoc");
     }
-    if (time5 == 40) {
+    if (time5 == 80) {
       gridSquare[358].classList.remove("paperdoc");
       gridSquare[277].classList.add("letter1");
     }
-    if (time5 == 50) {
+    if (time5 == 70) {
       gridSquare[277].classList.remove("letter1");
       gridSquare[185].classList.add("heart1");
     }
@@ -1032,80 +1059,215 @@ document.addEventListener("DOMContentLoaded", () => {
       gridSquare[185].classList.remove("heart1");
       gridSquare[253].classList.add("heart2");
     }
-    if (time5 == 70) {
+    if (time5 == 50) {
       gridSquare[253].classList.remove("heart2");
       gridSquare[367].classList.add("heart2");
     }
-    if (time5 == 80) {
+    if (time5 == 40) {
       gridSquare[367].classList.remove("heart2");
       gridSquare[289].classList.add("badge1");
     }
-    if (time5 == 90) {
+    if (time5 == 30) {
       gridSquare[289].classList.remove("badge1");
       gridSquare[336].classList.add("letter2");
     }
-    if (time5 == 100) {
+    if (time5 == 20) {
       gridSquare[336].classList.remove("letter2");
       gridSquare[106].classList.add("lottery");
     }
-    if (time5 == 110) {
+    if (time5 == 10) {
       gridSquare[106].classList.remove("lottery");
       gridSquare[170].classList.add("gate");
     }
-    if (time5 == 118) {
+    /*if (time5 == 8) {
       gridSquare[170].classList.remove("gate");
-    }
-  }
-
-  // KARLO: specifically for visa expiration.
-  let time4 = 120;
-  let CountDownId;
-  CountDownId = setInterval(CountDown, 1000);
-  function CountDown() {
-    time4 = time4 - 1;
-    if (time4 == 29) {
-      CountDown3Id = setInterval(CountDown3, 1000);
-      function CountDown3() {
-        time4 = time4;
+    }*/
+    // KARLO: specifically for visa expiration.
+    if (time5 == 28) {
+      document.getElementById("timer4").className = "timer4";
+      let time4 = 28;
+      let CountDownId;
+      CountDownId = setInterval(CountDown, 1000);
+      function CountDown() {
+        time4 = time4 - 1;
         timer4.innerHTML = time4;
+        if (time4 == 0) {
+          clearInterval(CountDownId);
+          time4 = 0;
+          timer4.innerHTML = time4;
+        }
       }
     }
   }
-
-  // this runs a hard reset on eveything clearing all the timers
-  function reset(beaver) {
-    for (let i = 0; i < 4; i++) {
-      clearInterval(caughtIdOne);
-      clearInterval(caughtIdTwo);
-      clearInterval(caughtIdThree);
-      clearInterval(caughtIdFour);
-      clearInterval(caughtIdFive);
+  CountDown6Id = setInterval(CountDown6, 1000);
+  function CountDown6() {
+    time6 = time6 - 1;
+    timer6.innerHTML = time6;
+    if (time6 <= 0) {
+      clearInterval(CountDown6Id);
+      clearInterval(pacSoundId);
+      clearInterval(beaverMoveIdOne);
+      clearInterval(beaverMoveIdTwo);
+      clearInterval(beaverMoveIdThree);
+      clearInterval(beaverMoveIdFour);
+      clearInterval(beaverMoveIdFive);
+      clearInterval(CountUpid);
+      clearInterval(CountUp3id);
+      clearInterval(CountDown2Id);
+      clearInterval(CountDownId);
     }
-    scoreNumber = 0;
-    time = 0;
-    score.innerHTML = scoreNumber;
-    timer.innerHTML = time;
-    timer2.innerHTML = time2;
-    timer3.innerHTML = time3;
-    gridSquare[beaver.beaverIndex].classList.remove("beaverDead");
-    gridSquare[beaver.beaverIndex].classList.remove("beaverFlee");
-    gridSquare[beaver.beaverIndex].classList.remove(beaver.beaverClass);
-    pacIndex = 250;
-    beaver.directionStore = [];
-    beaver.goodDirections = [];
-    beaver.directionMove = -1;
-    beaver.lastDirection = 0;
-    gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
-    gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
-    gridSquare[beaverThree.beaverIndex].classList.remove("beaverThree");
-    gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
-    gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
-    beaverOne.beaverIndex = 170;
-    beaverTwo.beaverIndex = 169;
-    beaverOne.beaverIndex = 168;
-    beaverTwo.beaverIndex = 171;
-    beaverOne.beaverIndex = 148;
-    beaver.bias = 1;
-    assignGrid(beaverOne, beaverTwo, beaverThree, beaverFour, beaverFive);
+    console.log(time6);
+  }
+
+  function checkWin() {
+    let scoreTarget = 2000;
+    targetScore.innerHTML = scoreTarget;
+
+    if (gridSquare[170].classList.contains("gate")) {
+      if (
+        scoreNumber >= scoreTarget &&
+        gridSquare[pacIndex].classList.contains("gate")
+      ) {
+        scoreNumber = scoreNumber;
+        time = 0;
+        clearInterval(pacSoundId);
+        clearInterval(beaverMoveIdOne);
+        clearInterval(beaverMoveIdTwo);
+        clearInterval(beaverMoveIdThree);
+        clearInterval(beaverMoveIdFour);
+        clearInterval(beaverMoveIdFive);
+        clearInterval(CountUpid);
+        //clearInterval(CountUp2id);
+        clearInterval(CountUp3id);
+        clearInterval(CountDown2Id);
+        clearInterval(CountDownId);
+        clearInterval(CountDown6Id);
+        gridSquare[pacIndex].classList.remove("pacmanUp");
+        gridSquare[pacIndex].classList.remove("pacmanRight");
+        gridSquare[pacIndex].classList.remove("pacmanDown");
+        gridSquare[pacIndex].classList.remove("pacmanLeft");
+        //beaver.directionStore = [];
+        //beaver.goodDirections = [];
+        //beaver.directionMove = -1;
+        //beaver.lastDirection = 0;
+        gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
+        gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
+        gridSquare[beaverThree.beaverIndex].classList.remove("beaverThree");
+        gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
+        gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
+        infoBox.innerHTML = "YOU GET TO LIVE IN CANADA!";
+        //winAudio.loop = false;
+        winAudio.play();
+      } else if (
+        scoreNumber < scoreTarget &&
+        gridSquare[pacIndex].classList.contains("gate")
+      ) {
+        scoreNumber = scoreNumber;
+        time = 0;
+        clearInterval(pacSoundId);
+        clearInterval(beaverMoveIdOne);
+        clearInterval(beaverMoveIdTwo);
+        clearInterval(beaverMoveIdThree);
+        clearInterval(beaverMoveIdFour);
+        clearInterval(beaverMoveIdFive);
+        clearInterval(CountUpid);
+        //clearInterval(CountUp2id);
+        clearInterval(CountUp3id);
+        clearInterval(CountDown2Id);
+        clearInterval(CountDownId);
+        clearInterval(CountDown6Id);
+        gridSquare[pacIndex].classList.remove("pacmanUp");
+        gridSquare[pacIndex].classList.remove("pacmanRight");
+        gridSquare[pacIndex].classList.remove("pacmanDown");
+        gridSquare[pacIndex].classList.remove("pacmanLeft");
+        //beaver.directionStore = [];
+        //beaver.goodDirections = [];
+        //beaver.directionMove = -1;
+        //beaver.lastDirection = 0;
+        gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
+        gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
+        gridSquare[beaverThree.beaverIndex].classList.remove("beaverThree");
+        gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
+        gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
+        infoBox.innerHTML = "YOU DON'T DESERVE TO BE IN CANADA!";
+      } /*else if (
+        scoreNumber > 0 &&
+        !gridSquare[pacIndex].classList.contains("gate") &&
+        time6 == 0
+      ) {
+        clearInterval(CountDown6Id);
+        scoreNumber = scoreNumber;
+        time = 0;
+        clearInterval(pacSoundId);
+        clearInterval(beaverMoveIdOne);
+        clearInterval(beaverMoveIdTwo);
+        clearInterval(beaverMoveIdThree);
+        clearInterval(beaverMoveIdFour);
+        clearInterval(beaverMoveIdFive);
+        clearInterval(CountUpid);
+        //clearInterval(CountUp2id);
+        clearInterval(CountUp3id);
+        clearInterval(CountDown2Id);
+        clearInterval(CountDownId);
+        clearInterval(CountDown6Id);
+        gridSquare[pacIndex].classList.remove("pacmanUp");
+        gridSquare[pacIndex].classList.remove("pacmanRight");
+        gridSquare[pacIndex].classList.remove("pacmanDown");
+        gridSquare[pacIndex].classList.remove("pacmanLeft");
+        //beaver.directionStore = [];
+        //beaver.goodDirections = [];
+        //beaver.directionMove = -1;
+        //beaver.lastDirection = 0;
+        gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
+        gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
+        gridSquare[beaverThree.beaverIndex].classList.remove("beaverThree");
+        gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
+        gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
+        infoBox.innerHTML = "YOU DON'T DESERVE TO BE IN CANADA!";
+      }*/
+    }
+
+    //Calling the checkWin to run at a set interval 200ms
+    setInterval(checkWin, 200);
+
+    // this runs a hard reset on eveything clearing all the timers
+    function reset(beaver) {
+      for (let i = 0; i < 4; i++) {
+        clearInterval(caughtIdOne);
+        clearInterval(caughtIdTwo);
+        clearInterval(caughtIdThree);
+        clearInterval(caughtIdFour);
+        clearInterval(caughtIdFive);
+      }
+      scoreNumber = 0;
+      time = 0;
+      score.innerHTML = scoreNumber;
+      timer.innerHTML = time;
+      timer2.innerHTML = time2;
+      timer3.innerHTML = time3;
+      timer4.innerHTML = time4;
+      timer5.innerHTML = time5;
+      timer6.innerHTML = time6;
+      gridSquare[beaver.beaverIndex].classList.remove("beaverDead");
+      gridSquare[beaver.beaverIndex].classList.remove("beaverFlee");
+      gridSquare[beaver.beaverIndex].classList.remove(beaver.beaverClass);
+      pacIndex = 250;
+      beaver.directionStore = [];
+      beaver.goodDirections = [];
+      beaver.directionMove = -1;
+      beaver.lastDirection = 0;
+      gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
+      gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
+      gridSquare[beaverThree.beaverIndex].classList.remove("beaverThree");
+      gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
+      gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
+      beaverOne.beaverIndex = 170;
+      beaverTwo.beaverIndex = 169;
+      beaverOne.beaverIndex = 168;
+      beaverTwo.beaverIndex = 171;
+      beaverOne.beaverIndex = 148;
+      beaver.bias = 1;
+      assignGrid(beaverOne, beaverTwo, beaverThree, beaverFour, beaverFive);
+    }
   }
 });

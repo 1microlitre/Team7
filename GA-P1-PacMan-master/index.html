@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <title>PacMan</title>
     <link rel="stylesheet" href="css/style.css">
-    <!--<link rel="preconnect" href="https://fonts.googleapis.com">-->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=VT323&family=Press+Start+2P&display=swap" rel="stylesheet">
     <script src="js/app.js" charset="utf-8"></script>
@@ -15,17 +14,18 @@
       <div class="grid"></div>
       <div class="info">
         <div class="table">
-          <p>Required:</p>
-          <p class="highScore"></p>
+          <p>Required: <span class="targetScore">2000</span></p>
           <p>Current: <span class="score">700<span></p>
         </div>
         <div class="start">Start</div>
       <div class="infoBox"></div>
        <div class="infoBox2">
       <p>Age: <span class="timer">26</span> | <span class="timer2">1</span> | <span class="timer3">15</span></p>
-      <p>Visa Expiration: <span class="timer4">28</span></p>
+      <p>Visa expires in: <span id="timer4" class="timer4">28</span></p>
     </div> 
-        <!--<p><span class="timer5">0</span></p>-->
+    <!--Keep this span to activate the timer for the power-up appearance-->
+    <span class="timer5"></span>
+    <span class="timer6"></span>
         <!--<p class="label">Controls</p>-->
         <div class="controls">
           <div class="up">↑</div>
