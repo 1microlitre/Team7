@@ -20,7 +20,7 @@ let scoreTarget = 2000;
 let time = 26;
 let time2 = 1;
 let time3 = 15;
-let time4 = 28;
+let time4 = 30;
 let time5 = 120;
 let time6 = 120;
 
@@ -171,41 +171,41 @@ const beavers = [beaverOne, beaverTwo, beaverThree, beaverFour, beaverFive];
 const layout = [
   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
   //Next
-  1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1,
+  1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
   //Next
-  1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 2, 1,
+  1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1,
   //Next
-  1, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 2, 1,
+  1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1,
   //Next
-  1, 2, 1, 2, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1,
+  1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1,
   //Next
-  1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1,
+  1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
   //Next
-  1, 2, 1, 2, 1, 2, 1, 1, 1, 0, 0, 1, 1, 1, 2, 1, 2, 1, 2, 1,
+  1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1,
   //Next
-  1, 2, 1, 2, 1, 2, 1, 1, 18, 0, 0, 0, 1, 1, 2, 1, 2, 1, 2, 1,
+  1, 0, 1, 0, 1, 0, 1, 1, 18, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1,
   //Next
-  1, 2, 1, 2, 1, 2, 1, 1, 8, 7, 4, 9, 1, 1, 2, 1, 2, 1, 2, 1,
+  1, 0, 1, 0, 1, 0, 1, 1, 8, 7, 4, 9, 1, 1, 0, 1, 0, 1, 0, 1,
   //Next
-  1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1,
+  1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1,
   //Next
-  1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1,
+  1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
   //Next
-  1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1,
+  1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1,
   //Next
-  1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 1,
+  1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 1,
   //Next
-  1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1,
+  1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1,
   //Next
-  1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1,
+  1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
   //Next
-  1, 2, 1, 2, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1,
+  1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1,
   //Next
-  1, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 2, 1,
+  1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1,
   //Next
-  1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 2, 1,
+  1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1,
   //Next
-  1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1,
+  1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
   //Next
   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 ];
@@ -247,7 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
       startGame();
       document.addEventListener("keydown", moveImmigrant);
       start.innerHTML = "RUN!";
-      infoBox.innerHTML = "nice m8";
+      infoBox.innerHTML = "TOIL TOIL TOIL!!!";
       start.style.backgroundColor = "red";
       // if it says play again? run the game 1st > time
     } /*else if (start.innerHTML === "Play Again?") {
@@ -298,9 +298,9 @@ document.addEventListener("DOMContentLoaded", () => {
       // gridSquare[i].classList.add(layoutClasses[layout[i]])
       if (layout[i] === 1) {
         gridSquare[i].classList.add("wall");
-      } else if (layout[i] === 2) {
+      } /*else if (layout[i] === 0) {
         gridSquare[i].classList.add("food");
-      } else if (layout[i] === 3) {
+      }*/ else if (layout[i] === 3) {
         gridSquare[i].classList.add("ImmigrantRight");
       } else if (layout[i] === 6) {
         gridSquare[i].classList.add("gate");
@@ -341,49 +341,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Calling the assignGrid function
   assignGrid(beaverOne, beaverTwo, beaverThree, beaverFour, beaverFive);
 
-  // This counts to see how much food is left before you complete the level
-  /*function checkWin() {
-    // let foodAmount = (layout.filter(x => x === 2)).length
-    let foodAmount = 0;
-    for (let i = 0; i < 400; i++) {
-      if (gridSquare[i].classList.contains("food")) {
-        foodAmount = foodAmount + 1;
-      }
-    }
-    if (foodAmount === 0) {
-      clearInterval(ImmigrantSoundId);
-      for (let i = 0; i < 16; i++) {
-        clearInterval(caughtIdOne);
-        clearInterval(caughtIdTwo);
-        clearInterval(caughtIdThree);
-        clearInterval(caughtIdFour);
-        clearInterval(caughtIdFive);
-      }
-      clearInterval(beaverMoveIdOne);
-      clearInterval(beaverMoveIdTwo);
-      clearInterval(beaverMoveIdThree);
-      clearInterval(beaverMoveIdFour);
-      clearInterval(beaverMoveIdFive);
-      clearInterval(CountUpid);
-      /*clearInterval(CountUp2id);
-      clearInterval(CountUp3id);
-      clearInterval(CountDown2id);
-      /*clearInterval(CountDownid);
-      gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
-      gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
-      gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
-      gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
-      start.innerHTML = "Play Again?";
-      infoBox.innerHTML = "YOU WIN!";
-      if (scoreNumber > highScoreNumber) {
-        highScoreNumber = scoreNumber;
-        highScoreTime = time;
-      }
-      highScore.innerHTML = `${highScoreNumber}ps in ${highScoreTime}s`;
-      time = time + 0;
-    }
-  }*/
-
   // Function to play the beaver sounds
   function ImmigrantSound() {
     const move = new Audio("Immigrant_chomp.wav");
@@ -392,6 +349,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Function that moves Immigrantkman using the arrow keys
   function moveImmigrant(e) {
+    infoBox.innerHTML = "TOIL TOIL TOIL!!!";
     scoreTarget = scoreTarget;
     targetScore.innerHTML = scoreTarget;
     time4 = time4;
@@ -436,58 +394,74 @@ document.addEventListener("DOMContentLoaded", () => {
         break;
     }
     // colliding with food -----------------------
-    if (gridSquare[ImmigrantIndex].classList.contains("food")) {
+    /*if (gridSquare[ImmigrantIndex].classList.contains("food")) {
       gridSquare[ImmigrantIndex].classList.remove("food");
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
+    }*/
+    if (gridSquare[ImmigrantIndex].classList.contains("")) {
+      infoBox.innerHTML = "TOIL! TOIL! TOIL!";
     }
     // colliding with powerups -----------------------
     if (gridSquare[ImmigrantIndex].classList.contains("book")) {
       gridSquare[ImmigrantIndex].classList.remove("book");
       scoreNumber = scoreNumber + 30;
       score.innerHTML = scoreNumber;
+      infoBox.innerHTML = "Canadian degree! Smart by Canadian standards!";
     }
 
     if (gridSquare[ImmigrantIndex].classList.contains("paperdoc")) {
       gridSquare[ImmigrantIndex].classList.remove("paperdoc");
       scoreNumber = scoreNumber + 40;
       score.innerHTML = scoreNumber;
+      infoBox.innerHTML =
+        "Canadian job experience! Competent by Canadian standards!";
     }
 
     if (gridSquare[ImmigrantIndex].classList.contains("letter1")) {
       gridSquare[ImmigrantIndex].classList.remove("letter1");
       scoreNumber = scoreNumber + 40;
       score.innerHTML = scoreNumber;
+      infoBox.innerHTML =
+        "Full-time Canadian job offer! A Canadian now believes in you!";
     }
 
     if (gridSquare[ImmigrantIndex].classList.contains("heart1")) {
       gridSquare[ImmigrantIndex].classList.remove("heart1");
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
+      infoBox.innerHTML =
+        "Partner offered a full-time Canadian job! Now you're both competent!";
     }
 
     if (gridSquare[ImmigrantIndex].classList.contains("heart2")) {
       gridSquare[ImmigrantIndex].classList.remove("heart2");
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
+      infoBox.innerHTML = "Partner's added Canadian job experience!";
     }
 
     if (gridSquare[ImmigrantIndex].classList.contains("badge1")) {
       gridSquare[ImmigrantIndex].classList.remove("badge1");
       scoreNumber = scoreNumber + 600;
       score.innerHTML = scoreNumber;
+      infoBox.innerHTML =
+        "Nominated by Province! Now 1/13 of Canada wants you!";
     }
 
     if (gridSquare[ImmigrantIndex].classList.contains("letter2")) {
       gridSquare[ImmigrantIndex].classList.remove("letter2");
       scoreNumber = scoreNumber + 200;
       score.innerHTML = scoreNumber;
+      infoBox.innerHTML =
+        "LMIA by your employer! A Canadian employer now loves you!";
     }
 
     if (gridSquare[ImmigrantIndex].classList.contains("lottery")) {
       gridSquare[ImmigrantIndex].classList.remove("lottery");
       scoreTarget = 75; //scoreTarget - 1925;
       targetScore.innerHTML = scoreTarget;
+      infoBox.innerHTML = "Historic CRS Low of 75! You're lucky!";
     }
   }
   // The next 2 if statments allow for warping from each side of the map
@@ -820,138 +794,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let caughtIdFive = setInterval(function () {
     ImmigrantCaught(beaverFive);
   }, 60);
-  //This function if run when Immigrant is caught by a beaver and dies
-  /*function ImmigrantDied() {
-    for (let i = 0; i < 16; i++) {
-      clearInterval(caughtIdOne);
-      clearInterval(caughtIdTwo);
-      clearInterval(caughtIdThree);
-      clearInterval(caughtIdFour);
-      clearInterval(caughtIdFive);
-    }
-    clearInterval(beaverMoveIdOne);
-    clearInterval(beaverMoveIdTwo);
-    clearInterval(beaverMoveIdThree);
-    clearInterval(beaverMoveIdFour);
-    clearInterval(beaverMoveIdFive);
-    ImmigrantIndex = null;
-    clearInterval(CountUpid);
-    /*clearInterval(CountUp2id);
-    clearInterval(CountUp3id);
-    clearInterval(CountDown2id);
-    clearInterval(CountDownid);
-  }*/
-  // this function is run after everything is set back to 0 inorder to play again
-  /*function startReset(beaver) {
-    for (let i = 0; i < 16; i++) {
-      clearInterval(caughtIdOne);
-      clearInterval(caughtIdTwo);
-      clearInterval(caughtIdThree);
-      clearInterval(caughtIdFour);
-      clearInterval(caughtIdFive);
-    }
-    reset(beaver);
-    clearInterval(ImmigrantSoundId);
-    ImmigrantSoundId = setInterval(ImmigrantSound, 650);
-    //restart beavers moving
-    clearInterval(beaverMoveIdOne);
-    clearInterval(beaverMoveIdTwo);
-    clearInterval(beaverMoveIdThree);
-    clearInterval(beaverMoveIdFour);
-    clearInterval(beaverMoveIdFive);
-    beaverMoveIdOne = setInterval(function () {
-      chooseAndMove(beaverOne);
-    }, beaverTimePerMove);
-    beaverMoveIdTwo = setInterval(function () {
-      chooseAndMove(beaverTwo);
-    }, beaverTimePerMove);
-    beaverMoveIdThree = setInterval(function () {
-      chooseAndMove(beaverThree);
-    }, beaverTimePerMove);
-    beaverMoveIdFour = setInterval(function () {
-      chooseAndMove(beaverFour);
-    }, beaverTimePerMove);
-    beaverMoveIdFive = setInterval(function () {
-      chooseAndMove(beaverFive);
-    }, beaverTimePerMove);
-  }
-  // This function is run when Immigrant takes a heart
-  function hearttaken(beaver) {
-    beaver.bias = 2;
-    gridSquare[beaver.beaverIndex].classList.remove("beaverDead");
-    gridSquare[beaver.beaverIndex].classList.remove(beaver.beaverClass);
-    gridSquare[beaver.beaverIndex].classList.add("beaverFlee");
-    for (let i = 0; i < 16; i++) {
-      clearInterval(caughtIdOne);
-      clearInterval(caughtIdTwo);
-      clearInterval(caughtIdThree);
-      clearInterval(caughtIdFour);
-      clearInterval(caughtIdFive);
-    }
-    // this reverses the beavers direction once Pman has taken the hearts
-    /*beaver.lastDirection = -beaver.lastDirection;
-    gridSquare[beaver.beaverIndex].classList.remove("beaverFlee");
-    beaver.beaverIndex = beaver.beaverIndex - beaver.directionMove;
-    gridSquare[beaver.beaverIndex].classList.add("beaverFlee");
-    const ImmigrantKillIdOne = setInterval(function () {
-      ImmigrantKill(beaverOne);
-    }, 60);
-    const ImmigrantKillIdTwo = setInterval(function () {
-      ImmigrantKill(beaverTwo);
-    }, 60);
-    const ImmigrantKillIdThree = setInterval(function () {
-      ImmigrantKill(beaverThree);
-    }, 60);
-    const ImmigrantKillIdFour = setInterval(function () {
-      ImmigrantKill(beaverFour);
-    }, 60);
-    setTimeout(function () {
-      for (let i = 0; i < 4; i++) {
-        clearInterval(ImmigrantKillIdOne);
-        clearInterval(ImmigrantKillIdTwo);
-        clearInterval(ImmigrantKillIdThree);
-        clearInterval(ImmigrantKillIdFour);
-      }
-      heartWareoff(beaver);
-    }, hearttime);
-  }
-  // When a heart is taken the function is run a number of times a second
-  // to check to see if Immigrant has killed a beaver
-  /*function ImmigrantKill(beaver) {
-    console.log("can Immigrant kill");
-    for (let i = 0; i < 16; i++) {
-      clearInterval(caughtIdOne);
-      clearInterval(caughtIdTwo);
-      clearInterval(caughtIdThree);
-      clearInterval(caughtIdFour);
-    }*/
-  // so Immigrant can kill beaver
-  /*if (gridSquare[ImmigrantIndex] === gridSquare[beaver.beaverIndex]) {
-      scoreNumber = scoreNumber + 200;
-      infoBox.innerHTML = "beaver \n +200 Points";
-      gridSquare[beaver.beaverIndex].classList.remove("beaverFlee");
-      gridSquare[beaver.beaverIndex].classList.remove(beaver.beaverClass);
-      gridSquare[beaver.beaverIndex].classList.remove("beaverDead");
-      beaver.lastDirection = -beaver.lastDirection;
-      gridSquare[beaver.beaverIndex].classList.remove("beaverDead");
-      beaver.beaverIndex = beaver.beaverIndex - beaver.directionMove;
-      gridSquare[beaver.beaverIndex].classList.add("beaverDead");
-      beaver.bias = 3;
-    }
-  }
-  // this resets the beavers to hunt Immigrant and stop Immigrant man from killing
-  /*function heartWareoff(beaver) {
-    beaver.bias = 1;
-    gridSquare[beaver.beaverIndex].classList.remove("beaverDead");
-    gridSquare[beaver.beaverIndex].classList.remove("beaverFlee");
-    for (let i = 0; i < 16; i++) {
-      clearInterval(caughtIdOne);
-      clearInterval(caughtIdTwo);
-      clearInterval(caughtIdThree);
-      clearInterval(caughtIdFour);
-    }
-  }*/
-  // KARLO: Counts up the Year in Age, affects score by change in year.
+
+  // KARLO: Counts up the Year in Age, affects score by change in year. Don't change the values because they reflect permanent residency computations for age.
   function CountUp() {
     if (time < 28) {
       scoreNumber = scoreNumber + 10;
@@ -1035,7 +879,7 @@ document.addEventListener("DOMContentLoaded", () => {
       gridSquare[170].classList.remove("gate");
     }*/
     // KARLO: specifically for visa expiration.
-    if (time5 == 28) {
+    if (time5 == 30) {
       document.getElementById("timer4").className = "timer4";
       time4 = time4;
       let CountDownId;
@@ -1086,37 +930,7 @@ document.addEventListener("DOMContentLoaded", () => {
               scoreNumber < scoreTarget &&
               gridSquare[ImmigrantIndex].classList.contains("gate")
             ) {
-              infoBox.innerHTML = "YOU DON'T HAVE ENOUGH POINTS YET!"; //DESERVE TO BE IN CANADA!";
-              /*winAudio.play();
-              scoreNumber = scoreNumber;
-              time = 0;
-              clearInterval(ImmigrantSoundId);
-              clearInterval(beaverMoveIdOne);
-              clearInterval(beaverMoveIdTwo);
-              clearInterval(beaverMoveIdThree);
-              clearInterval(beaverMoveIdFour);
-              clearInterval(beaverMoveIdFive);
-              clearInterval(CountUpid);
-              //clearInterval(CountUp2id);
-              clearInterval(CountUp3id);
-              clearInterval(CountDown2Id);
-              clearInterval(CountDownId);
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
-              //beaver.directionStore = [];
-              //beaver.goodDirections = [];
-              //beaver.directionMove = -1;
-              //beaver.lastDirection = 0;
-              gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
-              gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
-              gridSquare[beaverThree.beaverIndex].classList.remove(
-                "beaverThree"
-              );
-              gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
-              gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
-            }*/
+              infoBox.innerHTML = "YOU DON'T HAVE ENOUGH POINTS YET!";
             }
           }
         } else if (time4 == 0) {
