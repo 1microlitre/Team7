@@ -1,8 +1,5 @@
-// THESE VALUES CAN BE SET TO ALTER THE GAME
-// set how long the hearts work for (ms)
-//const hearttime = 6000;
 // Set how many miliseconds between each time the beavers move
-const beaverTimePerMove = 300;
+const beaverTimePerMove = 450;
 // Defining the beavers paramters.
 //---------------------------------------------------------------------
 // Used in algorithams to move beavers and Immigrant
@@ -20,17 +17,16 @@ let scoreTarget = 2000;
 let time = 26;
 let time2 = 1;
 let time3 = 15;
-let time4 = 28;
-let time5 = 120;
+let timeVisaExpire = 28;
+let timeGameItself = 120;
 let time6 = 120;
 
 // Id to ended the timer
-//let checkWin;
 let CountUpid;
 /*let CountUp2id;*/
 let CountUp3id;
-let CountDown2Id;
-let CountDownId;
+let timerGameItselfId;
+let timerVisaExpireId;
 // Ids to stop the beavers from moving
 let beaverMoveIdOne;
 let beaverMoveIdTwo;
@@ -45,25 +41,6 @@ let highScoreNumber = 0;
 let highScoreTime = 0;*/
 const winAudio = new Audio("Immigrant_win.wav");
 const death = new Audio("Immigrant_death.wav");
-
-/*let givenTime = 120000;
-let timeLimit;
-let clockInterval;
-resetClock();
-function updateClock() {
-  var now = new Date().getTime();
-  if (now < timeLimit) {
-    //Set the displayed clock to timeLimit-now
-  } else {
-    //Time has run out
-    clearInterval(clockInterval);
-  }
-}
-function resetClock() {
-  timeLimit = new Date().getTime() + givenTime;
-  clearInterval(clockInterval);
-  clockInterval = setInterval(updateClock, 10);
-}*/
 
 /*let win = new Audio("Immigrant_win.wav");
 win.loop = false;*/
@@ -97,7 +74,6 @@ const beaverTwo = {
   directionMove: -1,
   positionMove: null,
   lastDirection: 0,
-
   bias: 1,
 };
 const beaverThree = {
@@ -229,9 +205,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const timer = document.querySelector(".timer");
   const timer2 = document.querySelector(".timer2");
   const timer3 = document.querySelector(".timer3");
-  const timer4 = document.querySelector(".timer4");
+  const VisaExpire = document.querySelector(".VisaExpireTimer");
   const timer5 = document.querySelector(".timer5");
-  //const timer6 = document.querySelector(".timer6");
+  const timer6 = document.querySelector(".timer6");
   const start = document.querySelector(".start");
   const targetScore = document.querySelector(".targetScore");
   /*const highScore = document.querySelector(".highScore");*/
@@ -250,42 +226,9 @@ document.addEventListener("DOMContentLoaded", () => {
       start.innerHTML = "RUN!";
       infoBox.innerHTML = "nice m8";
       start.style.backgroundColor = "red";
-      // if it says play again? run the game 1st > time
-    } /*else if (start.innerHTML === "Play Again?") {
-      CountUpid = setInterval(CountUp, 1000);
-      for (let i = 0; i < 16; i++) {
-        clearInterval(caughtIdOne);
-        clearInterval(caughtIdTwo);
-        clearInterval(caughtIdThree);
-        clearInterval(caughtIdFour);
-      }
-      for (let i = 0; i < beavers.length; i++) {
-        for (let i = 0; i < 16; i++) {
-          clearInterval(caughtIdOne);
-          clearInterval(caughtIdTwo);
-          clearInterval(caughtIdThree);
-          clearInterval(caughtIdFour);
-        }
-        startReset(beavers[i]);
-        caughtIdOne = setInterval(function () {
-          ImmigrantCaught(beaverOne);
-        }, 60);
-        caughtIdTwo = setInterval(function () {
-          ImmigrantCaught(beaverTwo);
-        }, 60);
-        caughtIdThree = setInterval(function () {
-          ImmigrantCaught(beaverThree);
-        }, 60);
-        caughtIdFour = setInterval(function () {
-          ImmigrantCaught(beaverFour);
-        }, 60);
-        start.innerHTML = "RUN!";
-        start.style.backgroundColor = "red";
-      }
-   }*/
+    }
   });
 
-  // const layoutClasses = ['', 'wall', 'food', 'ImmigrantRight', 'heart', 'warp', 'beaverOne', 'beaverTwo', 'beaverThree', 'beaverFour']
   //This function assings the correct classes depending on the layout above.
   function assignGrid(
     beaverOne,
@@ -368,8 +311,8 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(CountUpid);
       /*clearInterval(CountUp2id);
       clearInterval(CountUp3id);
-      clearInterval(CountDown2id);
-      /*clearInterval(CountDownid);
+      clearInterval(timerGameItselfid);
+      /*clearInterval(timerVisaExpireid);
       gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
       gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
       gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
@@ -633,9 +576,9 @@ document.addEventListener("DOMContentLoaded", () => {
     CountUpid = setInterval(CountUp, 24000);
     /*CountUp2id = setInterval(CountUp2, 5000);*/
     CountUp3id = setInterval(CountUp3, 1000);
-    CountDown2Id = setInterval(CountDown2, 1000);
-    //CountDownId = setInterval(CountDown, 1000);
-    //CountDown6Id = setInterval(CountDown6, 1000);
+    timerGameItselfId = setInterval(timerGameItself, 1000);
+    //timerVisaExpireId = setInterval(timerVisaExpire, 1000);
+    //timerVisaExpire6Id = setInterval(timerVisaExpire6, 1000);
 
     beaverMoveIdOne = setInterval(function () {
       chooseAndMove(beaverOne);
@@ -868,8 +811,8 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(CountUpid);
     /*clearInterval(CountUp2id);*/
     clearInterval(CountUp3id);
-    clearInterval(CountDown2id);
-    clearInterval(CountDownid);
+    clearInterval(timerGameItselfid);
+    clearInterval(timerVisaExpireid);
   }
   // this function is run after everything is set back to 0 inorder to play again
   function startReset(beaver) {
@@ -1012,71 +955,73 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // KARLO: Timer for powerup appearance.
-  function CountDown2() {
-    time5 = time5 - 1;
-    console.log(time5);
-    timer5.innerHTML = time5;
-    if (time5 == 110) {
+  function timerGameItself() {
+    timeGameItself = timeGameItself - 1;
+    console.log(timeGameItself);
+    timer5.innerHTML = timeGameItself;
+    if (timeGameItself == 110) {
       gridSquare[29].classList.add("book");
     }
-    if (time5 == 100) {
+    if (timeGameItself == 100) {
       gridSquare[29].classList.remove("book");
       gridSquare[78].classList.add("book");
     }
-    if (time5 == 90) {
+    if (timeGameItself == 90) {
       gridSquare[78].classList.remove("book");
       gridSquare[358].classList.add("paperdoc");
     }
-    if (time5 == 80) {
+    if (timeGameItself == 80) {
       gridSquare[358].classList.remove("paperdoc");
       gridSquare[277].classList.add("letter1");
     }
-    if (time5 == 70) {
+    if (timeGameItself == 70) {
       gridSquare[277].classList.remove("letter1");
       gridSquare[185].classList.add("heart1");
     }
-    if (time5 == 60) {
+    if (timeGameItself == 60) {
       gridSquare[185].classList.remove("heart1");
       gridSquare[253].classList.add("heart2");
     }
-    if (time5 == 50) {
+    if (timeGameItself == 50) {
       gridSquare[253].classList.remove("heart2");
       gridSquare[367].classList.add("heart2");
     }
-    if (time5 == 40) {
+    if (timeGameItself == 40) {
       gridSquare[367].classList.remove("heart2");
       gridSquare[289].classList.add("badge1");
     }
-    if (time5 == 30) {
+    if (timeGameItself == 30) {
       gridSquare[289].classList.remove("badge1");
       gridSquare[336].classList.add("letter2");
     }
-    if (time5 == 20) {
+    if (timeGameItself == 20) {
       gridSquare[336].classList.remove("letter2");
       gridSquare[262].classList.add("lottery");
     }
-    if (time5 == 10) {
+    if (timeGameItself == 10) {
       gridSquare[262].classList.remove("lottery");
     }
-    if (time5 == 8) {
+    if (timeGameItself == 8) {
       gridSquare[170].classList.add("gate");
     }
-    /*if (time5 == 8) {
+    /*if (timeGameItself == 8) {
       gridSquare[170].classList.remove("gate");
     }*/
     // KARLO: specifically for visa expiration.
-    if (time5 == 28) {
-      document.getElementById("timer4").className = "timer4";
-      time4 = time4;
-      let CountDownId;
-      CountDownId = setInterval(CountDown, 1000);
-      function CountDown() {
-        time4 = time4 - 1;
-        timer4.innerHTML = time4;
-        if (time4 > 0) {
-          scoreTarget = scoreTarget;
-          targetScore.innerHTML = scoreTarget;
+    if (timeGameItself == 28) {
+      document.getElementById("VisaExpireTimer").className = "VisaExpireTimer";
+      timeVisaExpire = timeVisaExpire;
+      VisaExpireTimer.innerHTML = timeVisaExpire;
+      timerVisaExpireId = setInterval(timerVisaExpire, 1000);
+      function timerVisaExpire() {
+        timeVisaExpire = timeVisaExpire - 1;
+        VisaExpireTimer.innerHTML = timeVisaExpire;
+        if (timeVisaExpire > 0) {
+          //scoreTarget = scoreTarget;
+          //targetScore.innerHTML = scoreTarget;
           if (gridSquare[170].classList.contains("gate")) {
+            scoreTarget = scoreTarget;
+            targetScore.innerHTML = scoreTarget;
             if (
               scoreNumber >= scoreTarget &&
               gridSquare[ImmigrantIndex].classList.contains("gate")
@@ -1094,8 +1039,8 @@ document.addEventListener("DOMContentLoaded", () => {
               clearInterval(CountUpid);
               //clearInterval(CountUp2id);
               clearInterval(CountUp3id);
-              clearInterval(CountDown2Id);
-              clearInterval(CountDownId);
+              clearInterval(timerGameItselfId);
+              clearInterval(timerVisaExpireId);
               gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
               gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
               gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
@@ -1128,8 +1073,8 @@ document.addEventListener("DOMContentLoaded", () => {
               clearInterval(CountUpid);
               //clearInterval(CountUp2id);
               clearInterval(CountUp3id);
-              clearInterval(CountDown2Id);
-              clearInterval(CountDownId);
+              clearInterval(timerGameItselfId);
+              clearInterval(timerVisaExpireId);
               gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
               gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
               gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
@@ -1148,11 +1093,42 @@ document.addEventListener("DOMContentLoaded", () => {
             }*/
             }
           }
-        } else if (time4 == 0) {
-          clearInterval(CountDownId);
-          if (time4 == 0) {
-            time4 = time4;
-            timer4.innerHTML = time4;
+
+          if (timeVisaExpire == 0) {
+            scoreTarget = scoreTarget;
+            targetScore.innerHTML = scoreTarget;
+            timeVisaExpire = 0;
+            VisaExpireTimer.innerHTML = timeVisaExpire;
+            //if (timeVisaExpire == 0) {
+            scoreNumber = scoreNumber;
+            time = 0;
+            clearInterval(timerGameItselfId);
+            clearInterval(timerVisaExpireId);
+            clearInterval(ImmigrantSoundId);
+            clearInterval(beaverMoveIdOne);
+            clearInterval(beaverMoveIdTwo);
+            clearInterval(beaverMoveIdThree);
+            clearInterval(beaverMoveIdFour);
+            clearInterval(beaverMoveIdFive);
+            clearInterval(CountUpid);
+            //clearInterval(CountUp2id);
+            clearInterval(CountUp3id);
+            clearInterval(timerGameItselfId);
+            clearInterval(timerVisaExpireId);
+            //clearInterval(timerVisaExpire6Id);
+            gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
+            gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
+            gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
+            gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
+            //beaver.directionStore = [];
+            //beaver.goodDirections = [];
+            //beaver.directionMove = -1;
+            //beaver.lastDirection = 0;
+            gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
+            gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
+            gridSquare[beaverThree.beaverIndex].classList.remove("beaverThree");
+            gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
+            gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
             if (
               !gridSquare[ImmigrantIndex].classList.contains("gate") ||
               (gridSquare[ImmigrantIndex].classList.contains("gate") &&
@@ -1160,178 +1136,18 @@ document.addEventListener("DOMContentLoaded", () => {
             ) {
               winAudio.play();
               infoBox.innerHTML = "YOU DON'T DESERVE CANADA!";
-              clearInterval(CountDownId);
-              time4 = 0;
-              timer4.innerHTML = time4;
-              //if (time4 == 0) {
-              scoreNumber = scoreNumber;
-              time = 0;
-              clearInterval(ImmigrantSoundId);
-              clearInterval(beaverMoveIdOne);
-              clearInterval(beaverMoveIdTwo);
-              clearInterval(beaverMoveIdThree);
-              clearInterval(beaverMoveIdFour);
-              clearInterval(beaverMoveIdFive);
-              clearInterval(CountUpid);
-              //clearInterval(CountUp2id);
-              clearInterval(CountUp3id);
-              clearInterval(CountDown2Id);
-              clearInterval(CountDownId);
-              //clearInterval(CountDown6Id);
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
-              //beaver.directionStore = [];
-              //beaver.goodDirections = [];
-              //beaver.directionMove = -1;
-              //beaver.lastDirection = 0;
-              gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
-              gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
-              gridSquare[beaverThree.beaverIndex].classList.remove(
-                "beaverThree"
-              );
-              gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
-              gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
-            } else if (
-              gridSquare[ImmigrantIndex].classList.contains("gate") &&
-              scoreNumber >= scoreTarget
-            ) {
-              winAudio.play();
-              infoBox.innerHTML = "YOU GET TO LIVE IN CANADA!";
-              clearInterval(CountDownId);
-              time4 = 0;
-              timer4.innerHTML = time4;
-              //if (time4 == 0) {
-              scoreNumber = scoreNumber;
-              time = 0;
-              clearInterval(ImmigrantSoundId);
-              clearInterval(beaverMoveIdOne);
-              clearInterval(beaverMoveIdTwo);
-              clearInterval(beaverMoveIdThree);
-              clearInterval(beaverMoveIdFour);
-              clearInterval(beaverMoveIdFive);
-              clearInterval(CountUpid);
-              //clearInterval(CountUp2id);
-              clearInterval(CountUp3id);
-              clearInterval(CountDown2Id);
-              clearInterval(CountDownId);
-              //clearInterval(CountDown6Id);
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
-              //beaver.directionStore = [];
-              //beaver.goodDirections = [];
-              //beaver.directionMove = -1;
-              //beaver.lastDirection = 0;
-              gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
-              gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
-              gridSquare[beaverThree.beaverIndex].classList.remove(
-                "beaverThree"
-              );
-              gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
-              gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
             }
           }
-        }
-        if (time5 == 0) {
-          CountDown2ID = CountDown2Id;
-          clearInterval(CountDown2Id);
-          time5 = 0;
-          timer5.innerHTML = time5;
-          console.log(time5);
         }
       }
     }
 
-    /*if (time4 == 0) {
-      time4 = time4;
-      timer4.innerHTML = time4;
-      if (
-        !gridSquare[ImmigrantIndex].classList.contains("gate") ||
-        (gridSquare[ImmigrantIndex].classList.contains("gate") &&
-          scoreNumber < scoreTarget)
-      ) {
-        winAudio.play();
-        infoBox.innerHTML = "YOU DON'T DESERVE CANADA!";
-        clearInterval(CountDownId);
-        time4 = 0;
-        timer4.innerHTML = time4;
-        //if (time4 == 0) {
-        scoreNumber = scoreNumber;
-        time = 0;
-        clearInterval(ImmigrantSoundId);
-        clearInterval(beaverMoveIdOne);
-        clearInterval(beaverMoveIdTwo);
-        clearInterval(beaverMoveIdThree);
-        clearInterval(beaverMoveIdFour);
-        clearInterval(beaverMoveIdFive);
-        clearInterval(CountUpid);
-        //clearInterval(CountUp2id);
-        clearInterval(CountUp3id);
-        clearInterval(CountDown2Id);
-        clearInterval(CountDownId);
-        //clearInterval(CountDown6Id);
-        gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
-        gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
-        gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
-        gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
-        //beaver.directionStore = [];
-        //beaver.goodDirections = [];
-        //beaver.directionMove = -1;
-        //beaver.lastDirection = 0;
-        gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
-        gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
-        gridSquare[beaverThree.beaverIndex].classList.remove("beaverThree");
-        gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
-        gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
-      } else if (
-        gridSquare[ImmigrantIndex].classList.contains("gate") &&
-        scoreNumber >= scoreTarget
-      ) {
-        winAudio.play();
-        infoBox.innerHTML = "YOU GET TO LIVE IN CANADA!";
-        clearInterval(CountDownId);
-        time4 = 0;
-        timer4.innerHTML = time4;
-        //if (time4 == 0) {
-        scoreNumber = scoreNumber;
-        time = 0;
-        clearInterval(ImmigrantSoundId);
-        clearInterval(beaverMoveIdOne);
-        clearInterval(beaverMoveIdTwo);
-        clearInterval(beaverMoveIdThree);
-        clearInterval(beaverMoveIdFour);
-        clearInterval(beaverMoveIdFive);
-        clearInterval(CountUpid);
-        //clearInterval(CountUp2id);
-        clearInterval(CountUp3id);
-        clearInterval(CountDown2Id);
-        clearInterval(CountDownId);
-        //clearInterval(CountDown6Id);
-        gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
-        gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
-        gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
-        gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
-        //beaver.directionStore = [];
-        //beaver.goodDirections = [];
-        //beaver.directionMove = -1;
-        //beaver.lastDirection = 0;
-        gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
-        gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
-        gridSquare[beaverThree.beaverIndex].classList.remove("beaverThree");
-        gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
-        gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
-      }
-    }*/
-
-    /*CountDown6Id = setInterval(CountDown6, 1000);
-  function CountDown6() {
+    /*timerVisaExpire6Id = setInterval(timerVisaExpire6, 1000);
+  function timerVisaExpire6() {
     time6 = time6 - 1;
     timer6.innerHTML = time6;
     if (time6 <= 0) {
-      clearInterval(CountDown6Id);
+      clearInterval(timerVisaExpire6Id);
       clearInterval(ImmigrantSoundId);
       clearInterval(beaverMoveIdOne);
       clearInterval(beaverMoveIdTwo);
@@ -1340,8 +1156,8 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(beaverMoveIdFive);
       clearInterval(CountUpid);
       clearInterval(CountUp3id);
-      clearInterval(CountDown2Id);
-      clearInterval(CountDownId);
+      clearInterval(timerGameItselfId);
+      clearInterval(timerVisaExpireId);
     }
     console.log(time6);
   }*/
@@ -1366,8 +1182,8 @@ document.addEventListener("DOMContentLoaded", () => {
         clearInterval(CountUpid);
         //clearInterval(CountUp2id);
         clearInterval(CountUp3id);
-        clearInterval(CountDown2Id);
-        clearInterval(CountDownId);
+        clearInterval(timerGameItselfId);
+        clearInterval(timerVisaExpireId);
         gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
         gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
         gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
@@ -1399,8 +1215,8 @@ document.addEventListener("DOMContentLoaded", () => {
         clearInterval(CountUpid);
         //clearInterval(CountUp2id);
         clearInterval(CountUp3id);
-        clearInterval(CountDown2Id);
-        clearInterval(CountDownId);
+        clearInterval(timerGameItselfId);
+        clearInterval(timerVisaExpireId);
         gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
         gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
         gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
@@ -1436,8 +1252,8 @@ document.addEventListener("DOMContentLoaded", () => {
       timer.innerHTML = time;
       timer2.innerHTML = time2;
       timer3.innerHTML = time3;
-      timer4.innerHTML = time4;
-      timer5.innerHTML = time5;
+      VisaExpireTimer.innerHTML = timeVisaExpire;
+      timer5.innerHTML = timeGameItself;
       timer6.innerHTML = time6;
       gridSquare[beaver.beaverIndex].classList.remove("beaverDead");
       gridSquare[beaver.beaverIndex].classList.remove("beaverFlee");
