@@ -97,7 +97,6 @@ const beaverTwo = {
   directionMove: -1,
   positionMove: null,
   lastDirection: 0,
-
   bias: 1,
 };
 const beaverThree = {
@@ -395,6 +394,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function moveImmigrant(e) {
     scoreTarget = scoreTarget;
     targetScore.innerHTML = scoreTarget;
+    time4 = time4;
+    timer4.innerHTML = time4;
     gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
     gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
     gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
@@ -487,42 +488,10 @@ document.addEventListener("DOMContentLoaded", () => {
       gridSquare[ImmigrantIndex].classList.remove("lottery");
       scoreTarget = 75; //scoreTarget - 1925;
       targetScore.innerHTML = scoreTarget;
-      //document.getElementsByClassName("targetScore")[0].innerHTML = scoreTarget;
     }
-
-    // colliding with heart ------------------------------------------
-    if (gridSquare[ImmigrantIndex].classList.contains("heart")) {
-      gridSquare[ImmigrantIndex].classList.remove("heart");
-      for (let i = 0; i < beavers.length; i++) {
-        hearttaken(beavers[i]);
-      }
-      setTimeout(function () {
-        for (let i = 0; i < 16; i++) {
-          clearInterval(caughtIdOne);
-          clearInterval(caughtIdTwo);
-          clearInterval(caughtIdThree);
-          clearInterval(caughtIdFour);
-          clearInterval(caughtIdFive);
-        }
-        caughtIdOne = setInterval(function () {
-          ImmigrantCaught(beaverOne);
-        }, 60);
-        caughtIdTwo = setInterval(function () {
-          ImmigrantCaught(beaverTwo);
-        }, 60);
-        caughtIdThree = setInterval(function () {
-          ImmigrantCaught(beaverThree);
-        }, 60);
-        caughtIdFour = setInterval(function () {
-          ImmigrantCaught(beaverFour);
-        }, 60);
-        caughtIdFive = setInterval(function () {
-          ImmigrantCaught(beaverFive);
-        }, 60);
-      }, hearttime);
-    }
-    // The next 2 if statments allow for warping from each side of the map
-    /*if (ImmigrantIndex === 141) {
+  }
+  // The next 2 if statments allow for warping from each side of the map
+  /*if (ImmigrantIndex === 141) {
       gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
       gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
       gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
@@ -537,8 +506,9 @@ document.addEventListener("DOMContentLoaded", () => {
       gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
       ImmigrantIndex = 142;
       gridSquare[ImmigrantIndex].classList.add("ImmigrantRight");
-    }*/
-  }
+    }
+  }*/
+
   // Preventing arrow keys from scrolling
   function preventDefultScroll(e) {
     if ([32, 37, 38, 39, 40, 16].indexOf(e.keyCode) > -1) {
@@ -851,7 +821,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ImmigrantCaught(beaverFive);
   }, 60);
   //This function if run when Immigrant is caught by a beaver and dies
-  function ImmigrantDied() {
+  /*function ImmigrantDied() {
     for (let i = 0; i < 16; i++) {
       clearInterval(caughtIdOne);
       clearInterval(caughtIdTwo);
@@ -866,13 +836,13 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(beaverMoveIdFive);
     ImmigrantIndex = null;
     clearInterval(CountUpid);
-    /*clearInterval(CountUp2id);*/
+    /*clearInterval(CountUp2id);
     clearInterval(CountUp3id);
     clearInterval(CountDown2id);
     clearInterval(CountDownid);
-  }
+  }*/
   // this function is run after everything is set back to 0 inorder to play again
-  function startReset(beaver) {
+  /*function startReset(beaver) {
     for (let i = 0; i < 16; i++) {
       clearInterval(caughtIdOne);
       clearInterval(caughtIdTwo);
@@ -955,8 +925,8 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(caughtIdThree);
       clearInterval(caughtIdFour);
     }*/
-    // so Immigrant can kill beaver
-    /*if (gridSquare[ImmigrantIndex] === gridSquare[beaver.beaverIndex]) {
+  // so Immigrant can kill beaver
+  /*if (gridSquare[ImmigrantIndex] === gridSquare[beaver.beaverIndex]) {
       scoreNumber = scoreNumber + 200;
       infoBox.innerHTML = "beaver \n +200 Points";
       gridSquare[beaver.beaverIndex].classList.remove("beaverFlee");
@@ -967,7 +937,7 @@ document.addEventListener("DOMContentLoaded", () => {
       beaver.beaverIndex = beaver.beaverIndex - beaver.directionMove;
       gridSquare[beaver.beaverIndex].classList.add("beaverDead");
       beaver.bias = 3;
-    }*/
+    }
   }
   // this resets the beavers to hunt Immigrant and stop Immigrant man from killing
   /*function heartWareoff(beaver) {
@@ -1096,10 +1066,11 @@ document.addEventListener("DOMContentLoaded", () => {
               clearInterval(CountUp3id);
               clearInterval(CountDown2Id);
               clearInterval(CountDownId);
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
+              //gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
+              //gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
+              //gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
+              //gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
+              ImmigrantIndex = null;
               //beaver.directionStore = [];
               //beaver.goodDirections = [];
               //beaver.directionMove = -1;
@@ -1150,6 +1121,35 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         } else if (time4 == 0) {
           clearInterval(CountDownId);
+          time4 = 0;
+          timer4.innerHTML = time4;
+          scoreNumber = scoreNumber;
+          time = 0;
+          clearInterval(ImmigrantSoundId);
+          clearInterval(beaverMoveIdOne);
+          clearInterval(beaverMoveIdTwo);
+          clearInterval(beaverMoveIdThree);
+          clearInterval(beaverMoveIdFour);
+          clearInterval(beaverMoveIdFive);
+          clearInterval(CountUpid);
+          //clearInterval(CountUp2id);
+          clearInterval(CountUp3id);
+          clearInterval(CountDown2Id);
+          clearInterval(CountDownId);
+          //gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
+          //gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
+          //gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
+          //gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
+          ImmigrantIndex = null;
+          //beaver.directionStore = [];
+          //beaver.goodDirections = [];
+          //beaver.directionMove = -1;
+          //beaver.lastDirection = 0;
+          gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
+          gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
+          gridSquare[beaverThree.beaverIndex].classList.remove("beaverThree");
+          gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
+          gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
           if (time4 == 0) {
             time4 = time4;
             timer4.innerHTML = time4;
@@ -1160,77 +1160,12 @@ document.addEventListener("DOMContentLoaded", () => {
             ) {
               winAudio.play();
               infoBox.innerHTML = "YOU DON'T DESERVE CANADA!";
-              clearInterval(CountDownId);
-              time4 = 0;
-              timer4.innerHTML = time4;
-              //if (time4 == 0) {
-              scoreNumber = scoreNumber;
-              time = 0;
-              clearInterval(ImmigrantSoundId);
-              clearInterval(beaverMoveIdOne);
-              clearInterval(beaverMoveIdTwo);
-              clearInterval(beaverMoveIdThree);
-              clearInterval(beaverMoveIdFour);
-              clearInterval(beaverMoveIdFive);
-              clearInterval(CountUpid);
-              //clearInterval(CountUp2id);
-              clearInterval(CountUp3id);
-              clearInterval(CountDown2Id);
-              clearInterval(CountDownId);
-              //clearInterval(CountDown6Id);
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
-              //beaver.directionStore = [];
-              //beaver.goodDirections = [];
-              //beaver.directionMove = -1;
-              //beaver.lastDirection = 0;
-              gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
-              gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
-              gridSquare[beaverThree.beaverIndex].classList.remove(
-                "beaverThree"
-              );
-              gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
-              gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
             } else if (
               gridSquare[ImmigrantIndex].classList.contains("gate") &&
               scoreNumber >= scoreTarget
             ) {
               winAudio.play();
               infoBox.innerHTML = "YOU GET TO LIVE IN CANADA!";
-              clearInterval(CountDownId);
-              time4 = 0;
-              timer4.innerHTML = time4;
-              scoreNumber = scoreNumber;
-              time = 0;
-              clearInterval(ImmigrantSoundId);
-              clearInterval(beaverMoveIdOne);
-              clearInterval(beaverMoveIdTwo);
-              clearInterval(beaverMoveIdThree);
-              clearInterval(beaverMoveIdFour);
-              clearInterval(beaverMoveIdFive);
-              clearInterval(CountUpid);
-              //clearInterval(CountUp2id);
-              clearInterval(CountUp3id);
-              clearInterval(CountDown2Id);
-              clearInterval(CountDownId);
-              //clearInterval(CountDown6Id);
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
-              //beaver.directionStore = [];
-              //beaver.goodDirections = [];
-              //beaver.directionMove = -1;
-              //beaver.lastDirection = 0;
-              gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
-              gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
-              gridSquare[beaverThree.beaverIndex].classList.remove(
-                "beaverThree"
-              );
-              gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
-              gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
             }
           }
         }

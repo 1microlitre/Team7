@@ -489,10 +489,6 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreTarget = 75; //scoreTarget - 1925;
       targetScore.innerHTML = scoreTarget;
     }
-
-    if (time4 == 0) {
-      return moveImmigrant;
-    }
   }
   // The next 2 if statments allow for warping from each side of the map
   /*if (ImmigrantIndex === 141) {
@@ -1070,10 +1066,11 @@ document.addEventListener("DOMContentLoaded", () => {
               clearInterval(CountUp3id);
               clearInterval(CountDown2Id);
               clearInterval(CountDownId);
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
+              //gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
+              //gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
+              //gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
+              //gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
+              ImmigrantIndex = null;
               //beaver.directionStore = [];
               //beaver.goodDirections = [];
               //beaver.directionMove = -1;
@@ -1124,6 +1121,35 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         } else if (time4 == 0) {
           clearInterval(CountDownId);
+          time4 = 0;
+          timer4.innerHTML = time4;
+          scoreNumber = scoreNumber;
+          time = 0;
+          clearInterval(ImmigrantSoundId);
+          clearInterval(beaverMoveIdOne);
+          clearInterval(beaverMoveIdTwo);
+          clearInterval(beaverMoveIdThree);
+          clearInterval(beaverMoveIdFour);
+          clearInterval(beaverMoveIdFive);
+          clearInterval(CountUpid);
+          //clearInterval(CountUp2id);
+          clearInterval(CountUp3id);
+          clearInterval(CountDown2Id);
+          clearInterval(CountDownId);
+          //gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
+          //gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
+          //gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
+          //gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
+          ImmigrantIndex = null;
+          //beaver.directionStore = [];
+          //beaver.goodDirections = [];
+          //beaver.directionMove = -1;
+          //beaver.lastDirection = 0;
+          gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
+          gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
+          gridSquare[beaverThree.beaverIndex].classList.remove("beaverThree");
+          gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
+          gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
           if (time4 == 0) {
             time4 = time4;
             timer4.innerHTML = time4;
@@ -1134,77 +1160,12 @@ document.addEventListener("DOMContentLoaded", () => {
             ) {
               winAudio.play();
               infoBox.innerHTML = "YOU DON'T DESERVE CANADA!";
-              clearInterval(CountDownId);
-              time4 = 0;
-              timer4.innerHTML = time4;
-              //if (time4 == 0) {
-              scoreNumber = scoreNumber;
-              time = 0;
-              clearInterval(ImmigrantSoundId);
-              clearInterval(beaverMoveIdOne);
-              clearInterval(beaverMoveIdTwo);
-              clearInterval(beaverMoveIdThree);
-              clearInterval(beaverMoveIdFour);
-              clearInterval(beaverMoveIdFive);
-              clearInterval(CountUpid);
-              //clearInterval(CountUp2id);
-              clearInterval(CountUp3id);
-              clearInterval(CountDown2Id);
-              clearInterval(CountDownId);
-              //clearInterval(CountDown6Id);
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
-              //beaver.directionStore = [];
-              //beaver.goodDirections = [];
-              //beaver.directionMove = -1;
-              //beaver.lastDirection = 0;
-              gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
-              gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
-              gridSquare[beaverThree.beaverIndex].classList.remove(
-                "beaverThree"
-              );
-              gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
-              gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
             } else if (
               gridSquare[ImmigrantIndex].classList.contains("gate") &&
               scoreNumber >= scoreTarget
             ) {
               winAudio.play();
               infoBox.innerHTML = "YOU GET TO LIVE IN CANADA!";
-              clearInterval(CountDownId);
-              time4 = 0;
-              timer4.innerHTML = time4;
-              scoreNumber = scoreNumber;
-              time = 0;
-              clearInterval(ImmigrantSoundId);
-              clearInterval(beaverMoveIdOne);
-              clearInterval(beaverMoveIdTwo);
-              clearInterval(beaverMoveIdThree);
-              clearInterval(beaverMoveIdFour);
-              clearInterval(beaverMoveIdFive);
-              clearInterval(CountUpid);
-              //clearInterval(CountUp2id);
-              clearInterval(CountUp3id);
-              clearInterval(CountDown2Id);
-              clearInterval(CountDownId);
-              //clearInterval(CountDown6Id);
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
-              gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
-              //beaver.directionStore = [];
-              //beaver.goodDirections = [];
-              //beaver.directionMove = -1;
-              //beaver.lastDirection = 0;
-              gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
-              gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
-              gridSquare[beaverThree.beaverIndex].classList.remove(
-                "beaverThree"
-              );
-              gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
-              gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
             }
           }
         }
