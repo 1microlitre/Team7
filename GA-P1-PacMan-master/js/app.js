@@ -25,6 +25,7 @@ let time5 = 120;
 let time6 = 120;
 
 // Id to ended the timer
+//let checkWin;
 let CountUpid;
 /*let CountUp2id;*/
 let CountUp3id;
@@ -512,8 +513,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (gridSquare[pacIndex].classList.contains("lottery")) {
       gridSquare[pacIndex].classList.remove("lottery");
+
       scoreTarget = scoreTarget - 1925;
-      document.getElementsByClassName("scoreTarget")[0].innerHTML = scoreTarget;
+      document.getElementsByClassName("targetScore")[0].innerHTML = scoreTarget;
     }
 
     // colliding with heart ------------------------------------------
@@ -1077,6 +1079,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (time5 == 10) {
       gridSquare[106].classList.remove("lottery");
+    }
+    if (time5 == 28) {
       gridSquare[170].classList.add("gate");
     }
     /*if (time5 == 8) {
@@ -1091,15 +1095,126 @@ document.addEventListener("DOMContentLoaded", () => {
       function CountDown() {
         time4 = time4 - 1;
         timer4.innerHTML = time4;
-        if (time4 == 0) {
-          clearInterval(CountDownId);
-          time4 = 0;
-          timer4.innerHTML = time4;
+        if (time4 > 0) {
+          let scoreTarget = 2000;
+          targetScore.innerHTML = scoreTarget;
+
+          if (gridSquare[170].classList.contains("gate")) {
+            if (
+              scoreNumber >= scoreTarget &&
+              gridSquare[pacIndex].classList.contains("gate")
+            ) {
+              scoreNumber = scoreNumber;
+              time = 0;
+              clearInterval(pacSoundId);
+              clearInterval(beaverMoveIdOne);
+              clearInterval(beaverMoveIdTwo);
+              clearInterval(beaverMoveIdThree);
+              clearInterval(beaverMoveIdFour);
+              clearInterval(beaverMoveIdFive);
+              clearInterval(CountUpid);
+              //clearInterval(CountUp2id);
+              clearInterval(CountUp3id);
+              clearInterval(CountDown2Id);
+              clearInterval(CountDownId);
+              gridSquare[pacIndex].classList.remove("pacmanUp");
+              gridSquare[pacIndex].classList.remove("pacmanRight");
+              gridSquare[pacIndex].classList.remove("pacmanDown");
+              gridSquare[pacIndex].classList.remove("pacmanLeft");
+              //beaver.directionStore = [];
+              //beaver.goodDirections = [];
+              //beaver.directionMove = -1;
+              //beaver.lastDirection = 0;
+              gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
+              gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
+              gridSquare[beaverThree.beaverIndex].classList.remove(
+                "beaverThree"
+              );
+              gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
+              gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
+              infoBox.innerHTML = "YOU GET TO LIVE IN CANADA!";
+              //winAudio.loop = false;
+              winAudio.play();
+            } else if (
+              scoreNumber < scoreTarget &&
+              gridSquare[pacIndex].classList.contains("gate")
+            ) {
+              scoreNumber = scoreNumber;
+              time = 0;
+              clearInterval(pacSoundId);
+              clearInterval(beaverMoveIdOne);
+              clearInterval(beaverMoveIdTwo);
+              clearInterval(beaverMoveIdThree);
+              clearInterval(beaverMoveIdFour);
+              clearInterval(beaverMoveIdFive);
+              clearInterval(CountUpid);
+              //clearInterval(CountUp2id);
+              clearInterval(CountUp3id);
+              clearInterval(CountDown2Id);
+              clearInterval(CountDownId);
+              gridSquare[pacIndex].classList.remove("pacmanUp");
+              gridSquare[pacIndex].classList.remove("pacmanRight");
+              gridSquare[pacIndex].classList.remove("pacmanDown");
+              gridSquare[pacIndex].classList.remove("pacmanLeft");
+              //beaver.directionStore = [];
+              //beaver.goodDirections = [];
+              //beaver.directionMove = -1;
+              //beaver.lastDirection = 0;
+              gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
+              gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
+              gridSquare[beaverThree.beaverIndex].classList.remove(
+                "beaverThree"
+              );
+              gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
+              gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
+              infoBox.innerHTML = "YOU DON'T DESERVE TO BE IN CANADA!";
+              winAudio.play();
+            }
+          }
+
+          if (time4 == 0) {
+            clearInterval(CountDown2Id);
+            time4 = 0;
+            timer4.innerHTML = time4;
+            //if (time4 == 0) {
+            scoreNumber = scoreNumber;
+            time = 0;
+            clearInterval(pacSoundId);
+            clearInterval(beaverMoveIdOne);
+            clearInterval(beaverMoveIdTwo);
+            clearInterval(beaverMoveIdThree);
+            clearInterval(beaverMoveIdFour);
+            clearInterval(beaverMoveIdFive);
+            clearInterval(CountUpid);
+            //clearInterval(CountUp2id);
+            clearInterval(CountUp3id);
+            clearInterval(CountDown2Id);
+            clearInterval(CountDownId);
+            //clearInterval(CountDown6Id);
+            gridSquare[pacIndex].classList.remove("pacmanUp");
+            gridSquare[pacIndex].classList.remove("pacmanRight");
+            gridSquare[pacIndex].classList.remove("pacmanDown");
+            gridSquare[pacIndex].classList.remove("pacmanLeft");
+            //beaver.directionStore = [];
+            //beaver.goodDirections = [];
+            //beaver.directionMove = -1;
+            //beaver.lastDirection = 0;
+            gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
+            gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
+            gridSquare[beaverThree.beaverIndex].classList.remove("beaverThree");
+            gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
+            gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
+            if (!gridSquare[pacIndex].classList.contains("gate")) {
+              infoBox.innerHTML = "YOU DON'T DESERVE CANADA!";
+              winAudio.play();
+              //}
+            }
+          }
         }
       }
     }
-  }
-  CountDown6Id = setInterval(CountDown6, 1000);
+
+    /*CountDown6Id = setInterval(CountDown6, 1000);
   function CountDown6() {
     time6 = time6 - 1;
     timer6.innerHTML = time6;
@@ -1117,9 +1232,9 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(CountDownId);
     }
     console.log(time6);
-  }
+  }*/
 
-  function checkWin() {
+    /*function checkWin() {
     let scoreTarget = 2000;
     targetScore.innerHTML = scoreTarget;
 
@@ -1141,15 +1256,14 @@ document.addEventListener("DOMContentLoaded", () => {
         clearInterval(CountUp3id);
         clearInterval(CountDown2Id);
         clearInterval(CountDownId);
-        clearInterval(CountDown6Id);
         gridSquare[pacIndex].classList.remove("pacmanUp");
         gridSquare[pacIndex].classList.remove("pacmanRight");
         gridSquare[pacIndex].classList.remove("pacmanDown");
         gridSquare[pacIndex].classList.remove("pacmanLeft");
-        //beaver.directionStore = [];
-        //beaver.goodDirections = [];
-        //beaver.directionMove = -1;
-        //beaver.lastDirection = 0;
+        beaver.directionStore = [];
+        beaver.goodDirections = [];
+        beaver.directionMove = -1;
+        beaver.lastDirection = 0;
         gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
         gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
         gridSquare[beaverThree.beaverIndex].classList.remove("beaverThree");
@@ -1175,60 +1289,25 @@ document.addEventListener("DOMContentLoaded", () => {
         clearInterval(CountUp3id);
         clearInterval(CountDown2Id);
         clearInterval(CountDownId);
-        clearInterval(CountDown6Id);
         gridSquare[pacIndex].classList.remove("pacmanUp");
         gridSquare[pacIndex].classList.remove("pacmanRight");
         gridSquare[pacIndex].classList.remove("pacmanDown");
         gridSquare[pacIndex].classList.remove("pacmanLeft");
-        //beaver.directionStore = [];
-        //beaver.goodDirections = [];
-        //beaver.directionMove = -1;
-        //beaver.lastDirection = 0;
+        beaver.directionStore = [];
+        beaver.goodDirections = [];
+        beaver.directionMove = -1;
+        beaver.lastDirection = 0;
         gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
         gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
         gridSquare[beaverThree.beaverIndex].classList.remove("beaverThree");
         gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
         gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
         infoBox.innerHTML = "YOU DON'T DESERVE TO BE IN CANADA!";
-      } /*else if (
-        scoreNumber > 0 &&
-        !gridSquare[pacIndex].classList.contains("gate") &&
-        time6 == 0
-      ) {
-        clearInterval(CountDown6Id);
-        scoreNumber = scoreNumber;
-        time = 0;
-        clearInterval(pacSoundId);
-        clearInterval(beaverMoveIdOne);
-        clearInterval(beaverMoveIdTwo);
-        clearInterval(beaverMoveIdThree);
-        clearInterval(beaverMoveIdFour);
-        clearInterval(beaverMoveIdFive);
-        clearInterval(CountUpid);
-        //clearInterval(CountUp2id);
-        clearInterval(CountUp3id);
-        clearInterval(CountDown2Id);
-        clearInterval(CountDownId);
-        clearInterval(CountDown6Id);
-        gridSquare[pacIndex].classList.remove("pacmanUp");
-        gridSquare[pacIndex].classList.remove("pacmanRight");
-        gridSquare[pacIndex].classList.remove("pacmanDown");
-        gridSquare[pacIndex].classList.remove("pacmanLeft");
-        //beaver.directionStore = [];
-        //beaver.goodDirections = [];
-        //beaver.directionMove = -1;
-        //beaver.lastDirection = 0;
-        gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
-        gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
-        gridSquare[beaverThree.beaverIndex].classList.remove("beaverThree");
-        gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
-        gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
-        infoBox.innerHTML = "YOU DON'T DESERVE TO BE IN CANADA!";
-      }*/
-    }
+      }
+    }*/
 
     //Calling the checkWin to run at a set interval 200ms
-    setInterval(checkWin, 200);
+    //setInterval(checkWin, 200);
 
     // this runs a hard reset on eveything clearing all the timers
     function reset(beaver) {
