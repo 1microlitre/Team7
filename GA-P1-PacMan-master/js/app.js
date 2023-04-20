@@ -1,17 +1,17 @@
 // THESE VALUES CAN BE SET TO ALTER THE GAME
 // set how long the hearts work for (ms)
-const hearttime = 6000;
+//const hearttime = 6000;
 // Set how many miliseconds between each time the beavers move
-const beaverTimePerMove = 250;
+const beaverTimePerMove = 300;
 // Defining the beavers paramters.
 //---------------------------------------------------------------------
-// Used in algorithams to move beavers and pacman
+// Used in algorithams to move beavers and Immigrant
 const width = 20;
 // Possible moves for beaver
 const directions = [-1, -width, 1, width];
 // Set starting values:
-// pacman position
-let pacIndex = 250;
+// Immigrant position
+let ImmigrantIndex = 250;
 // players points
 let scoreNumber = 700;
 // scoreTargetpoints
@@ -37,14 +37,14 @@ let beaverMoveIdTwo;
 let beaverMoveIdThree;
 let beaverMoveIdFour;
 let beaverMoveIdFive;
-// Id to stop the pac audio sounds
-let pacSoundId;
+// Id to stop the Immigrant audio sounds
+let ImmigrantSoundId;
 /*// Used to set the games highscore
 let highScoreNumber = 0;
 // the   time to go along with the high score
 let highScoreTime = 0;*/
-const winAudio = new Audio("pacman_win.wav");
-const death = new Audio("pacman_death.wav");
+const winAudio = new Audio("Immigrant_win.wav");
+const death = new Audio("Immigrant_death.wav");
 
 /*let givenTime = 120000;
 let timeLimit;
@@ -65,7 +65,7 @@ function resetClock() {
   clockInterval = setInterval(updateClock, 10);
 }*/
 
-/*let win = new Audio("pacman_win.wav");
+/*let win = new Audio("Immigrant_win.wav");
 win.loop = false;*/
 
 const beaverOne = {
@@ -140,7 +140,7 @@ const beavers = [beaverOne, beaverTwo, beaverThree, beaverFour, beaverFive];
 // ASSIGN A CLASS A NUMBER.
 // empty = 0
 // wall = 1
-// pacman = 3
+// Immigrant = 3
 // beaver1 = 4
 // heart = 5
 // Gate = 6
@@ -246,7 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // if it says start run the game for the first time.
     if (start.innerHTML === "Start") {
       startGame();
-      document.addEventListener("keydown", movePacMan);
+      document.addEventListener("keydown", moveImmigrant);
       start.innerHTML = "RUN!";
       infoBox.innerHTML = "nice m8";
       start.style.backgroundColor = "red";
@@ -268,16 +268,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         startReset(beavers[i]);
         caughtIdOne = setInterval(function () {
-          pacCaught(beaverOne);
+          ImmigrantCaught(beaverOne);
         }, 60);
         caughtIdTwo = setInterval(function () {
-          pacCaught(beaverTwo);
+          ImmigrantCaught(beaverTwo);
         }, 60);
         caughtIdThree = setInterval(function () {
-          pacCaught(beaverThree);
+          ImmigrantCaught(beaverThree);
         }, 60);
         caughtIdFour = setInterval(function () {
-          pacCaught(beaverFour);
+          ImmigrantCaught(beaverFour);
         }, 60);
         start.innerHTML = "RUN!";
         start.style.backgroundColor = "red";
@@ -285,7 +285,7 @@ document.addEventListener("DOMContentLoaded", () => {
    }*/
   });
 
-  // const layoutClasses = ['', 'wall', 'food', 'pacmanRight', 'heart', 'warp', 'beaverOne', 'beaverTwo', 'beaverThree', 'beaverFour']
+  // const layoutClasses = ['', 'wall', 'food', 'ImmigrantRight', 'heart', 'warp', 'beaverOne', 'beaverTwo', 'beaverThree', 'beaverFour']
   //This function assings the correct classes depending on the layout above.
   function assignGrid(
     beaverOne,
@@ -302,7 +302,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (layout[i] === 2) {
         gridSquare[i].classList.add("food");
       } else if (layout[i] === 3) {
-        gridSquare[i].classList.add("pacmanRight");
+        gridSquare[i].classList.add("ImmigrantRight");
       } else if (layout[i] === 6) {
         gridSquare[i].classList.add("gate");
       } else if (layout[i] === 4) {
@@ -352,7 +352,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
     if (foodAmount === 0) {
-      clearInterval(pacSoundId);
+      clearInterval(ImmigrantSoundId);
       for (let i = 0; i < 16; i++) {
         clearInterval(caughtIdOne);
         clearInterval(caughtIdTwo);
@@ -370,10 +370,10 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(CountUp3id);
       clearInterval(CountDown2id);
       /*clearInterval(CountDownid);
-      gridSquare[pacIndex].classList.remove("pacmanUp");
-      gridSquare[pacIndex].classList.remove("pacmanRight");
-      gridSquare[pacIndex].classList.remove("pacmanDown");
-      gridSquare[pacIndex].classList.remove("pacmanLeft");
+      gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
+      gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
+      gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
+      gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
       start.innerHTML = "Play Again?";
       infoBox.innerHTML = "YOU WIN!";
       if (scoreNumber > highScoreNumber) {
@@ -383,144 +383,116 @@ document.addEventListener("DOMContentLoaded", () => {
       highScore.innerHTML = `${highScoreNumber}ps in ${highScoreTime}s`;
       time = time + 0;
     }
-  }/*
-
-  //KARLO: Condition for winning the game
-  function checkWin() {
-    if (scoreNumber >= scoreTarget&& gridSquare[pacIndex].classList.contains("gate") {
-      highScoreNumber = scoreNumber;
-      highScoreTime = time;
-      infoBox.innerHTML = "YOU WIN!";
-    }
-    /*if (foodAmount === 0) {
-      clearInterval(pacSoundId);
-      for (let i = 0; i < 16; i++) {
-        clearInterval(caughtIdOne);
-        clearInterval(caughtIdTwo);
-        clearInterval(caughtIdThree);
-        clearInterval(caughtIdFour);
-      }
-      clearInterval(beaverMoveIdOne);
-      clearInterval(beaverMoveIdTwo);
-      clearInterval(beaverMoveIdThree);
-      clearInterval(beaverMoveIdFour);
-      clearInterval(CountUpid);
-      clearInterval(CountUp2id);
-      gridSquare[pacIndex].classList.remove("pacmanUp");
-      gridSquare[pacIndex].classList.remove("pacmanRight");
-      gridSquare[pacIndex].classList.remove("pacmanDown");
-      gridSquare[pacIndex].classList.remove("pacmanLeft");
-      start.innerHTML = "Play Again?";
-      infoBox.innerHTML = "YOU WIN!";
-  
-    }
   }*/
 
   // Function to play the beaver sounds
-  function pacSound() {
-    const move = new Audio("pacman_chomp.wav");
+  function ImmigrantSound() {
+    const move = new Audio("Immigrant_chomp.wav");
     move.play();
   }
 
-  //Function that moves packman using the arrow keys
-  function movePacMan(e) {
-    let scoreTarget = 2000;
+  //Function that moves Immigrantkman using the arrow keys
+  function moveImmigrant(e) {
+    scoreTarget = scoreTarget;
     targetScore.innerHTML = scoreTarget;
-    gridSquare[pacIndex].classList.remove("pacmanUp");
-    gridSquare[pacIndex].classList.remove("pacmanRight");
-    gridSquare[pacIndex].classList.remove("pacmanDown");
-    gridSquare[pacIndex].classList.remove("pacmanLeft");
+    gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
+    gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
+    gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
+    gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
     switch (e.keyCode) {
       case 37: // left arrow
         left.classList.add("active");
         setTimeout(() => left.classList.remove("active"), 100);
-        if (gridSquare[pacIndex - 1].classList.contains("wall")) pacIndex += 0;
-        else if (pacIndex % width !== 0) pacIndex -= 1;
-        gridSquare[pacIndex].classList.add("pacmanLeft");
+        if (gridSquare[ImmigrantIndex - 1].classList.contains("wall"))
+          ImmigrantIndex += 0;
+        else if (ImmigrantIndex % width !== 0) ImmigrantIndex -= 1;
+        gridSquare[ImmigrantIndex].classList.add("ImmigrantLeft");
         break;
       case 38: // upp arrow
         up.classList.add("active");
         setTimeout(() => up.classList.remove("active"), 100);
-        if (gridSquare[pacIndex - width].classList.contains("wall"))
-          pacIndex += 0;
-        else if (pacIndex - width >= 0) pacIndex -= width;
-        gridSquare[pacIndex].classList.add("pacmanUp");
+        if (gridSquare[ImmigrantIndex - width].classList.contains("wall"))
+          ImmigrantIndex += 0;
+        else if (ImmigrantIndex - width >= 0) ImmigrantIndex -= width;
+        gridSquare[ImmigrantIndex].classList.add("ImmigrantUp");
         break;
       case 39: // right arrow
         right.classList.add("active");
         setTimeout(() => right.classList.remove("active"), 100);
-        if (gridSquare[pacIndex + 1].classList.contains("wall")) pacIndex += 0;
-        else if (pacIndex % width < width - 1) pacIndex += 1;
-        gridSquare[pacIndex].classList.add("pacmanRight");
+        if (gridSquare[ImmigrantIndex + 1].classList.contains("wall"))
+          ImmigrantIndex += 0;
+        else if (ImmigrantIndex % width < width - 1) ImmigrantIndex += 1;
+        gridSquare[ImmigrantIndex].classList.add("ImmigrantRight");
         break;
       case 40: //down arrow
         down.classList.add("active");
         setTimeout(() => down.classList.remove("active"), 100);
-        if (gridSquare[pacIndex + width].classList.contains("wall"))
-          pacIndex += 0;
-        else if (pacIndex + width < width * width) pacIndex += width;
-        gridSquare[pacIndex].classList.add("pacmanDown");
+        if (gridSquare[ImmigrantIndex + width].classList.contains("wall"))
+          ImmigrantIndex += 0;
+        else if (ImmigrantIndex + width < width * width)
+          ImmigrantIndex += width;
+        gridSquare[ImmigrantIndex].classList.add("ImmigrantDown");
         break;
     }
     // colliding with food -----------------------
-    if (gridSquare[pacIndex].classList.contains("food")) {
-      gridSquare[pacIndex].classList.remove("food");
+    if (gridSquare[ImmigrantIndex].classList.contains("food")) {
+      gridSquare[ImmigrantIndex].classList.remove("food");
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
     }
     // colliding with powerups -----------------------
-    if (gridSquare[pacIndex].classList.contains("book")) {
-      gridSquare[pacIndex].classList.remove("book");
+    if (gridSquare[ImmigrantIndex].classList.contains("book")) {
+      gridSquare[ImmigrantIndex].classList.remove("book");
       scoreNumber = scoreNumber + 30;
       score.innerHTML = scoreNumber;
     }
 
-    if (gridSquare[pacIndex].classList.contains("paperdoc")) {
-      gridSquare[pacIndex].classList.remove("paperdoc");
+    if (gridSquare[ImmigrantIndex].classList.contains("paperdoc")) {
+      gridSquare[ImmigrantIndex].classList.remove("paperdoc");
       scoreNumber = scoreNumber + 40;
       score.innerHTML = scoreNumber;
     }
 
-    if (gridSquare[pacIndex].classList.contains("letter1")) {
-      gridSquare[pacIndex].classList.remove("letter1");
+    if (gridSquare[ImmigrantIndex].classList.contains("letter1")) {
+      gridSquare[ImmigrantIndex].classList.remove("letter1");
       scoreNumber = scoreNumber + 40;
       score.innerHTML = scoreNumber;
     }
 
-    if (gridSquare[pacIndex].classList.contains("heart1")) {
-      gridSquare[pacIndex].classList.remove("heart1");
+    if (gridSquare[ImmigrantIndex].classList.contains("heart1")) {
+      gridSquare[ImmigrantIndex].classList.remove("heart1");
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
     }
 
-    if (gridSquare[pacIndex].classList.contains("heart2")) {
-      gridSquare[pacIndex].classList.remove("heart2");
+    if (gridSquare[ImmigrantIndex].classList.contains("heart2")) {
+      gridSquare[ImmigrantIndex].classList.remove("heart2");
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
     }
 
-    if (gridSquare[pacIndex].classList.contains("badge1")) {
-      gridSquare[pacIndex].classList.remove("badge1");
+    if (gridSquare[ImmigrantIndex].classList.contains("badge1")) {
+      gridSquare[ImmigrantIndex].classList.remove("badge1");
       scoreNumber = scoreNumber + 600;
       score.innerHTML = scoreNumber;
     }
 
-    if (gridSquare[pacIndex].classList.contains("letter2")) {
-      gridSquare[pacIndex].classList.remove("letter2");
+    if (gridSquare[ImmigrantIndex].classList.contains("letter2")) {
+      gridSquare[ImmigrantIndex].classList.remove("letter2");
       scoreNumber = scoreNumber + 200;
       score.innerHTML = scoreNumber;
     }
 
-    if (gridSquare[pacIndex].classList.contains("lottery")) {
-      gridSquare[pacIndex].classList.remove("lottery");
-
-      scoreTarget = scoreTarget - 1925;
-      document.getElementsByClassName("targetScore")[0].innerHTML = scoreTarget;
+    if (gridSquare[ImmigrantIndex].classList.contains("lottery")) {
+      gridSquare[ImmigrantIndex].classList.remove("lottery");
+      scoreTarget = 75; //scoreTarget - 1925;
+      targetScore.innerHTML = scoreTarget;
+      //document.getElementsByClassName("targetScore")[0].innerHTML = scoreTarget;
     }
 
     // colliding with heart ------------------------------------------
-    if (gridSquare[pacIndex].classList.contains("heart")) {
-      gridSquare[pacIndex].classList.remove("heart");
+    if (gridSquare[ImmigrantIndex].classList.contains("heart")) {
+      gridSquare[ImmigrantIndex].classList.remove("heart");
       for (let i = 0; i < beavers.length; i++) {
         hearttaken(beavers[i]);
       }
@@ -533,38 +505,38 @@ document.addEventListener("DOMContentLoaded", () => {
           clearInterval(caughtIdFive);
         }
         caughtIdOne = setInterval(function () {
-          pacCaught(beaverOne);
+          ImmigrantCaught(beaverOne);
         }, 60);
         caughtIdTwo = setInterval(function () {
-          pacCaught(beaverTwo);
+          ImmigrantCaught(beaverTwo);
         }, 60);
         caughtIdThree = setInterval(function () {
-          pacCaught(beaverThree);
+          ImmigrantCaught(beaverThree);
         }, 60);
         caughtIdFour = setInterval(function () {
-          pacCaught(beaverFour);
+          ImmigrantCaught(beaverFour);
         }, 60);
         caughtIdFive = setInterval(function () {
-          pacCaught(beaverFive);
+          ImmigrantCaught(beaverFive);
         }, 60);
       }, hearttime);
     }
     // The next 2 if statments allow for warping from each side of the map
-    /*if (pacIndex === 141) {
-      gridSquare[pacIndex].classList.remove("pacmanUp");
-      gridSquare[pacIndex].classList.remove("pacmanRight");
-      gridSquare[pacIndex].classList.remove("pacmanDown");
-      gridSquare[pacIndex].classList.remove("pacmanLeft");
-      pacIndex = 157;
-      gridSquare[pacIndex].classList.add("pacmanLeft");
+    /*if (ImmigrantIndex === 141) {
+      gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
+      gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
+      gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
+      gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
+      ImmigrantIndex = 157;
+      gridSquare[ImmigrantIndex].classList.add("ImmigrantLeft");
     }
-    if (pacIndex === 158) {
-      gridSquare[pacIndex].classList.remove("pacmanUp");
-      gridSquare[pacIndex].classList.remove("pacmanRight");
-      gridSquare[pacIndex].classList.remove("pacmanDown");
-      gridSquare[pacIndex].classList.remove("pacmanLeft");
-      pacIndex = 142;
-      gridSquare[pacIndex].classList.add("pacmanRight");
+    if (ImmigrantIndex === 158) {
+      gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
+      gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
+      gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
+      gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
+      ImmigrantIndex = 142;
+      gridSquare[ImmigrantIndex].classList.add("ImmigrantRight");
     }*/
   }
   // Preventing arrow keys from scrolling
@@ -650,14 +622,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     beaver.goodDirections = beaver.goodDirections.filter((x) => x !== null);
     // choses a direction to move depending on what the bais is set to
-    // and pacman locations
-    pacManBias(beaver);
+    // and Immigrant locations
+    ImmigrantBias(beaver);
     // This calls the function that actually makes the move
     makeTheMove(beaver);
   }
   // This function is only used once to start the game and set the beavers moving.
   function startGame() {
-    pacSoundId = setInterval(pacSound, 650);
+    ImmigrantSoundId = setInterval(ImmigrantSound, 650);
     CountUpid = setInterval(CountUp, 24000);
     /*CountUp2id = setInterval(CountUp2, 5000);*/
     CountUp3id = setInterval(CountUp3, 1000);
@@ -707,27 +679,28 @@ document.addEventListener("DOMContentLoaded", () => {
       gridSquare[beaver.beaverIndex].classList.add(beaver.beaverClass);
     }
   }
-  // ------------------- pac move direction BIAS ----------------
-  // fucntion used by the ghists to find an appropiate route to chase pacman
-  function towardsPacMan(beaver) {
+  // ------------------- Immigrant move direction BIAS ----------------
+  // fucntion used by the ghists to find an appropiate route to chase Immigrant
+  function towardsImmigrant(beaver) {
     // return all the possible new position indexs the beaver can move.
     beaver.goodPositions = beaver.goodDirections.map(
       (x) => x + beaver.beaverIndex
     );
     // all the possible positions are reduced down to the one that bring then
-    // beavers position index closest to pacmans
+    // beavers position index closest to Immigrants
     const closestIndex = beaver.goodPositions.reduce(function (prev, curr) {
-      return Math.abs(curr - pacIndex) < Math.abs(prev - pacIndex)
+      return Math.abs(curr - ImmigrantIndex) < Math.abs(prev - ImmigrantIndex)
         ? curr
         : prev;
     });
-    // Pacmans Modulas % width.
-    const pacModulas = pacIndex % width;
+    // Immigrants Modulas % width.
+    const ImmigrantModulas = ImmigrantIndex % width;
     // This takes the possble indexs to move to and chnages them to modulas% width.
     const posPositionsModulas = beaver.goodPositions.map((x) => x % width);
-    // This then finds the modulas closest to the modulas of Pacman
+    // This then finds the modulas closest to the modulas of Immigrant
     const closestModulas = posPositionsModulas.reduce(function (prev, curr) {
-      return Math.abs(curr - pacModulas) < Math.abs(prev - pacModulas)
+      return Math.abs(curr - ImmigrantModulas) <
+        Math.abs(prev - ImmigrantModulas)
         ? curr
         : prev;
     });
@@ -743,12 +716,12 @@ document.addEventListener("DOMContentLoaded", () => {
     return beaver.positionMove;
   }
   // modulas is not used for the other 3 bais choices just closest pos index
-  function awayFromPacMan(beaver) {
+  function awayFromImmigrant(beaver) {
     beaver.goodPositions = beaver.goodDirections.map(
       (x) => x + beaver.beaverIndex
     );
     beaver.positionMove = beaver.goodPositions.reduce(function (prev, curr) {
-      return Math.abs(curr - pacIndex) > Math.abs(prev - pacIndex)
+      return Math.abs(curr - ImmigrantIndex) > Math.abs(prev - ImmigrantIndex)
         ? curr
         : prev;
     });
@@ -773,7 +746,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return beaver.positionMove;
   }
   // this function runs the approprate function based on the current bias.
-  function pacManBias(beaver) {
+  function ImmigrantBias(beaver) {
     // this function get the beavers out of the box they start in
     if (
       beaver.beaverIndex === 168 ||
@@ -787,25 +760,25 @@ document.addEventListener("DOMContentLoaded", () => {
     ) {
       outOfBox(beaver);
     } else if (beaver.bias === 1) {
-      towardsPacMan(beaver);
+      towardsImmigrant(beaver);
     } else if (beaver.bias === 2) {
-      awayFromPacMan(beaver);
+      awayFromImmigrant(beaver);
     } else if (beaver.bias === 3) {
       sendHome(beaver);
     }
   }
   // This function is run many times a second checking if a beaver
-  // has caught pacman
-  /*function pacCaught(beaver) {
+  // has caught Immigrant
+  /*function ImmigrantCaught(beaver) {
     console.log("is it catching?");
-    if (gridSquare[pacIndex] === gridSquare[beaver.beaverIndex]) {
-      gridSquare[pacIndex].classList.remove("pacmanRight");
-      gridSquare[pacIndex].classList.remove("pacmanLeft");
-      gridSquare[pacIndex].classList.remove("pacmanUp");
-      gridSquare[pacIndex].classList.remove("pacmanDown");
-      pacDied(beaver);
+    if (gridSquare[ImmigrantIndex] === gridSquare[beaver.beaverIndex]) {
+      gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
+      gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
+      gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
+      gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
+      ImmigrantDied(beaver);
       death.play();
-      clearInterval(pacSoundId);
+      clearInterval(ImmigrantSoundId);
       clearInterval(CountUpid);
       for (let i = 0; i < 16; i++) {
         clearInterval(caughtIdOne);
@@ -820,60 +793,65 @@ document.addEventListener("DOMContentLoaded", () => {
       highScore.innerHTML = `${highScoreNumber}ps in ${highScoreTime}s`;
       time = time + 0;
       start.innerHTML = "Play Again?";
-      infoBox.innerHTML = "PacMan Died.";
+      infoBox.innerHTML = "Immigrant Died.";
       start.style.backgroundColor = "red";
     }
   }*/
 
   // Function for reducing score when hit by monsters.
-  function pacCaught(beaverOne) {
+  function ImmigrantCaught(beaverOne) {
     /*console.log("is it catching?");*/
-    if (gridSquare[pacIndex] === gridSquare[beaverOne.beaverIndex]) {
+    if (gridSquare[ImmigrantIndex] === gridSquare[beaverOne.beaverIndex]) {
       scoreNumber = scoreNumber - 40;
+      score.innerHTML = scoreNumber;
     }
   }
-  function pacCaught(beaverTwo) {
+  function ImmigrantCaught(beaverTwo) {
     /*console.log("is it catching?");*/
-    if (gridSquare[pacIndex] === gridSquare[beaverTwo.beaverIndex]) {
+    if (gridSquare[ImmigrantIndex] === gridSquare[beaverTwo.beaverIndex]) {
       scoreNumber = scoreNumber - 60;
+      score.innerHTML = scoreNumber;
     }
   }
-  function pacCaught(beaverThree) {
+  function ImmigrantCaught(beaverThree) {
     /*console.log("is it catching?");*/
-    if (gridSquare[pacIndex] === gridSquare[beaverThree.beaverIndex]) {
+    if (gridSquare[ImmigrantIndex] === gridSquare[beaverThree.beaverIndex]) {
       scoreNumber = scoreNumber - 90;
+      score.innerHTML = scoreNumber;
     }
   }
-  function pacCaught(beaverFour) {
+  function ImmigrantCaught(beaverFour) {
     /*console.log("is it catching?");*/
-    if (gridSquare[pacIndex] === gridSquare[beaverFour.beaverIndex]) {
+    if (gridSquare[ImmigrantIndex] === gridSquare[beaverFour.beaverIndex]) {
       scoreNumber = scoreNumber - 450;
+      score.innerHTML = scoreNumber;
     }
   }
-  function pacCaught(beaverFive) {
+  function ImmigrantCaught(beaverFive) {
     /*console.log("is it catching?");*/
-    if (gridSquare[pacIndex] === gridSquare[beaverFive.beaverIndex]) {
+    if (gridSquare[ImmigrantIndex] === gridSquare[beaverFive.beaverIndex]) {
       scoreNumber = scoreNumber - 10;
+      score.innerHTML = scoreNumber;
     }
   }
   // Calling the caught function for each beaver
   let caughtIdOne = setInterval(function () {
-    pacCaught(beaverOne);
+    ImmigrantCaught(beaverOne);
   }, 60);
   let caughtIdTwo = setInterval(function () {
-    pacCaught(beaverTwo);
+    ImmigrantCaught(beaverTwo);
   }, 60);
   let caughtIdThree = setInterval(function () {
-    pacCaught(beaverThree);
+    ImmigrantCaught(beaverThree);
   }, 60);
   let caughtIdFour = setInterval(function () {
-    pacCaught(beaverFour);
+    ImmigrantCaught(beaverFour);
   }, 60);
   let caughtIdFive = setInterval(function () {
-    pacCaught(beaverFive);
+    ImmigrantCaught(beaverFive);
   }, 60);
-  //This function if run when pacman is caught by a beaver and dies
-  function pacDied() {
+  //This function if run when Immigrant is caught by a beaver and dies
+  function ImmigrantDied() {
     for (let i = 0; i < 16; i++) {
       clearInterval(caughtIdOne);
       clearInterval(caughtIdTwo);
@@ -886,7 +864,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(beaverMoveIdThree);
     clearInterval(beaverMoveIdFour);
     clearInterval(beaverMoveIdFive);
-    pacIndex = null;
+    ImmigrantIndex = null;
     clearInterval(CountUpid);
     /*clearInterval(CountUp2id);*/
     clearInterval(CountUp3id);
@@ -903,8 +881,8 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(caughtIdFive);
     }
     reset(beaver);
-    clearInterval(pacSoundId);
-    pacSoundId = setInterval(pacSound, 650);
+    clearInterval(ImmigrantSoundId);
+    ImmigrantSoundId = setInterval(ImmigrantSound, 650);
     //restart beavers moving
     clearInterval(beaverMoveIdOne);
     clearInterval(beaverMoveIdTwo);
@@ -927,7 +905,7 @@ document.addEventListener("DOMContentLoaded", () => {
       chooseAndMove(beaverFive);
     }, beaverTimePerMove);
   }
-  // This function is run when pacman takes a heart
+  // This function is run when Immigrant takes a heart
   function hearttaken(beaver) {
     beaver.bias = 2;
     gridSquare[beaver.beaverIndex].classList.remove("beaverDead");
@@ -945,40 +923,40 @@ document.addEventListener("DOMContentLoaded", () => {
     gridSquare[beaver.beaverIndex].classList.remove("beaverFlee");
     beaver.beaverIndex = beaver.beaverIndex - beaver.directionMove;
     gridSquare[beaver.beaverIndex].classList.add("beaverFlee");
-    const pacKillIdOne = setInterval(function () {
-      pacKill(beaverOne);
+    const ImmigrantKillIdOne = setInterval(function () {
+      ImmigrantKill(beaverOne);
     }, 60);
-    const pacKillIdTwo = setInterval(function () {
-      pacKill(beaverTwo);
+    const ImmigrantKillIdTwo = setInterval(function () {
+      ImmigrantKill(beaverTwo);
     }, 60);
-    const pacKillIdThree = setInterval(function () {
-      pacKill(beaverThree);
+    const ImmigrantKillIdThree = setInterval(function () {
+      ImmigrantKill(beaverThree);
     }, 60);
-    const pacKillIdFour = setInterval(function () {
-      pacKill(beaverFour);
+    const ImmigrantKillIdFour = setInterval(function () {
+      ImmigrantKill(beaverFour);
     }, 60);
     setTimeout(function () {
       for (let i = 0; i < 4; i++) {
-        clearInterval(pacKillIdOne);
-        clearInterval(pacKillIdTwo);
-        clearInterval(pacKillIdThree);
-        clearInterval(pacKillIdFour);
+        clearInterval(ImmigrantKillIdOne);
+        clearInterval(ImmigrantKillIdTwo);
+        clearInterval(ImmigrantKillIdThree);
+        clearInterval(ImmigrantKillIdFour);
       }
       heartWareoff(beaver);
     }, hearttime);
   }
   // When a heart is taken the function is run a number of times a second
-  // to check to see if pacman has killed a beaver
-  /*function pacKill(beaver) {
-    console.log("can pac kill");
+  // to check to see if Immigrant has killed a beaver
+  /*function ImmigrantKill(beaver) {
+    console.log("can Immigrant kill");
     for (let i = 0; i < 16; i++) {
       clearInterval(caughtIdOne);
       clearInterval(caughtIdTwo);
       clearInterval(caughtIdThree);
       clearInterval(caughtIdFour);
     }*/
-    // so pacMan can kill beaver
-    /*if (gridSquare[pacIndex] === gridSquare[beaver.beaverIndex]) {
+    // so Immigrant can kill beaver
+    /*if (gridSquare[ImmigrantIndex] === gridSquare[beaver.beaverIndex]) {
       scoreNumber = scoreNumber + 200;
       infoBox.innerHTML = "beaver \n +200 Points";
       gridSquare[beaver.beaverIndex].classList.remove("beaverFlee");
@@ -991,7 +969,7 @@ document.addEventListener("DOMContentLoaded", () => {
       beaver.bias = 3;
     }*/
   }
-  // this resets the beavers to hunt pacman and stop pac man from killing
+  // this resets the beavers to hunt Immigrant and stop Immigrant man from killing
   /*function heartWareoff(beaver) {
     beaver.bias = 1;
     gridSquare[beaver.beaverIndex].classList.remove("beaverDead");
@@ -1075,12 +1053,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (time5 == 20) {
       gridSquare[336].classList.remove("letter2");
-      gridSquare[106].classList.add("lottery");
+      gridSquare[262].classList.add("lottery");
     }
     if (time5 == 10) {
-      gridSquare[106].classList.remove("lottery");
+      gridSquare[262].classList.remove("lottery");
     }
-    if (time5 == 28) {
+    if (time5 == 8) {
       gridSquare[170].classList.add("gate");
     }
     /*if (time5 == 8) {
@@ -1096,17 +1074,18 @@ document.addEventListener("DOMContentLoaded", () => {
         time4 = time4 - 1;
         timer4.innerHTML = time4;
         if (time4 > 0) {
-          let scoreTarget = 2000;
+          scoreTarget = scoreTarget;
           targetScore.innerHTML = scoreTarget;
-
           if (gridSquare[170].classList.contains("gate")) {
             if (
               scoreNumber >= scoreTarget &&
-              gridSquare[pacIndex].classList.contains("gate")
+              gridSquare[ImmigrantIndex].classList.contains("gate")
             ) {
+              winAudio.play();
+              infoBox.innerHTML = "YOU GET TO LIVE IN CANADA!";
               scoreNumber = scoreNumber;
               time = 0;
-              clearInterval(pacSoundId);
+              clearInterval(ImmigrantSoundId);
               clearInterval(beaverMoveIdOne);
               clearInterval(beaverMoveIdTwo);
               clearInterval(beaverMoveIdThree);
@@ -1117,10 +1096,10 @@ document.addEventListener("DOMContentLoaded", () => {
               clearInterval(CountUp3id);
               clearInterval(CountDown2Id);
               clearInterval(CountDownId);
-              gridSquare[pacIndex].classList.remove("pacmanUp");
-              gridSquare[pacIndex].classList.remove("pacmanRight");
-              gridSquare[pacIndex].classList.remove("pacmanDown");
-              gridSquare[pacIndex].classList.remove("pacmanLeft");
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
               //beaver.directionStore = [];
               //beaver.goodDirections = [];
               //beaver.directionMove = -1;
@@ -1132,16 +1111,15 @@ document.addEventListener("DOMContentLoaded", () => {
               );
               gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
               gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
-              infoBox.innerHTML = "YOU GET TO LIVE IN CANADA!";
-              //winAudio.loop = false;
-              winAudio.play();
             } else if (
               scoreNumber < scoreTarget &&
-              gridSquare[pacIndex].classList.contains("gate")
+              gridSquare[ImmigrantIndex].classList.contains("gate")
             ) {
+              infoBox.innerHTML = "YOU DON'T HAVE ENOUGH POINTS YET!"; //DESERVE TO BE IN CANADA!";
+              /*winAudio.play();
               scoreNumber = scoreNumber;
               time = 0;
-              clearInterval(pacSoundId);
+              clearInterval(ImmigrantSoundId);
               clearInterval(beaverMoveIdOne);
               clearInterval(beaverMoveIdTwo);
               clearInterval(beaverMoveIdThree);
@@ -1152,10 +1130,10 @@ document.addEventListener("DOMContentLoaded", () => {
               clearInterval(CountUp3id);
               clearInterval(CountDown2Id);
               clearInterval(CountDownId);
-              gridSquare[pacIndex].classList.remove("pacmanUp");
-              gridSquare[pacIndex].classList.remove("pacmanRight");
-              gridSquare[pacIndex].classList.remove("pacmanDown");
-              gridSquare[pacIndex].classList.remove("pacmanLeft");
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
               //beaver.directionStore = [];
               //beaver.goodDirections = [];
               //beaver.directionMove = -1;
@@ -1167,19 +1145,26 @@ document.addEventListener("DOMContentLoaded", () => {
               );
               gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
               gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
-              infoBox.innerHTML = "YOU DON'T DESERVE TO BE IN CANADA!";
-              winAudio.play();
+            }*/
             }
           }
 
           if (time4 == 0) {
+            if (
+              !gridSquare[ImmigrantIndex].classList.contains("gate") ||
+              (gridSquare[ImmigrantIndex].classList.contains("gate") &&
+                scoreNumber < scoreTarget)
+            ) {
+              winAudio.play();
+              infoBox.innerHTML = "YOU DON'T DESERVE CANADA!";
+            }
             clearInterval(CountDown2Id);
             time4 = 0;
             timer4.innerHTML = time4;
             //if (time4 == 0) {
             scoreNumber = scoreNumber;
             time = 0;
-            clearInterval(pacSoundId);
+            clearInterval(ImmigrantSoundId);
             clearInterval(beaverMoveIdOne);
             clearInterval(beaverMoveIdTwo);
             clearInterval(beaverMoveIdThree);
@@ -1191,10 +1176,10 @@ document.addEventListener("DOMContentLoaded", () => {
             clearInterval(CountDown2Id);
             clearInterval(CountDownId);
             //clearInterval(CountDown6Id);
-            gridSquare[pacIndex].classList.remove("pacmanUp");
-            gridSquare[pacIndex].classList.remove("pacmanRight");
-            gridSquare[pacIndex].classList.remove("pacmanDown");
-            gridSquare[pacIndex].classList.remove("pacmanLeft");
+            gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
+            gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
+            gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
+            gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
             //beaver.directionStore = [];
             //beaver.goodDirections = [];
             //beaver.directionMove = -1;
@@ -1204,11 +1189,6 @@ document.addEventListener("DOMContentLoaded", () => {
             gridSquare[beaverThree.beaverIndex].classList.remove("beaverThree");
             gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
             gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
-            if (!gridSquare[pacIndex].classList.contains("gate")) {
-              infoBox.innerHTML = "YOU DON'T DESERVE CANADA!";
-              winAudio.play();
-              //}
-            }
           }
         }
       }
@@ -1220,7 +1200,7 @@ document.addEventListener("DOMContentLoaded", () => {
     timer6.innerHTML = time6;
     if (time6 <= 0) {
       clearInterval(CountDown6Id);
-      clearInterval(pacSoundId);
+      clearInterval(ImmigrantSoundId);
       clearInterval(beaverMoveIdOne);
       clearInterval(beaverMoveIdTwo);
       clearInterval(beaverMoveIdThree);
@@ -1241,11 +1221,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (gridSquare[170].classList.contains("gate")) {
       if (
         scoreNumber >= scoreTarget &&
-        gridSquare[pacIndex].classList.contains("gate")
+        gridSquare[ImmigrantIndex].classList.contains("gate")
       ) {
         scoreNumber = scoreNumber;
         time = 0;
-        clearInterval(pacSoundId);
+        clearInterval(ImmigrantSoundId);
         clearInterval(beaverMoveIdOne);
         clearInterval(beaverMoveIdTwo);
         clearInterval(beaverMoveIdThree);
@@ -1256,10 +1236,10 @@ document.addEventListener("DOMContentLoaded", () => {
         clearInterval(CountUp3id);
         clearInterval(CountDown2Id);
         clearInterval(CountDownId);
-        gridSquare[pacIndex].classList.remove("pacmanUp");
-        gridSquare[pacIndex].classList.remove("pacmanRight");
-        gridSquare[pacIndex].classList.remove("pacmanDown");
-        gridSquare[pacIndex].classList.remove("pacmanLeft");
+        gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
+        gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
+        gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
+        gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
         beaver.directionStore = [];
         beaver.goodDirections = [];
         beaver.directionMove = -1;
@@ -1274,11 +1254,11 @@ document.addEventListener("DOMContentLoaded", () => {
         winAudio.play();
       } else if (
         scoreNumber < scoreTarget &&
-        gridSquare[pacIndex].classList.contains("gate")
+        gridSquare[ImmigrantIndex].classList.contains("gate")
       ) {
         scoreNumber = scoreNumber;
         time = 0;
-        clearInterval(pacSoundId);
+        clearInterval(ImmigrantSoundId);
         clearInterval(beaverMoveIdOne);
         clearInterval(beaverMoveIdTwo);
         clearInterval(beaverMoveIdThree);
@@ -1289,10 +1269,10 @@ document.addEventListener("DOMContentLoaded", () => {
         clearInterval(CountUp3id);
         clearInterval(CountDown2Id);
         clearInterval(CountDownId);
-        gridSquare[pacIndex].classList.remove("pacmanUp");
-        gridSquare[pacIndex].classList.remove("pacmanRight");
-        gridSquare[pacIndex].classList.remove("pacmanDown");
-        gridSquare[pacIndex].classList.remove("pacmanLeft");
+        gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
+        gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
+        gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
+        gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
         beaver.directionStore = [];
         beaver.goodDirections = [];
         beaver.directionMove = -1;
@@ -1310,7 +1290,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //setInterval(checkWin, 200);
 
     // this runs a hard reset on eveything clearing all the timers
-    function reset(beaver) {
+    /*function reset(beaver) {
       for (let i = 0; i < 4; i++) {
         clearInterval(caughtIdOne);
         clearInterval(caughtIdTwo);
@@ -1330,7 +1310,7 @@ document.addEventListener("DOMContentLoaded", () => {
       gridSquare[beaver.beaverIndex].classList.remove("beaverDead");
       gridSquare[beaver.beaverIndex].classList.remove("beaverFlee");
       gridSquare[beaver.beaverIndex].classList.remove(beaver.beaverClass);
-      pacIndex = 250;
+      ImmigrantIndex = 250;
       beaver.directionStore = [];
       beaver.goodDirections = [];
       beaver.directionMove = -1;
@@ -1347,6 +1327,6 @@ document.addEventListener("DOMContentLoaded", () => {
       beaverOne.beaverIndex = 148;
       beaver.bias = 1;
       assignGrid(beaverOne, beaverTwo, beaverThree, beaverFour, beaverFive);
-    }
+    }*/
   }
 });

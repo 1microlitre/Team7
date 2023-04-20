@@ -192,23 +192,23 @@ p {
   background-color: yellow;
   border: 1px solid black;
 }
-.pacman {
+.Immigrant {
   background-image: url("../pacWhole.png");
   background-size: contain;
 }
-.pacmanUp {
+.ImmigrantUp {
   background-image: url("../pacUp.png");
   background-size: contain;
 }
-.pacmanRight {
+.ImmigrantRight {
   background-image: url("../pacRight.png");
   background-size: contain;
 }
-.pacmanDown {
+.ImmigrantDown {
   background-image: url("../pacDown.png");
   background-size: contain;
 }
-.pacmanLeft {
+.ImmigrantLeft {
   background-image: url("../pacLeft.png");
   background-size: contain;
 }
