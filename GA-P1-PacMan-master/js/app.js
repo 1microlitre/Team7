@@ -1,10 +1,6 @@
-// THESE VALUES CAN BE SET TO ALTER THE GAME
-// set how long the hearts work for (ms)
-//const hearttime = 6000;
 // Set how many miliseconds between each time the beavers move
 const beaverTimePerMove = 300;
 // Defining the beavers paramters.
-//---------------------------------------------------------------------
 // Used in algorithams to move beavers and Immigrant
 const width = 20;
 // Possible moves for beaver
@@ -247,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
       startGame();
       document.addEventListener("keydown", moveImmigrant);
       start.innerHTML = "RUN!";
-      infoBox.innerHTML = "TOIL TOIL TOIL!!!";
+      //infoBox.innerHTML = "TOIL TOIL TOIL!!!";
       start.style.backgroundColor = "red";
       // if it says play again? run the game 1st > time
     } /*else if (start.innerHTML === "Play Again?") {
@@ -335,6 +331,8 @@ document.addEventListener("DOMContentLoaded", () => {
         gridSquare[i].classList.add("letter2");
       } else if (layout[i] === 17) {
         gridSquare[i].classList.add("letter2");
+      } else if (layout[i] === 18) {
+        gridSquare[i].classList.add("book2");
       }
     }
   }
@@ -347,9 +345,9 @@ document.addEventListener("DOMContentLoaded", () => {
     move.play();
   }
 
-  //Function that moves Immigrantkman using the arrow keys
+  //Function that moves Immigrant using the arrow keys
   function moveImmigrant(e) {
-    infoBox.innerHTML = "TOIL TOIL TOIL!!!";
+    //infoBox.innerHTML = "TOIL TOIL TOIL!!!";
     scoreTarget = scoreTarget;
     targetScore.innerHTML = scoreTarget;
     time4 = time4;
@@ -399,69 +397,82 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
     }*/
-    if (gridSquare[ImmigrantIndex].classList.contains("")) {
-      infoBox.innerHTML = "TOIL! TOIL! TOIL!";
-    }
+    //if (gridSquare[ImmigrantIndex].classList.contains("")) {
+    //infoBox.innerHTML = "TOIL! TOIL! TOIL!";
+    //}
     // colliding with powerups -----------------------
     if (gridSquare[ImmigrantIndex].classList.contains("book")) {
       gridSquare[ImmigrantIndex].classList.remove("book");
       scoreNumber = scoreNumber + 30;
       score.innerHTML = scoreNumber;
-      infoBox.innerHTML = "Canadian degree! Smart by Canadian standards!";
+      infoBox.innerHTML = "+30 : Canadian degree!";
+      infoBox2.innerHTML = "You're now smart enough by Canadian standards.";
+    }
+
+    if (gridSquare[ImmigrantIndex].classList.contains("book2")) {
+      gridSquare[ImmigrantIndex].classList.remove("book2");
+      scoreNumber = scoreNumber + 30;
+      score.innerHTML = scoreNumber;
+      infoBox.innerHTML = "+30 : English proficiency!";
+      infoBox2.innerHTML = "You can be understood in Canada!";
     }
 
     if (gridSquare[ImmigrantIndex].classList.contains("paperdoc")) {
       gridSquare[ImmigrantIndex].classList.remove("paperdoc");
       scoreNumber = scoreNumber + 40;
       score.innerHTML = scoreNumber;
-      infoBox.innerHTML =
-        "Canadian job experience! Competent by Canadian standards!";
+      infoBox.innerHTML = "+40 : Canadian job experience!";
+      infoBox2.innerHTML = "You're now skilled enough by Canadian standards!";
     }
 
     if (gridSquare[ImmigrantIndex].classList.contains("letter1")) {
       gridSquare[ImmigrantIndex].classList.remove("letter1");
       scoreNumber = scoreNumber + 40;
       score.innerHTML = scoreNumber;
-      infoBox.innerHTML =
-        "Full-time Canadian job offer! A Canadian now believes in you!";
+      infoBox.innerHTML = "+40 : Canadian job offer!";
+      infoBox2.innerHTML = "A Canadian employer now believes in you!";
     }
 
     if (gridSquare[ImmigrantIndex].classList.contains("heart1")) {
       gridSquare[ImmigrantIndex].classList.remove("heart1");
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
-      infoBox.innerHTML =
-        "Partner offered a full-time Canadian job! Now you're both competent!";
+      infoBox.innerHTML = "+10 : Partner's Canadian job offer!";
+      infoBox2.innerHTML =
+        "Your partner's Canadian employer believes in them too!";
     }
 
     if (gridSquare[ImmigrantIndex].classList.contains("heart2")) {
       gridSquare[ImmigrantIndex].classList.remove("heart2");
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
-      infoBox.innerHTML = "Partner's added Canadian job experience!";
+      infoBox.innerHTML = "+10 : Partner's added experience!";
+      infoBox2.innerHTML = "Your partner competence has increased!";
     }
 
     if (gridSquare[ImmigrantIndex].classList.contains("badge1")) {
       gridSquare[ImmigrantIndex].classList.remove("badge1");
       scoreNumber = scoreNumber + 600;
       score.innerHTML = scoreNumber;
-      infoBox.innerHTML =
-        "Nominated by Province! Now 1/13 of Canada wants you!";
+      infoBox.innerHTML = "+600 : Nominated by province!";
+      infoBox2.innerHTML = "1/13 of Canada recognizes your worth!";
     }
 
     if (gridSquare[ImmigrantIndex].classList.contains("letter2")) {
       gridSquare[ImmigrantIndex].classList.remove("letter2");
       scoreNumber = scoreNumber + 200;
       score.innerHTML = scoreNumber;
-      infoBox.innerHTML =
-        "LMIA by your employer! A Canadian employer now loves you!";
+      infoBox.innerHTML = "+200 : LMIA by your Employer!";
+      infoBox2.innerHTML =
+        "Someone finds you better than anybody else in Canada!";
     }
 
     if (gridSquare[ImmigrantIndex].classList.contains("lottery")) {
       gridSquare[ImmigrantIndex].classList.remove("lottery");
       scoreTarget = 75; //scoreTarget - 1925;
       targetScore.innerHTML = scoreTarget;
-      infoBox.innerHTML = "Historic CRS Low of 75! You're lucky!";
+      infoBox.innerHTML = "Historic CRS Low!";
+      infoBox2.innerHTML = "Lucky you!";
     }
   }
   // The next 2 if statments allow for warping from each side of the map
@@ -624,7 +635,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   // ------------------- Immigrant move direction BIAS ----------------
-  // fucntion used by the ghists to find an appropiate route to chase Immigrant
+  // fucntion used by the beavers to find an appropiate route to chase Immigrant
   function towardsImmigrant(beaver) {
     // return all the possible new position indexs the beaver can move.
     beaver.goodPositions = beaver.goodDirections.map(
@@ -711,73 +722,48 @@ document.addEventListener("DOMContentLoaded", () => {
       sendHome(beaver);
     }
   }
-  // This function is run many times a second checking if a beaver
-  // has caught Immigrant
-  /*function ImmigrantCaught(beaver) {
-    console.log("is it catching?");
-    if (gridSquare[ImmigrantIndex] === gridSquare[beaver.beaverIndex]) {
-      gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
-      gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
-      gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
-      gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
-      ImmigrantDied(beaver);
-      death.play();
-      clearInterval(ImmigrantSoundId);
-      clearInterval(CountUpid);
-      for (let i = 0; i < 16; i++) {
-        clearInterval(caughtIdOne);
-        clearInterval(caughtIdTwo);
-        clearInterval(caughtIdThree);
-        clearInterval(caughtIdFour);
-      }
-      if (scoreNumber > highScoreNumber) {
-        highScoreNumber = scoreNumber;
-        highScoreTime = time;
-      }
-      highScore.innerHTML = `${highScoreNumber}ps in ${highScoreTime}s`;
-      time = time + 0;
-      start.innerHTML = "Play Again?";
-      infoBox.innerHTML = "Immigrant Died.";
-      start.style.backgroundColor = "red";
-    }
-  }*/
-
   // Function for reducing score when hit by monsters.
   function ImmigrantCaught(beaverOne) {
-    /*console.log("is it catching?");*/
     if (gridSquare[ImmigrantIndex] === gridSquare[beaverOne.beaverIndex]) {
       scoreNumber = scoreNumber - 40;
       score.innerHTML = scoreNumber;
+      infoBox.innerHTML = "-40 : Got fired!";
+      infoBox2.innerHTML = "You're not competent enough in Canada!";
     }
   }
   function ImmigrantCaught(beaverTwo) {
-    /*console.log("is it catching?");*/
     if (gridSquare[ImmigrantIndex] === gridSquare[beaverTwo.beaverIndex]) {
       scoreNumber = scoreNumber - 60;
       score.innerHTML = scoreNumber;
+      infoBox.innerHTML = "-60 : Education rejected!";
+      infoBox2.innerHTML = "You're not smart enough in Canada!";
     }
   }
   function ImmigrantCaught(beaverThree) {
-    /*console.log("is it catching?");*/
     if (gridSquare[ImmigrantIndex] === gridSquare[beaverThree.beaverIndex]) {
-      scoreNumber = scoreNumber - 90;
+      scoreNumber = scoreNumber - 10;
       score.innerHTML = scoreNumber;
+      infoBox.innerHTML = "-10 : Partner fired!";
+      infoBox2.innerHTML = "You're partner's not competent enough in Canada!";
     }
   }
   function ImmigrantCaught(beaverFour) {
-    /*console.log("is it catching?");*/
     if (gridSquare[ImmigrantIndex] === gridSquare[beaverFour.beaverIndex]) {
       scoreNumber = scoreNumber - 450;
       score.innerHTML = scoreNumber;
+      infoBox.innerHTML = "-450 : Life's unexpected turn!";
+      infoBox2.innerHTML = "Life doesn't want you in Canada!";
     }
   }
   function ImmigrantCaught(beaverFive) {
-    /*console.log("is it catching?");*/
     if (gridSquare[ImmigrantIndex] === gridSquare[beaverFive.beaverIndex]) {
-      scoreNumber = scoreNumber - 10;
+      scoreNumber = scoreNumber - 15;
       score.innerHTML = scoreNumber;
+      infoBox.innerHTML = "-15 : Irrelevant job experience!";
+      infoBox2.innerHTML = "Your skills are irrelevant in Canada!";
     }
   }
+
   // Calling the caught function for each beaver
   let caughtIdOne = setInterval(function () {
     ImmigrantCaught(beaverOne);
@@ -835,10 +821,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (time5 == 100) {
       gridSquare[29].classList.remove("book");
-      gridSquare[78].classList.add("book");
+      gridSquare[78].classList.add("book2");
     }
     if (time5 == 90) {
-      gridSquare[78].classList.remove("book");
+      gridSquare[78].classList.remove("book2");
       gridSquare[358].classList.add("paperdoc");
     }
     if (time5 == 80) {
@@ -880,7 +866,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }*/
     // KARLO: specifically for visa expiration.
     if (time5 == 30) {
-      document.getElementById("timer4").className = "timer4";
+      //document.getElementById("timer4").className.remove = "hidden";
+      document.getElementById("timer4").removeProperty("visibility");
       time4 = time4;
       let CountDownId;
       CountDownId = setInterval(CountDown, 1000);

@@ -1,10 +1,6 @@
-// THESE VALUES CAN BE SET TO ALTER THE GAME
-// set how long the hearts work for (ms)
-//const hearttime = 6000;
 // Set how many miliseconds between each time the beavers move
 const beaverTimePerMove = 300;
 // Defining the beavers paramters.
-//---------------------------------------------------------------------
 // Used in algorithams to move beavers and Immigrant
 const width = 20;
 // Possible moves for beaver
@@ -247,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
       startGame();
       document.addEventListener("keydown", moveImmigrant);
       start.innerHTML = "RUN!";
-      infoBox.innerHTML = "TOIL TOIL TOIL!!!";
+      //infoBox.innerHTML = "TOIL TOIL TOIL!!!";
       start.style.backgroundColor = "red";
       // if it says play again? run the game 1st > time
     } /*else if (start.innerHTML === "Play Again?") {
@@ -349,7 +345,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Function that moves Immigrantkman using the arrow keys
   function moveImmigrant(e) {
-    infoBox.innerHTML = "TOIL TOIL TOIL!!!";
+    //infoBox.innerHTML = "TOIL TOIL TOIL!!!";
     scoreTarget = scoreTarget;
     targetScore.innerHTML = scoreTarget;
     time4 = time4;
@@ -399,46 +395,49 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
     }*/
-    if (gridSquare[ImmigrantIndex].classList.contains("")) {
-      infoBox.innerHTML = "TOIL! TOIL! TOIL!";
-    }
+    //if (gridSquare[ImmigrantIndex].classList.contains("")) {
+    //infoBox.innerHTML = "TOIL! TOIL! TOIL!";
+    //}
     // colliding with powerups -----------------------
     if (gridSquare[ImmigrantIndex].classList.contains("book")) {
       gridSquare[ImmigrantIndex].classList.remove("book");
       scoreNumber = scoreNumber + 30;
       score.innerHTML = scoreNumber;
-      infoBox.innerHTML = "Canadian degree! Smart by Canadian standards!";
+      infoBox.innerHTML = "+30 for Canadian degree!";
+      infoBox2.innerHTML = "You're now smart enough by Canadian standards.";
     }
 
     if (gridSquare[ImmigrantIndex].classList.contains("paperdoc")) {
       gridSquare[ImmigrantIndex].classList.remove("paperdoc");
       scoreNumber = scoreNumber + 40;
       score.innerHTML = scoreNumber;
-      infoBox.innerHTML =
-        "Canadian job experience! Competent by Canadian standards!";
+      infoBox.innerHTML = "+40 for Canadian job experience!";
+      infoBox2.innerHTML = "You're now skilled enough by Canadian standards!";
     }
 
     if (gridSquare[ImmigrantIndex].classList.contains("letter1")) {
       gridSquare[ImmigrantIndex].classList.remove("letter1");
       scoreNumber = scoreNumber + 40;
       score.innerHTML = scoreNumber;
-      infoBox.innerHTML =
-        "Full-time Canadian job offer! A Canadian now believes in you!";
+      infoBox.innerHTML = "+40 > Canadian job offer!";
+      infoBox2.innerHTML = "A Canadian employer now believes in you!";
     }
 
     if (gridSquare[ImmigrantIndex].classList.contains("heart1")) {
       gridSquare[ImmigrantIndex].classList.remove("heart1");
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
-      infoBox.innerHTML =
-        "Partner offered a full-time Canadian job! Now you're both competent!";
+      infoBox.innerHTML = "+10 > partner's Canadian job offer!";
+      infoBox2.innerHTML =
+        "Your partner has a believing Canadian employer too!";
     }
 
     if (gridSquare[ImmigrantIndex].classList.contains("heart2")) {
       gridSquare[ImmigrantIndex].classList.remove("heart2");
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
-      infoBox.innerHTML = "Partner's added Canadian job experience!";
+      infoBox.innerHTML = "+10 > partner's added job experience!";
+      infoBox2.innerHTML = "Your partner has been proven more competent!";
     }
 
     if (gridSquare[ImmigrantIndex].classList.contains("badge1")) {

@@ -86,15 +86,19 @@ p {
 }
 .timer,
 .timer2,
-.timer3,
-.timer4 {
+.timer3 {
   color: yellow;
   font-weight: bold;
   font-family: /*"Press Start 2P", cursive;*/ "VT323", monospace;
   text-transform: uppercase;
   font-size: 32px;
 }
-.timer4hidden {
+.timer4 {
+  color: yellow;
+  font-weight: bold;
+  font-family: /*"Press Start 2P", cursive;*/ "VT323", monospace;
+  text-transform: uppercase;
+  font-size: 32px;
   visibility: hidden;
 }
 .timer5 {
@@ -283,6 +287,10 @@ p {
 }*/
 .book {
   background-image: url("../images/powerups/book.png");
+  background-size: contain;
+}
+.book2 {
+  background-image: url("../images/powerups/book2.png");
   background-size: contain;
 }
 .paperdoc {
