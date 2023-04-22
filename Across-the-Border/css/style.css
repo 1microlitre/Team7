@@ -16,6 +16,9 @@ h1 {
   font-family: "Press Start 2P", cursive;
   font-size: 36px;
 }
+audio {
+  display: none;
+}
 
 /*For Splash Page*/
 .bodySplash {

@@ -11,17 +11,25 @@
     <script src="js/app.js" charset="utf-8"></script>
   </head>
   <body class="bodySplash">
+    <div id="player">
+      <audio controls autoplay hidden>
+       <source src="canadatheme.wav" type="audio/mpeg"> unsupported !! 
+      </audio>
+    </div>
     <div class="splash">
       <section id="splashanimation" class="splashlogo">
         <img
-          img src="/images/Across-the-Border-logo_02.png" alt='blinking!' 
-        />
+          img src="/images/Across-the-Border-logo_01.png" alt='blinking!'/>
       </section>
       <div class="clear"></div>
       <section class="splashenter" id='blinking'>
         <p>Press <span style="color: yellow">enter</span> to start</p>
       </section>
     <script>
+      function myFunction() {
+        var x = document.getElementById("myAudio").autoplay;
+        document.getElementById("demo").innerHTML = x;
+        }
       document.addEventListener("keydown", function (event) {
         if (event.code === "Enter") {
           window.location.href = "Char-Selection.html";
