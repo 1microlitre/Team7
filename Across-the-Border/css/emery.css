@@ -71,16 +71,16 @@ h2 {
   font-size: 36px;
 }
 .charSelectorHeader {
-  margin-top: 50px;
+  margin-top: 100px;
 }
 .character input[type="radio"]:checked + label {
   border: 2px solid red;
 }
 .blink {
-  animation: blink 0.5s linear infinite;
+  animation: blink 1s linear infinite;
 }
 @keyframes blink {
-  5% {
+  50% {
     opacity: 0;
   }
 }
@@ -91,17 +91,14 @@ h2 {
 }
 .character-list > li {
   width: 30%;
-  height: 230px;
+  height: 280px;
   border: white 1px solid;
   background-color: white;
-  padding: 10px;
+  padding: 25px;
 }
 .character {
   margin: 0 20px;
   text-align: center;
-}
-.hidden {
-  display: none;
 }
 input[type="radio"] {
   display: none;
@@ -110,27 +107,19 @@ label {
   cursor: pointer;
 }
 .labelThumb {
-  width: 35%;
+  width: 40%;
   float: left;
-  margin-right: 5%;
-}
-.labelThumb > img {
-  width: 100%;
 }
 .labelDesc {
-  width: 55%;
+  width: 60%;
   float: left;
   text-align: left;
-  margin-right: 5%;
 }
 .labelDesc > h3 {
   font-size: 24px;
   font-family: "VT323", monospace;
   text-transform: uppercase;
-  padding-top: 20px;
-  padding-bottom: 5px;
-  margin: 0px;
-  color: red;
+  line-height: 18px;
 }
 .labelDesc > p {
   font-size: 14px;
@@ -140,7 +129,7 @@ label {
   margin: 0px;
 }
 img {
-  width: 40%;
+  width: 100%;
   height: auto;
 }
 img:hover {
@@ -173,6 +162,20 @@ img:hover {
   text-align: center;
 }
 .selected {
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.selectedCharacter {
   width: 40%;
 }
 
@@ -374,23 +377,23 @@ img:hover {
   border: 1px solid black;
 }
 .Immigrant {
-  background-image: url("../pacWhole.png");
+  background-image: url("../images/characters/female/emeryheadlarge.png");
   background-size: contain;
 }
 .ImmigrantUp {
-  background-image: url("../pacUp.png");
+  background-image: url("../images/characters/female/emerybackhead.png");
   background-size: contain;
 }
 .ImmigrantRight {
-  background-image: url("../pacRight.png");
+  background-image: url("../images/characters/female/emeryrighthead.png");
   background-size: contain;
 }
 .ImmigrantDown {
-  background-image: url("../pacDown.png");
+  background-image: url("../images/characters/female/emeryheadlarge.png");
   background-size: contain;
 }
 .ImmigrantLeft {
-  background-image: url("../pacLeft.png");
+  background-image: url("../images/characters/female/emerylefthead.png");
   background-size: contain;
 }
 .wall {

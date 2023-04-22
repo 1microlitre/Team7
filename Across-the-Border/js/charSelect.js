@@ -1,5 +1,7 @@
 const selectedCharacter = document.getElementById("selected-character");
-const characterList = document.querySelector(".character-list");
+const characterListContainer = document.querySelector(
+  ".character-list-container"
+);
 const characterListItems = document.querySelectorAll(".character-list li");
 
 // Function to select a random character
@@ -18,23 +20,15 @@ function selectRandomCharacter() {
     }
   });
 
-  // Hide non-selected characters
-  characterList.style.display = "none";
+  // Hide character list container
+  characterListContainer.classList.add("hidden");
 
   // Update selected character element with image and name
   const selectedCharacterName =
     selectedCharacterListItem.querySelector("input").value;
   const selectedCharacterImage =
     selectedCharacterListItem.querySelector("img").src;
-  selectedCharacter.innerHTML = `<img src="${selectedCharacterImage}" alt="${selectedCharacterName}">`;
-
-  // Show description of selected character
-  const selectedCharacterDesc =
-    selectedCharacterListItem.querySelector(".labelDesc").innerHTML;
-  selectedCharacter.insertAdjacentHTML(
-    "beforeend",
-    `<p class="description">${selectedCharacterDesc}</p>`
-  );
+  selectedCharacter.innerHTML = `<img src="${selectedCharacterImage}" alt="${selectedCharacterName}"><span>${selectedCharacterName}</span>`;
 }
 
 // Function to start blinking animation
@@ -54,7 +48,6 @@ function stopBlinking() {
   characterListItems.forEach((item) => {
     if (item !== selectedCharacterListItem) {
       item.querySelector("label").classList.remove("blink");
-      item.style.display = "none";
     }
   });
 }
