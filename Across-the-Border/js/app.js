@@ -890,7 +890,8 @@ document.addEventListener("DOMContentLoaded", () => {
             ) {
               winAudio.play();
               infoBox2.innerHTML = "YOU GET TO LIVE IN CANADA!";
-              document.body.style.background = "url('images/CanadianFlag.gif')";
+              document.body.style.background =
+                "#FFFFFF url('images/CanadianFlag.gif') repeat right top";
               scoreNumber = scoreNumber;
               timeAgeYear = 0;
               clearInterval(ImmigrantSoundId);
@@ -962,7 +963,8 @@ document.addEventListener("DOMContentLoaded", () => {
             ) {
               winAudio.play();
               infoBox2.innerHTML = "YOU GET TO LIVE IN CANADA!";
-              document.body.style.background = "url('images/CanadianFlag.gif')";
+              document.body.style.background =
+                "#FFFFFF url('images/CanadianFlag.gif') repeat right top";
             }
           }
         }
