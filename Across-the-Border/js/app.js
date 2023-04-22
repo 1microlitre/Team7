@@ -916,6 +916,9 @@ document.addEventListener("DOMContentLoaded", () => {
               );
               gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
               gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
+              setTimeout(function () {
+                window.location.href = "SplashPage.html";
+              }, 10000);
             } else if (
               scoreNumber < scoreTarget &&
               gridSquare[ImmigrantIndex].classList.contains("gate")
@@ -957,6 +960,9 @@ document.addEventListener("DOMContentLoaded", () => {
               infoBox2.innerHTML = "YOU DON'T DESERVE CANADA!";
               document.body.style.background =
                 "#ED0000 url('images/denied.png') repeat right top";
+              setTimeout(function () {
+                window.location.href = "SplashPage.html";
+              }, 10000);
             } else if (
               gridSquare[ImmigrantIndex].classList.contains("gate") &&
               scoreNumber >= scoreTarget
@@ -965,6 +971,9 @@ document.addEventListener("DOMContentLoaded", () => {
               infoBox2.innerHTML = "YOU GET TO LIVE IN CANADA!";
               document.body.style.background =
                 "#FFFFFF url('images/CanadianFlag.gif') repeat right top";
+              setTimeout(function () {
+                window.location.href = "SplashPage.html";
+              }, 10000);
             }
           }
         }
