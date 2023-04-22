@@ -26,7 +26,7 @@ function selectRandomCharacter() {
     selectedCharacterListItem.querySelector("input").value;
   const selectedCharacterImage =
     selectedCharacterListItem.querySelector("img").src;
-  selectedCharacter.innerHTML = `<img src="${selectedCharacterImage}" alt="${selectedCharacterName}"><span>${selectedCharacterName}</span>`;
+  selectedCharacter.innerHTML = `<img src="${selectedCharacterImage}" alt="${selectedCharacterName}">`;
 
   // Show description of selected character
   const selectedCharacterDesc =
