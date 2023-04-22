@@ -16,8 +16,14 @@ h1 {
   font-family: "Press Start 2P", cursive;
   font-size: 36px;
 }
-audio {
-  display: none;
+.countdownBanner {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 48px;
+  font-weight: bold;
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
 }
 
 /*For Splash Page*/
@@ -74,7 +80,7 @@ h2 {
   font-size: 36px;
 }
 .charSelectorHeader {
-  margin-top: 50px;
+  margin-top: 100px;
 }
 .character input[type="radio"]:checked + label {
   border: 2px solid red;
@@ -103,9 +109,6 @@ h2 {
   margin: 0 20px;
   text-align: center;
 }
-.hidden {
-  display: none;
-}
 input[type="radio"] {
   display: none;
 }
@@ -133,7 +136,6 @@ label {
   padding-top: 20px;
   padding-bottom: 5px;
   margin: 0px;
-  color: red;
 }
 .labelDesc > p {
   font-size: 14px;

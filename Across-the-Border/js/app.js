@@ -195,19 +195,53 @@ document.addEventListener("DOMContentLoaded", () => {
   const right = document.querySelector(".right");
   const down = document.querySelector(".down");
 
-  //This event listener prevents the arrow keys from scrolling
-  document.addEventListener("keydown", preventDefultScroll);
-  // eventlistner to start the game
-  start.addEventListener("click", () => {
-    // if it says start run the game for the first time.
-    if (start.innerHTML === "Start") {
-      startGame();
-      document.addEventListener("keydown", moveImmigrant);
-      start.innerHTML = "RUN!";
-      //infoBox.innerHTML = "TOIL TOIL TOIL!!!";
-      start.style.backgroundColor = "red";
-    }
-  });
+ //This event listener prevents the arrow keys from scrolling
+ document.addEventListener("keydown", preventDefaultScroll);
+
+ // event listener to start the game with Enter key
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && start.innerHTML === "Start") {
+    startCountdown();
+  }
+});
+
+ function startCountdown() {
+   let count = 3;
+
+   // create countdown banner element
+   const countdownBanner = document.createElement("div");
+   countdownBanner.classList.add("countdownBanner");
+   countdownBanner.textContent = count;
+   document.body.appendChild(countdownBanner);
+
+   // position countdown banner in the center of the screen
+   countdownBanner.style.position = "fixed";
+   countdownBanner.style.top = "50%";
+   countdownBanner.style.left = "50%";
+   countdownBanner.style.transform = "translate(-50%, -50%)";
+
+   const countdown = setInterval(() => {
+     count--;
+     countdownBanner.textContent = count;
+
+     if (count === 0) {
+       clearInterval(countdown);
+       document.body.removeChild(countdownBanner);
+
+       startGame();
+       document.addEventListener("keydown", moveImmigrant);
+       infoBox.textContent = "nice m8";
+       start.style.backgroundColor = "red";
+     }
+   }, 1000);
+ }
+
+// event listener to prevent arrow keys from scrolling
+function preventDefaultScroll(event) {
+  if ([32, 37, 38, 39, 40].indexOf(event.keyCode) > -1) {
+    event.preventDefault();
+  }
+};
 
   //This function assings the correct classes depending on the layout above.
   function assignGrid(
