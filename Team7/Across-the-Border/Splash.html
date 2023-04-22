@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Across the Border - Splash</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=VT323&display=swap" rel="stylesheet">
+    <script src="js/app.js" charset="utf-8"></script>
+  </head>
+  <body class="bodySplash">
+    <div class="splash">
+      <section id="splashanimation" class="splashlogo">
+        <img
+          img src="/images/Across-the-Border-logo_01.png" alt='blinking!' 
+        />
+      </section>
+      <div class="clear"></div>
+      <section class="splashenter" id='blinking'>
+        <p>Press <span style="color: yellow">enter</span> to start</p>
+      </section>
+    <script>
+      document.addEventListener("keydown", function (event) {
+        if (event.code === "Enter") {
+          window.location.href = "Char-Selection.html";
+        }
+      });
+      var img = document.getElementById('blinking');
+      var interval = window.setInterval(function(){
+          if(img.style.visibility == 'hidden'){
+            img.style.visibility = 'visible';
+          }else{
+            img.style.visibility = 'hidden';
+          }
+          }, 500);
+    </script>
+  </body>
+</html>

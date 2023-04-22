@@ -1,0 +1,107 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+h2 {
+  margin-top: 50px;
+  font-size: 36px;
+}
+
+.character input[type="radio"]:checked + label {
+  border: 2px solid red;
+}
+
+.blink {
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.character-list {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.character {
+  margin: 0 20px;
+  text-align: center;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+label {
+  cursor: pointer;
+}
+
+img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+img:hover {
+  transform: scale(1.1);
+}
+
+.character-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.character-list li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1em;
+}
+
+.character-list li label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.character-list li img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+.character-list li span {
+  margin-top: 0.5em;
+  text-align: center;
+}
+
+.selected {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
