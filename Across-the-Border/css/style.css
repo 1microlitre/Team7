@@ -1,0 +1,451 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background-color: red;
+}
+.container {
+  width: 1000px;
+  margin: 0 auto;
+}
+h1 {
+  text-align: center;
+  margin-top: 30px;
+  color: rgb(255, 255, 255);
+  font-family: "Press Start 2P", cursive;
+  font-size: 36px;
+}
+
+/*For Splash Page*/
+.bodySplash {
+  margin: 0;
+  background-image: url("/images/Across-the-Border-logo_03.png");
+  background-repeat: repeat;
+  background-size: 20px;
+  background-position: center;
+  background-color: red;
+}
+.splash {
+  text-align: center;
+  justify-content: center;
+  margin: 10px auto 30px auto;
+  height: 600px;
+  width: 900px;
+  padding-top: 100px;
+}
+.splashlogo {
+  position: relative;
+  padding-bottom: 30px;
+}
+.splashlogo > img {
+  width: 80%;
+}
+.splashenter {
+  width: 40%;
+  height: 25%;
+  padding: 10px;
+  border: 2px solid white;
+  background-color: red;
+  margin: 0% 30%;
+}
+.splashenter > p {
+  font-size: 32px;
+  color: white;
+  font-family: "VT323", monospace;
+  text-align: center;
+  text-transform: uppercase;
+}
+.clear {
+  clear: both;
+}
+
+/*For character selector*/
+.container {
+  width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+h2 {
+  margin-top: 50px;
+  font-size: 36px;
+}
+.charSelectorHeader {
+  margin-top: 100px;
+}
+.character input[type="radio"]:checked + label {
+  border: 2px solid red;
+}
+.blink {
+  animation: blink 0.5s linear infinite;
+}
+@keyframes blink {
+  5% {
+    opacity: 0;
+  }
+}
+.character-list {
+  width: 100%;
+  display: block;
+  justify-content: center;
+}
+.character-list > li {
+  width: 30%;
+  height: 230px;
+  border: white 1px solid;
+  background-color: white;
+  padding: 10px;
+}
+.character {
+  margin: 0 20px;
+  text-align: center;
+}
+input[type="radio"] {
+  display: none;
+}
+label {
+  cursor: pointer;
+}
+.labelThumb {
+  width: 35%;
+  float: left;
+  margin-right: 5%;
+}
+.labelThumb > img {
+  width: 100%;
+}
+.labelDesc {
+  width: 55%;
+  float: left;
+  text-align: left;
+  margin-right: 5%;
+}
+.labelDesc > h3 {
+  font-size: 24px;
+  font-family: "VT323", monospace;
+  text-transform: uppercase;
+  padding-top: 20px;
+  padding-bottom: 5px;
+  margin: 0px;
+}
+.labelDesc > p {
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+  line-height: 21px;
+  padding: 0px;
+  margin: 0px;
+}
+img {
+  width: 40%;
+  height: auto;
+}
+img:hover {
+  transform: scale(1.1);
+}
+.character-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.character-list li {
+  display: block;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1em;
+}
+.character-list li label {
+  display: block;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+.character-list li span {
+  margin-top: 0.5em;
+  text-align: center;
+}
+.selected {
+  width: 40%;
+}
+
+/*For game page*/
+.game {
+  text-align: center;
+  justify-content: center;
+  margin: 10px auto 30px auto;
+  background-color: black;
+  height: 600px;
+  width: 900px;
+  padding: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+.score,
+.targetScore {
+  color: yellow;
+  font-weight: bold;
+  font-family: "Press Start 2P", cursive;
+  font-size: 18px;
+  line-height: 18px;
+}
+.info {
+  display: block;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 35%;
+}
+.infoBox {
+  color: white;
+  font-family: "VT323", monospace;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: left;
+  text-transform: uppercase;
+  height: 8%;
+  width: 100%;
+  padding: 10px auto;
+}
+.infoBox2 {
+  border-top: 2px solid white;
+  color: yellow;
+  display: block;
+  font-family: "VT323", monospace;
+  font-size: 32px;
+  margin-top: 0;
+  width: 100%;
+  align-content: left;
+  justify-content: left;
+  width: 100%;
+  padding: 5px 0px;
+  text-align: left;
+  text-transform: uppercase;
+}
+.start {
+  color: white;
+  font-family: "Press Start 2P", cursive;
+  font-size: 20px;
+  /*height: 20%;*/
+  padding: 20px;
+  margin: 20px 0 20px;
+  width: 100%;
+  background-color: red;
+  box-shadow: 5px 5px 0 white;
+  border-color: white;
+}
+.start:active {
+  top: 5px;
+  box-shadow: none;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-bottom: -5px;
+}
+.gameStats > p {
+  color: white;
+  font-weight: bold;
+  text-align: left;
+  line-height: 15px;
+  text-align: left;
+  font-family: "VT323", monospace;
+  font-size: 32px;
+}
+.timerAgeYear,
+.timerAgeMonth,
+.timerAgeDay,
+.timerVisa {
+  color: yellow;
+  font-weight: bold;
+  font-family: "VT323", monospace;
+  text-transform: uppercase;
+  font-size: 32px;
+}
+.timer4hidden {
+  color: yellow;
+  font-weight: bold;
+  font-family: "VT323", monospace;
+  text-transform: uppercase;
+  font-size: 32px;
+  visibility: hidden;
+}
+.timerGame {
+  display: hidden;
+}
+.table {
+  border: 2px solid white;
+  width: 100%;
+  height: 18%;
+  margin-top: 0px;
+  padding: 5px 10px;
+  text-align: left;
+}
+.table > p {
+  font-family: "Press Start 2P", cursive;
+  color: white;
+}
+.info > p {
+  margin: 10px auto;
+  font-family: "VT323", monospace;
+  height: 5%;
+}
+.label {
+  margin-bottom: 10px;
+  padding-top: 20px;
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0;
+  width: 100%;
+  height: 30%;
+  align-content: center;
+  justify-content: center;
+  padding: 10px 10px;
+  display: none;
+}
+.up,
+.down,
+.left,
+.right {
+  font-size: 20px;
+  font-family: "VT323", monospace;
+  color: white;
+  font-weight: bold;
+  background-color: red;
+  /*padding: 5px auto;*/
+  height: 25px;
+  /*padding: 2px auto;*/
+  margin: 5px auto;
+  box-shadow: 2px 2px 0 white;
+}
+.sideways {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.up.active {
+  box-shadow: none;
+  margin: 5px -5px -5px 5px;
+}
+.down.active {
+  box-shadow: none;
+  margin: 5px -5px -5px 5px;
+}
+.right.active {
+  box-shadow: none;
+  margin: 5px 5px -5px 5px;
+}
+.left.active {
+  box-shadow: none;
+  margin: 5px 5px -5px 15px;
+}
+.up,
+.down {
+  width: 65%;
+}
+.left,
+.right {
+  width: 40%;
+  margin: 0 10px;
+}
+.grid {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: black;
+  box-shadow: 0 0 0 2px White;
+}
+.gridSquare {
+  width: 25px;
+  height: 25px;
+}
+.food {
+  background-image: radial-gradient(white 15%, transparent 20%);
+}
+.gate {
+  background-color: yellow;
+  border: 1px solid black;
+}
+.Immigrant {
+  background-image: url("../pacWhole.png");
+  background-size: contain;
+}
+.ImmigrantUp {
+  background-image: url("../pacUp.png");
+  background-size: contain;
+}
+.ImmigrantRight {
+  background-image: url("../pacRight.png");
+  background-size: contain;
+}
+.ImmigrantDown {
+  background-image: url("../pacDown.png");
+  background-size: contain;
+}
+.ImmigrantLeft {
+  background-image: url("../pacLeft.png");
+  background-size: contain;
+}
+.wall {
+  background-image: url("../images/Wall.png");
+  background-size: contain;
+}
+.beaverOne {
+  background-image: url("../images/monsters/beavercyanhead.png");
+  background-size: auto;
+}
+.beaverTwo {
+  background-image: url("../images/monsters/beaverorangehead.png");
+  background-size: auto;
+}
+.beaverThree {
+  background-image: url("../images/monsters/beaverpinkhead.png");
+  background-size: auto;
+}
+.beaverFour {
+  background-image: url("../images/monsters/beaverkinghead.png");
+  background-size: auto;
+}
+.beaverFive {
+  background-image: url("../images/monsters/beaveroriginalhead.png");
+  background-size: auto;
+}
+.book {
+  background-image: url("../images/powerups/book.png");
+  background-size: contain;
+}
+.book2 {
+  background-image: url("../images/powerups/book2.png");
+  background-size: contain;
+}
+.paperdoc {
+  background-image: url("../images/powerups/paperdoc.png");
+  background-size: contain;
+}
+.letter1 {
+  background-image: url("../images/powerups/letter1.png");
+  background-size: contain;
+}
+.heart1 {
+  background-image: url("../images/powerups/heart1.png");
+  background-size: contain;
+}
+.heart2 {
+  background-image: url("../images/powerups/heart2.png");
+  background-size: contain;
+}
+.letter2 {
+  background-image: url("../images/powerups/letter2.png");
+  background-size: contain;
+}
+.lottery {
+  background-image: url("../images/powerups/lottery.png");
+  background-size: contain;
+}
+.badge1 {
+  background-image: url("../images/powerups/lottery.png");
+  background-size: contain;
+}
