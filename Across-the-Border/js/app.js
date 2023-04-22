@@ -890,7 +890,8 @@ document.addEventListener("DOMContentLoaded", () => {
             ) {
               winAudio.play();
               infoBox2.innerHTML = "YOU GET TO LIVE IN CANADA!";
-              document.body.style.background = "url('images/CanadianFlag.gif')";
+              document.body.style.background =
+                "#FFFFFF url('images/CanadianFlag.gif') repeat right top";
               scoreNumber = scoreNumber;
               timeAgeYear = 0;
               clearInterval(ImmigrantSoundId);
@@ -957,7 +958,8 @@ document.addEventListener("DOMContentLoaded", () => {
             ) {
               loseAudio.play();
               infoBox2.innerHTML = "YOU DON'T DESERVE CANADA!";
-              document.body.style.background = "url('images/denied.png')";
+              document.body.style.background =
+                "#FFFFFF url('images/denied.png') repeat right top";
               setTimeout(function () {
                 window.location.href = "SplashPage.html";
               }, 10000);
@@ -967,7 +969,8 @@ document.addEventListener("DOMContentLoaded", () => {
             ) {
               winAudio.play();
               infoBox2.innerHTML = "YOU GET TO LIVE IN CANADA!";
-              document.body.style.background = "url('images/CanadianFlag.gif')";
+              document.body.style.background =
+                "#FFFFFF url('images/CanadianFlag.gif') repeat right top";
               setTimeout(function () {
                 window.location.href = "SplashPage.html";
               }, 10000);
