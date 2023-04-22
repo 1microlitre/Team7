@@ -890,8 +890,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ) {
               winAudio.play();
               infoBox2.innerHTML = "YOU GET TO LIVE IN CANADA!";
-              document.body.style.background =
-                "#ED0000 url('images/canada.gif') repeat right top";
+              document.body.style.background = "url('images/CanadianFlag.gif')";
               scoreNumber = scoreNumber;
               timeAgeYear = 0;
               clearInterval(ImmigrantSoundId);
@@ -956,15 +955,14 @@ document.addEventListener("DOMContentLoaded", () => {
               loseAudio.play();
               infoBox2.innerHTML = "YOU DON'T DESERVE CANADA!";
               document.body.style.background =
-                "#ED0000 url('images/canada.gif') repeat right top";
+                "#ED0000 url('images/denied.png') repeat right top";
             } else if (
               gridSquare[ImmigrantIndex].classList.contains("gate") &&
               scoreNumber >= scoreTarget
             ) {
               winAudio.play();
               infoBox2.innerHTML = "YOU GET TO LIVE IN CANADA!";
-              document.body.style.background =
-                "#ED0000 url('images/canada.gif') repeat right top";
+              document.body.style.background = "url('images/CanadianFlag.gif')";
             }
           }
         }
