@@ -16,6 +16,15 @@ h1 {
   font-family: "Press Start 2P", cursive;
   font-size: 36px;
 }
+.countdownBanner {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 48px;
+  font-weight: bold;
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+}
 
 /*For Splash Page*/
 .bodySplash {
