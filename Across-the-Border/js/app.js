@@ -195,53 +195,53 @@ document.addEventListener("DOMContentLoaded", () => {
   const right = document.querySelector(".right");
   const down = document.querySelector(".down");
 
- //This event listener prevents the arrow keys from scrolling
- document.addEventListener("keydown", preventDefaultScroll);
+  //This event listener prevents the arrow keys from scrolling
+  document.addEventListener("keydown", preventDefaultScroll);
 
- // event listener to start the game with Enter key
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Enter" && start.innerHTML === "Start") {
-    startCountdown();
+  // event listener to start the game with Enter key
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && start.innerHTML === "Start") {
+      startCountdown();
+    }
+  });
+
+  function startCountdown() {
+    let count = 3;
+
+    // create countdown banner element
+    const countdownBanner = document.createElement("div");
+    countdownBanner.classList.add("countdownBanner");
+    countdownBanner.textContent = count;
+    document.body.appendChild(countdownBanner);
+
+    // position countdown banner in the center of the screen
+    countdownBanner.style.position = "fixed";
+    countdownBanner.style.top = "50%";
+    countdownBanner.style.left = "50%";
+    countdownBanner.style.transform = "translate(-50%, -50%)";
+
+    const countdown = setInterval(() => {
+      count--;
+      countdownBanner.textContent = count;
+
+      if (count === 0) {
+        clearInterval(countdown);
+        document.body.removeChild(countdownBanner);
+
+        startGame();
+        document.addEventListener("keydown", moveImmigrant);
+        infoBox.textContent = "nice m8";
+        start.style.backgroundColor = "red";
+      }
+    }, 1000);
   }
-});
 
- function startCountdown() {
-   let count = 3;
-
-   // create countdown banner element
-   const countdownBanner = document.createElement("div");
-   countdownBanner.classList.add("countdownBanner");
-   countdownBanner.textContent = count;
-   document.body.appendChild(countdownBanner);
-
-   // position countdown banner in the center of the screen
-   countdownBanner.style.position = "fixed";
-   countdownBanner.style.top = "50%";
-   countdownBanner.style.left = "50%";
-   countdownBanner.style.transform = "translate(-50%, -50%)";
-
-   const countdown = setInterval(() => {
-     count--;
-     countdownBanner.textContent = count;
-
-     if (count === 0) {
-       clearInterval(countdown);
-       document.body.removeChild(countdownBanner);
-
-       startGame();
-       document.addEventListener("keydown", moveImmigrant);
-       infoBox.textContent = "nice m8";
-       start.style.backgroundColor = "red";
-     }
-   }, 1000);
- }
-
-// event listener to prevent arrow keys from scrolling
-function preventDefaultScroll(event) {
-  if ([32, 37, 38, 39, 40].indexOf(event.keyCode) > -1) {
-    event.preventDefault();
+  // event listener to prevent arrow keys from scrolling
+  function preventDefaultScroll(event) {
+    if ([32, 37, 38, 39, 40].indexOf(event.keyCode) > -1) {
+      event.preventDefault();
+    }
   }
-};
 
   //This function assings the correct classes depending on the layout above.
   function assignGrid(
@@ -356,6 +356,7 @@ function preventDefaultScroll(event) {
     // colliding with powerups -----------------------
     if (gridSquare[ImmigrantIndex].classList.contains("book")) {
       gridSquare[ImmigrantIndex].classList.remove("book");
+      powerUpSound();
       scoreNumber = scoreNumber + 30;
       score.innerHTML = scoreNumber;
       boxInfo = "+30 : Canadian degree!";

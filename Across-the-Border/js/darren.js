@@ -322,6 +322,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // colliding with powerups -----------------------
     if (gridSquare[ImmigrantIndex].classList.contains("book")) {
       gridSquare[ImmigrantIndex].classList.remove("book");
+      powerUpSound();
       scoreNumber = scoreNumber + 30;
       score.innerHTML = scoreNumber;
       boxInfo = "+30 : Canadian degree!";
