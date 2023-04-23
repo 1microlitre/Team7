@@ -213,82 +213,82 @@ h1 {
   border: 1px solid black;
 }
 .Immigrant {
-  background-image: url("../images/characters/female/emeryheadlarge.png");
+  background-image: url("images/characters/female/emeryheadlarge.png");
   background-size: contain;
 }
 .ImmigrantUp {
-  background-image: url("../images/characters/female/emerybackhead.png");
+  background-image: url("images/characters/female/emerybackhead.png");
   background-size: contain;
 }
 .ImmigrantRight {
-  background-image: url("../images/characters/female/emeryrighthead.png");
+  background-image: url("images/characters/female/emeryrighthead.png");
   background-size: contain;
 }
 .ImmigrantDown {
-  background-image: url("../images/characters/female/emeryheadlarge.png");
+  background-image: url("images/characters/female/emeryheadlarge.png");
   background-size: contain;
 }
 .ImmigrantLeft {
-  background-image: url("../images/characters/female/emerylefthead.png");
+  background-image: url("images/characters/female/emerylefthead.png");
   background-size: contain;
 }
 .wall {
-  background-image: url("../images/Wall.png");
+  background-image: url("images/Wall.png");
   background-size: contain;
 }
 .beaverOne {
-  background-image: url("../images/monsters/beavercyanhead.png");
+  background-image: url("images/monsters/beavercyanhead.png");
   background-size: auto;
 }
 .beaverTwo {
-  background-image: url("../images/monsters/beaverorangehead.png");
+  background-image: url("images/monsters/beaverorangehead.png");
   background-size: auto;
 }
 .beaverThree {
-  background-image: url("../images/monsters/beaverpinkhead.png");
+  background-image: url("images/monsters/beaverpinkhead.png");
   background-size: auto;
 }
 .beaverFour {
-  background-image: url("../images/monsters/beaverkinghead.png");
+  background-image: url("images/monsters/beaverkinghead.png");
   background-size: auto;
 }
 .beaverFive {
-  background-image: url("../images/monsters/beaveroriginalhead.png");
+  background-image: url("images/monsters/beaveroriginalhead.png");
   background-size: auto;
 }
 .book {
-  background-image: url("../images/powerups/book.png");
+  background-image: url("images/powerups/book.png");
   background-size: contain;
 }
 .book2 {
-  background-image: url("../images/powerups/book2.png");
+  background-image: url("images/powerups/book2.png");
   background-size: contain;
 }
 .paperdoc {
-  background-image: url("../images/powerups/paperdoc.png");
+  background-image: url("images/powerups/paperdoc.png");
   background-size: contain;
 }
 .letter1 {
-  background-image: url("../images/powerups/letter1.png");
+  background-image: url("images/powerups/letter1.png");
   background-size: contain;
 }
 .heart1 {
-  background-image: url("../images/powerups/heart1.png");
+  background-image: url("images/powerups/heart1.png");
   background-size: contain;
 }
 .heart2 {
-  background-image: url("../images/powerups/heart2.png");
+  background-image: url("images/powerups/heart2.png");
   background-size: contain;
 }
 .letter2 {
-  background-image: url("../images/powerups/letter2.png");
+  background-image: url("images/powerups/letter2.png");
   background-size: contain;
 }
 .lottery {
-  background-image: url("../images/powerups/lottery.png");
+  background-image: url("images/powerups/lottery.png");
   background-size: contain;
 }
 .badge1 {
-  background-image: url("../images/powerups/lottery.png");
+  background-image: url("images/powerups/lottery.png");
   background-size: contain;
 }
