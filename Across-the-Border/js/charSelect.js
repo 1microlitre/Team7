@@ -1,8 +1,11 @@
-const selectedCharacter = document.getElementById("selected-character");
-const characterListContainer = document.querySelector(
+let selectedCharacter = document.getElementById("selected-character");
+let characterListContainer = document.querySelector(
   ".character-list-container"
 );
-const characterListItems = document.querySelectorAll(".character-list li");
+let characterListItems = document.querySelectorAll(".character-list li");
+let charSelectorHead = document.querySelector(".charSelectorHead");
+let SelectorHeaderBox = "Choosing your immigrant profile...";
+charSelectorHead.innerHTML = SelectorHeaderBox;
 
 // Function to select a random character
 function selectRandomCharacter() {
@@ -19,6 +22,9 @@ function selectRandomCharacter() {
       item.classList.add("blink");
     }
   });
+
+  SelectorHeaderBox = "Press to proceed!";
+  charSelectorHead.innerHTML = SelectorHeaderBox;
 
   // Hide character list container
   characterListContainer.classList.add("hidden");
@@ -52,16 +58,14 @@ function stopBlinking() {
   });
 }
 
-// Function to open character page on enter key press
-function handleKeyPress(event) {
-  if (event.keyCode === 13) {
-    const selectedCharacterListItem = document.querySelector(
-      ".character-list li.selected"
-    );
-    const selectedCharacterName =
-      selectedCharacterListItem.querySelector("input").value;
-    window.location.href = `${selectedCharacterName}.html`;
-  }
+// Function to open character page on click
+function handleClick(event) {
+  const selectedCharacterListItem = document.querySelector(
+    ".character-list li.selected"
+  );
+  const selectedCharacterName =
+    selectedCharacterListItem.querySelector("input").value;
+  window.location.href = `${selectedCharacterName}.html`;
 }
 
 // Add event listener to character list for radio button click
@@ -81,5 +85,5 @@ setTimeout(() => {
   selectRandomCharacter();
 }, 5000);
 
-// Add event listener to document for enter key press
-document.addEventListener("keydown", handleKeyPress);
+// Add event listener to document for click
+document.addEventListener("click", handleClick);

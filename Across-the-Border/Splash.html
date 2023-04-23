@@ -18,21 +18,19 @@
     <div class="splash">
       <section id="splashanimation" class="splashlogo">
         <img
-          img src="/images/Across-the-Border-logo_01.png" alt='blinking!'/>
+          img src="../images/Across-the-Border-logo_01.png" alt='blinking!'/>
       </section>
       <div class="clear"></div>
       <section class="splashenter" id='blinking'>
-        <p>Press <span style="color: yellow">enter</span> to start</p>
+        <p><span style="color: yellow">Press to start!</span></p>
       </section>
     <script>
       function myFunction() {
         var x = document.getElementById("myAudio").autoplay;
         document.getElementById("demo").innerHTML = x;
         }
-      document.addEventListener("keydown", function (event) {
-        if (event.code === "Enter") {
+      document.addEventListener("click", function (event) {
           window.location.href = "Char-Selection.html";
-        }
       });
       var img = document.getElementById('blinking');
       var interval = window.setInterval(function(){

@@ -29,7 +29,7 @@ h1 {
 /*For Splash Page*/
 .bodySplash {
   margin: 0;
-  background-image: url("/images/Across-the-Border-logo_03.png");
+  background-image: url("../images/Across-the-Border-logo_03.png");
   background-repeat: repeat;
   background-size: 20px;
   background-position: center;
@@ -72,15 +72,16 @@ h1 {
 /*For character selector*/
 .container {
   width: 1200px;
-  margin: 0 auto;
+  margin-top: 80px;
   text-align: center;
 }
 h2 {
-  margin-top: 50px;
+  margin-top: 30px;
   font-size: 36px;
-}
-.charSelectorHeader {
-  margin-top: 100px;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  font-family: "Press Start 2P", cursive;
+  font-size: 36px;
 }
 .character input[type="radio"]:checked + label {
   border: 2px solid red;
@@ -180,8 +181,6 @@ img:hover {
 .selected {
   width: 40%;
 }
-
-/*For game page*/
 .game {
   text-align: center;
   justify-content: center;
@@ -260,35 +259,6 @@ img:hover {
   text-align: left;
   font-family: "VT323", monospace;
   font-size: 32px;
-}
-.timerAgeYear,
-.timerAgeMonth,
-.timerAgeDay,
-.timerVisa {
-  color: yellow;
-  font-weight: bold;
-  font-family: "VT323", monospace;
-  text-transform: uppercase;
-  font-size: 32px;
-}
-.timer4hidden {
-  color: yellow;
-  font-weight: bold;
-  font-family: "VT323", monospace;
-  text-transform: uppercase;
-  font-size: 32px;
-  visibility: hidden;
-}
-.timerGame {
-  display: hidden;
-}
-.table {
-  border: 2px solid white;
-  width: 100%;
-  height: 18%;
-  margin-top: 0px;
-  padding: 5px 10px;
-  text-align: left;
 }
 .table > p {
   font-family: "Press Start 2P", cursive;
@@ -377,84 +347,4 @@ img:hover {
 .gate {
   background-color: yellow;
   border: 1px solid black;
-}
-.Immigrant {
-  background-image: url("../pacWhole.png");
-  background-size: contain;
-}
-.ImmigrantUp {
-  background-image: url("../pacUp.png");
-  background-size: contain;
-}
-.ImmigrantRight {
-  background-image: url("../pacRight.png");
-  background-size: contain;
-}
-.ImmigrantDown {
-  background-image: url("../pacDown.png");
-  background-size: contain;
-}
-.ImmigrantLeft {
-  background-image: url("../pacLeft.png");
-  background-size: contain;
-}
-.wall {
-  background-image: url("../images/Wall.png");
-  background-size: contain;
-}
-.beaverOne {
-  background-image: url("../images/monsters/beavercyanhead.png");
-  background-size: auto;
-}
-.beaverTwo {
-  background-image: url("../images/monsters/beaverorangehead.png");
-  background-size: auto;
-}
-.beaverThree {
-  background-image: url("../images/monsters/beaverpinkhead.png");
-  background-size: auto;
-}
-.beaverFour {
-  background-image: url("../images/monsters/beaverkinghead.png");
-  background-size: auto;
-}
-.beaverFive {
-  background-image: url("../images/monsters/beaveroriginalhead.png");
-  background-size: auto;
-}
-.book {
-  background-image: url("../images/powerups/book.png");
-  background-size: contain;
-}
-.book2 {
-  background-image: url("../images/powerups/book2.png");
-  background-size: contain;
-}
-.paperdoc {
-  background-image: url("../images/powerups/paperdoc.png");
-  background-size: contain;
-}
-.letter1 {
-  background-image: url("../images/powerups/letter1.png");
-  background-size: contain;
-}
-.heart1 {
-  background-image: url("../images/powerups/heart1.png");
-  background-size: contain;
-}
-.heart2 {
-  background-image: url("../images/powerups/heart2.png");
-  background-size: contain;
-}
-.letter2 {
-  background-image: url("../images/powerups/letter2.png");
-  background-size: contain;
-}
-.lottery {
-  background-image: url("../images/powerups/lottery.png");
-  background-size: contain;
-}
-.badge1 {
-  background-image: url("../images/powerups/lottery.png");
-  background-size: contain;
 }
