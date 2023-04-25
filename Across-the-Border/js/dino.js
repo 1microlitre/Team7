@@ -198,14 +198,17 @@ document.addEventListener("DOMContentLoaded", () => {
   //This event listener prevents the arrow keys from scrolling
   document.addEventListener("keydown", preventDefultScroll);
   // eventlistner to start the game
-  start.addEventListener("click", () => {
-    // if it says start run the game for the first time.
-    if (start.innerHTML === "Start") {
-      startGame();
-      document.addEventListener("keydown", moveImmigrant);
-      start.innerHTML = "RUN!";
-      //infoBox.innerHTML = "TOIL TOIL TOIL!!!";
-      start.style.backgroundColor = "red";
+  document.addEventListener("keydown", (event) => {
+    if (event.keyCode === 13) {
+      // check if Enter key was pressed
+      // if it says start run the game for the first time.
+      if (start.innerHTML === "Start") {
+        startGame();
+        document.addEventListener("keydown", moveImmigrant);
+        start.innerHTML = "RUN!";
+        //infoBox.innerHTML = "TOIL TOIL TOIL!!!";
+        start.style.backgroundColor = "red";
+      }
     }
   });
 
@@ -284,7 +287,7 @@ document.addEventListener("DOMContentLoaded", () => {
     gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
     gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
     switch (e.keyCode) {
-      case 37: // left arrow
+      case 65: // left arrow
         left.classList.add("active");
         setTimeout(() => left.classList.remove("active"), 100);
         if (gridSquare[ImmigrantIndex - 1].classList.contains("wall"))
@@ -292,7 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
         else if (ImmigrantIndex % width !== 0) ImmigrantIndex -= 1;
         gridSquare[ImmigrantIndex].classList.add("ImmigrantLeft");
         break;
-      case 38: // upp arrow
+      case 87: // upp arrow
         up.classList.add("active");
         setTimeout(() => up.classList.remove("active"), 100);
         if (gridSquare[ImmigrantIndex - width].classList.contains("wall"))
@@ -300,7 +303,7 @@ document.addEventListener("DOMContentLoaded", () => {
         else if (ImmigrantIndex - width >= 0) ImmigrantIndex -= width;
         gridSquare[ImmigrantIndex].classList.add("ImmigrantUp");
         break;
-      case 39: // right arrow
+      case 68: // right arrow
         right.classList.add("active");
         setTimeout(() => right.classList.remove("active"), 100);
         if (gridSquare[ImmigrantIndex + 1].classList.contains("wall"))
@@ -308,7 +311,7 @@ document.addEventListener("DOMContentLoaded", () => {
         else if (ImmigrantIndex % width < width - 1) ImmigrantIndex += 1;
         gridSquare[ImmigrantIndex].classList.add("ImmigrantRight");
         break;
-      case 40: //down arrow
+      case 83: //down arrow
         down.classList.add("active");
         setTimeout(() => down.classList.remove("active"), 100);
         if (gridSquare[ImmigrantIndex + width].classList.contains("wall"))

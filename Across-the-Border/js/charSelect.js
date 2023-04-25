@@ -59,13 +59,24 @@ function stopBlinking() {
 }
 
 // Function to open character page on click
-function handleClick(event) {
+/*function handleClick(event) {
   const selectedCharacterListItem = document.querySelector(
     ".character-list li.selected"
   );
   const selectedCharacterName =
     selectedCharacterListItem.querySelector("input").value;
   window.location.href = `${selectedCharacterName}.html`;
+}*/
+
+function handleKeyPress(event) {
+  if (event.keyCode === 13) {
+    const selectedCharacterListItem = document.querySelector(
+      ".character-list li.selected"
+    );
+    const selectedCharacterName =
+      selectedCharacterListItem.querySelector("input").value;
+    window.location.href = `${selectedCharacterName}.html`;
+  }
 }
 
 // Add event listener to character list for radio button click
@@ -86,4 +97,5 @@ setTimeout(() => {
 }, 5000);
 
 // Add event listener to document for click
-document.addEventListener("click", handleClick);
+//document.addEventListener("click", handleClick);
+document.addEventListener("keydown", handleKeyPress);
