@@ -2,8 +2,8 @@
 Repository for Team 7 of Physical Interface
 
 Instructions:
-  W       
-A S D   to move
+
+W A S D   to move
 
 Enter   to act as a button press
 
