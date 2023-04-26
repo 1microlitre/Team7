@@ -7,13 +7,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
-    <script src="js/app.js" charset="utf-8"></script>
   </head>
   <body class="bodySplash">
-    <div id="player">
-      <audio controls autoplay hidden>
-       <source src="canadatheme.wav" type="audio/mpeg"> unsupported !! 
-      </audio>
+    <div>
+      <audio id="player" autoplay src="canadatheme.mp3" type="audio/mp3"></audio>
     </div>
     <div class="splash">
       <section id="splashanimation" class="splashlogo">
@@ -25,23 +22,31 @@
         <p><span style="color: yellow">Press to start!</span></p>
       </section>
     <script>
-      function myFunction() {
-        var x = document.getElementById("myAudio").autoplay;
-        document.getElementById("demo").innerHTML = x;
-        }
-        document.addEventListener("keydown", function (event) {
+       function playAudio() {
+        var audio = document.getElementById("player");
+        audio.play();
+      }
+      function stopAudio() {
+        var audio = document.getElementById("player");
+        audio.pause();
+      }
+      document.addEventListener("keydown", function (event) {
         if (event.keyCode === 13) {
           window.location.href = "Char-Selection.html";
         }
       });
       var img = document.getElementById('blinking');
       var interval = window.setInterval(function(){
-          if(img.style.visibility == 'hidden'){
-            img.style.visibility = 'visible';
-          }else{
-            img.style.visibility = 'hidden';
-          }
-          }, 500);
+        if(img.style.visibility == 'hidden'){
+          img.style.visibility = 'visible';
+        } else {
+          img.style.visibility = 'hidden';
+        }
+      }, 500);
+      playAudio();
+      window.addEventListener("beforeunload", function(event) {
+        stopAudio();
+      });
     </script>
   </body>
 </html>
