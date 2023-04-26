@@ -9,9 +9,9 @@ const directions = [-1, -width, 1, width];
 // Immigrant position
 let ImmigrantIndex = 250;
 // players points
-let scoreNumber = 450;
+let scoreNumber = 156;
 // scoreTargetpoints
-let scoreTarget = 156;
+let scoreTarget = 450;
 // The time played
 let timeAgeYear = 19;
 let timeAgeMonth = 1;
@@ -794,7 +794,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ImmigrantCaughtOriginal(beaverFive);
   }, 30);
 
-  // KARLO: Counts up the Year in Age, affects score by change in year. Don't change the values because they reflect permanent residency computations for age.
+  // Counts up the Year in Age, affects score by change in year. Don't change the values because they reflect permanent residency computations for age.
   function CountUpAgeYear() {
     boxInfo = "YOU GOT OLDER!";
     infoBox.innerHTML = boxInfo;
@@ -807,7 +807,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // KARLO: Counts up the time for the Days (which affects Months) in Age, resets its everytime it reaches 12.
+  // Counts up the time for the Days (which affects Months) in Age, resets its everytime it reaches 12.
   function CountUpAgeDay() {
     timeAgeDay = timeAgeDay;
     timerAgeDay.innerHTML = timeAgeDay;
@@ -828,7 +828,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // KARLO: Timer for powerup appearance.
+  // Timer for powerup appearance.
   function CountDownGame() {
     timeGame = timeGame - 1;
     //console.log(timeGame);
@@ -878,8 +878,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (timeGame == 8) {
       gridSquare[170].classList.add("gate");
     }
-    // KARLO: specifically for visa expiration.
+
+    // Specifically for visa expiration and game ending.
     if (timeGame == 30) {
+      console.log(timeGame);
       timeVisa = timeVisa;
       timerVisa.innerHTML = 30;
       let CountDownVisaId;
@@ -926,7 +928,7 @@ document.addEventListener("DOMContentLoaded", () => {
               gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
               gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
               setTimeout(function () {
-                window.location.href = "Splash.html";
+                window.location.href = "index.html";
               }, 10000);
             } else if (
               scoreNumber < scoreTarget &&
@@ -938,10 +940,9 @@ document.addEventListener("DOMContentLoaded", () => {
               infoBox2.innerHTML = boxInfo2;
             }
           }
-        } else if (timeVisa == 0) {
+        }
+        if (timeVisa == 0) {
           clearInterval(CountDownVisaId);
-          timeVisa = 0;
-          timerVisa.innerHTML = timeVisa;
           scoreNumber = scoreNumber;
           timeAgeYear = 0;
           clearInterval(ImmigrantSoundId);
@@ -954,51 +955,52 @@ document.addEventListener("DOMContentLoaded", () => {
           clearInterval(CountUpAgeDayId);
           clearInterval(CountDownGameId);
           clearInterval(CountDownVisaId);
-          ImmigrantIndex = null;
-          gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
-          gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
-          gridSquare[beaverThree.beaverIndex].classList.remove("beaverThree");
-          gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
-          gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
-          if (timeVisa == 0) {
-            timeVisa = timeVisa;
-            timerVisa.innerHTML = timeVisa;
-            if (
-              !gridSquare[ImmigrantIndex].classList.contains("gate") ||
-              (gridSquare[ImmigrantIndex].classList.contains("gate") &&
-                scoreNumber < scoreTarget)
-            ) {
-              loseAudio.play();
-              boxInfo = "YOU DON'T DESERVE CANADA!";
-              infoBox.innerHTML = boxInfo;
-              boxInfo2 = "STAY IN YOUR COUNTRY LOSER!";
-              infoBox2.innerHTML = boxInfo2;
-              document.body.style.background = "url('images/denied.png')";
-              setTimeout(function () {
-                window.location.href = "Splash.html";
-              }, 10000);
-            } else if (
-              gridSquare[ImmigrantIndex].classList.contains("gate") &&
-              scoreNumber >= scoreTarget
-            ) {
-              winAudio.play();
-              boxInfo = "YOU GET TO LIVE IN CANADA!";
-              infoBox.innerHTML = boxInfo;
-              boxInfo2 = "CONGRATULATIONS!";
-              infoBox2.innerHTML = boxInfo2;
-              document.body.style.background = "url('images/Canada.gif')";
-              setTimeout(function () {
-                window.location.href = "SplashPage.html";
-              }, 10000);
-            }
-          }
         }
-        if (timeGame == 0) {
-          CountDownGameId = CountDownGameId;
-          clearInterval(CountDownGameId);
-          timeGame = 0;
-          timerGame.innerHTML = timeGame;
-          console.log(timeGame);
+      }
+    }
+
+    if (timeGame == 0) {
+      CountDownGameId = CountDownGameId;
+      clearInterval(CountDownGameId);
+      timeGame = 0;
+      timerGame.innerHTML = timeGame;
+      timeVisa = timeVisa;
+      timerVisa.innerHTML = timeVisa;
+      let CountDownVisaId;
+      CountDownVisaId = setInterval(CountDownVisa, 1000);
+      function CountDownVisa() {
+        console.log(timeGame);
+        if (timeVisa == 0) {
+          timeVisa = 0;
+          timerVisa.innerHTML = timeVisa;
+          if (
+            !gridSquare[ImmigrantIndex].classList.contains("gate") ||
+            (gridSquare[ImmigrantIndex].classList.contains("gate") &&
+              scoreNumber >= scoreTarget)
+          ) {
+            loseAudio.play();
+            boxInfo = "YOU DON'T DESERVE CANADA!";
+            infoBox.innerHTML = boxInfo;
+            boxInfo2 = "STAY IN YOUR COUNTRY LOSER!";
+            infoBox2.innerHTML = boxInfo2;
+            document.body.style.background = "url('images/denied.png')";
+            setTimeout(function () {
+              window.location.href = "index.html";
+            }, 10000);
+          } else if (
+            gridSquare[ImmigrantIndex].classList.contains("gate") &&
+            scoreNumber >= scoreTarget
+          ) {
+            winAudio.play();
+            boxInfo = "YOU GET TO LIVE IN CANADA!";
+            infoBox.innerHTML = boxInfo;
+            boxInfo2 = "CONGRATULATIONS!";
+            infoBox2.innerHTML = boxInfo2;
+            document.body.style.background = "url('images/Canada.gif')";
+            setTimeout(function () {
+              window.location.href = "index.html";
+            }, 10000);
+          }
         }
       }
     }
