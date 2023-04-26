@@ -9,6 +9,8 @@ Enter   to act as a button press
 
 note that this game was designed for arcade joystick + button
 
+a character will be randomly assigned to you
+
 collect power-ups (outlined in yellow) while running away from the monsters (outlined in red)
 
 colleting power-ups will grant you points
