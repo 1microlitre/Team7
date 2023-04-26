@@ -21,4 +21,5 @@ after a specific amount of time has passed, a gate will appear
 get to the gate...
 1. before the visa expires
 2. with points higher than requirement
+
 failing to meet any of the following requirements will result in rejection to Canada
