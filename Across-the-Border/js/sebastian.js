@@ -974,10 +974,19 @@ document.addEventListener("DOMContentLoaded", () => {
           timeVisa = 0;
           timerVisa.innerHTML = timeVisa;
           if (
-            !gridSquare[ImmigrantIndex].classList.contains("gate") ||
-            (gridSquare[ImmigrantIndex].classList.contains("gate") &&
-              scoreNumber >= scoreTarget)
+            gridSquare[ImmigrantIndex].classList.contains("gate") &&
+            scoreNumber >= scoreTarget
           ) {
+            loseAudio.play();
+            boxInfo = "YOU DON'T DESERVE CANADA!";
+            infoBox.innerHTML = boxInfo;
+            boxInfo2 = "STAY IN YOUR COUNTRY LOSER!";
+            infoBox2.innerHTML = boxInfo2;
+            document.body.style.background = "url('images/denied.png')";
+            setTimeout(function () {
+              window.location.href = "index.html";
+            }, 10000);
+          } else if (!gridSquare[ImmigrantIndex].classList.contains("gate")) {
             loseAudio.play();
             boxInfo = "YOU DON'T DESERVE CANADA!";
             infoBox.innerHTML = boxInfo;
