@@ -29,11 +29,13 @@ h1 {
 /*For Splash Page*/
 .bodySplash {
   margin: 0;
-  background-image: url("../images/Across-the-Border-logo_03.png");
+  background-image: url("../images/Across-the-Border-BG.png");
+  background-size: 100%;
+  /*background-image: url("../images/Across-the-Border-logo_03.png");
   background-repeat: repeat;
   background-size: 20px;
   background-position: center;
-  background-color: red;
+  background-color: red;*/
 }
 .splash {
   text-align: center;
@@ -54,7 +56,7 @@ h1 {
   width: 40%;
   height: 25%;
   padding: 10px;
-  border: 2px solid white;
+  border: 5px solid yellow;
   background-color: red;
   margin: 0% 30%;
 }
@@ -70,6 +72,14 @@ h1 {
 }
 
 /*For character selector*/
+.bodychar {
+  margin: 0;
+  background-image: url("../images/Across-the-Border-logo_03.png");
+  background-repeat: repeat;
+  background-size: 20px;
+  background-position: center;
+  background-color: red;
+}
 .container {
   width: 1200px;
   margin-top: 80px;
@@ -79,7 +89,7 @@ h2 {
   margin-top: 30px;
   font-size: 36px;
   text-align: center;
-  color: rgb(255, 255, 255);
+  color: yellow;
   font-family: "Press Start 2P", cursive;
   font-size: 36px;
 }
@@ -102,7 +112,7 @@ h2 {
 .character-list > li {
   width: 30%;
   height: 230px;
-  border: white 1px solid;
+  border: yellow 5px solid;
   background-color: white;
   padding: 10px;
 }

@@ -23,7 +23,7 @@ function selectRandomCharacter() {
     }
   });
 
-  SelectorHeaderBox = "Press to proceed!";
+  SelectorHeaderBox = "Press button to proceed!";
   charSelectorHead.innerHTML = SelectorHeaderBox;
 
   // Hide character list container
