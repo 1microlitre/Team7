@@ -798,6 +798,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function CountUpAgeYear() {
     boxInfo = "YOU GOT OLDER!";
     infoBox.innerHTML = boxInfo;
+    boxInfo2 = "YOUR CANADA DREAM'S RUNNING OUT OF TIME!";
+    infoBox2.innerHTML = boxInfo2;
     if (timeAgeYear < 28) {
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
@@ -810,12 +812,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // Counts up the time for the Days (which affects Months) in Age, resets its everytime it reaches 12.
   function CountUpAgeDay() {
     timeAgeDay = timeAgeDay;
+    console.log(timeAgeDay);
     timerAgeDay.innerHTML = timeAgeDay;
     if (timeAgeDay == 15) {
+      //timeAgeDay = timeAgeDay;
       timeAgeDay = timeAgeDay + 15;
       timerAgeDay.innerHTML = timeAgeDay;
     } else if (timeAgeDay == 30) {
       timeAgeDay = 15;
+      timerAgeDay.innerHTML = timeAgeDay;
       if (timeAgeMonth < 12) {
         timeAgeMonth = timeAgeMonth + 1;
         timerAgeMonth.innerHTML = timeAgeMonth;
@@ -915,10 +920,10 @@ document.addEventListener("DOMContentLoaded", () => {
               clearInterval(CountUpAgeDayId);
               clearInterval(CountDownGameId);
               clearInterval(CountDownVisaId);
-              //gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
-              //gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
-              //gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
-              //gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
               ImmigrantIndex = null;
               gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
               gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
@@ -973,33 +978,119 @@ document.addEventListener("DOMContentLoaded", () => {
         if (timeVisa == 0) {
           timeVisa = 0;
           timerVisa.innerHTML = timeVisa;
-          if (
-            !gridSquare[ImmigrantIndex].classList.contains("gate") ||
-            (gridSquare[ImmigrantIndex].classList.contains("gate") &&
-              scoreNumber >= scoreTarget)
-          ) {
-            loseAudio.play();
-            boxInfo = "YOU DON'T DESERVE CANADA!";
-            infoBox.innerHTML = boxInfo;
-            boxInfo2 = "STAY IN YOUR COUNTRY LOSER!";
-            infoBox2.innerHTML = boxInfo2;
-            document.body.style.background = "url('images/denied.png')";
-            setTimeout(function () {
-              window.location.href = "index.html";
-            }, 10000);
-          } else if (
-            gridSquare[ImmigrantIndex].classList.contains("gate") &&
-            scoreNumber >= scoreTarget
-          ) {
-            winAudio.play();
-            boxInfo = "YOU GET TO LIVE IN CANADA!";
-            infoBox.innerHTML = boxInfo;
-            boxInfo2 = "CONGRATULATIONS!";
-            infoBox2.innerHTML = boxInfo2;
-            document.body.style.background = "url('images/Canada.gif')";
-            setTimeout(function () {
-              window.location.href = "index.html";
-            }, 10000);
+          if (gridSquare[170].classList.contains("gate")) {
+            if (
+              scoreNumber < scoreTarget &&
+              gridSquare[ImmigrantIndex].classList.contains("gate")
+            ) {
+              loseAudio.play();
+              boxInfo = "YOU DON'T DESERVE CANADA!";
+              infoBox.innerHTML = boxInfo;
+              boxInfo2 = "STAY IN YOUR COUNTRY LOSER!";
+              infoBox2.innerHTML = boxInfo2;
+              document.body.style.background = "url('images/denied.png')";
+              setTimeout(function () {
+                window.location.href = "index.html";
+              }, 10000);
+              clearInterval(CountDownVisaId);
+              scoreNumber = scoreNumber;
+              timeAgeYear = 0;
+              clearInterval(ImmigrantSoundId);
+              clearInterval(beaverMoveIdOne);
+              clearInterval(beaverMoveIdTwo);
+              clearInterval(beaverMoveIdThree);
+              clearInterval(beaverMoveIdFour);
+              clearInterval(beaverMoveIdFive);
+              clearInterval(CountUpAgeYearId);
+              clearInterval(CountUpAgeDayId);
+              clearInterval(CountDownGameId);
+              clearInterval(CountDownVisaId);
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
+              ImmigrantIndex = null;
+              gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
+              gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
+              gridSquare[beaverThree.beaverIndex].classList.remove(
+                "beaverThree"
+              );
+              gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
+              gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
+            } else if (!gridSquare[ImmigrantIndex].classList.contains("gate")) {
+              loseAudio.play();
+              boxInfo = "YOU DON'T DESERVE CANADA!";
+              infoBox.innerHTML = boxInfo;
+              boxInfo2 = "STAY IN YOUR COUNTRY LOSER!";
+              infoBox2.innerHTML = boxInfo2;
+              document.body.style.background = "url('images/denied.png')";
+              setTimeout(function () {
+                window.location.href = "index.html";
+              }, 10000);
+              clearInterval(CountDownVisaId);
+              scoreNumber = scoreNumber;
+              timeAgeYear = 0;
+              clearInterval(ImmigrantSoundId);
+              clearInterval(beaverMoveIdOne);
+              clearInterval(beaverMoveIdTwo);
+              clearInterval(beaverMoveIdThree);
+              clearInterval(beaverMoveIdFour);
+              clearInterval(beaverMoveIdFive);
+              clearInterval(CountUpAgeYearId);
+              clearInterval(CountUpAgeDayId);
+              clearInterval(CountDownGameId);
+              clearInterval(CountDownVisaId);
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
+              ImmigrantIndex = null;
+              gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
+              gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
+              gridSquare[beaverThree.beaverIndex].classList.remove(
+                "beaverThree"
+              );
+              gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
+              gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
+            } else if (
+              gridSquare[ImmigrantIndex].classList.contains("gate") &&
+              scoreNumber >= scoreTarget
+            ) {
+              winAudio.play();
+              boxInfo = "YOU GET TO LIVE IN CANADA!";
+              infoBox.innerHTML = boxInfo;
+              boxInfo2 = "CONGRATULATIONS!";
+              infoBox2.innerHTML = boxInfo2;
+              document.body.style.background = "url('images/Canada.gif')";
+              setTimeout(function () {
+                window.location.href = "index.html";
+              }, 10000);
+              clearInterval(CountDownVisaId);
+              scoreNumber = scoreNumber;
+              timeAgeYear = 0;
+              clearInterval(ImmigrantSoundId);
+              clearInterval(beaverMoveIdOne);
+              clearInterval(beaverMoveIdTwo);
+              clearInterval(beaverMoveIdThree);
+              clearInterval(beaverMoveIdFour);
+              clearInterval(beaverMoveIdFive);
+              clearInterval(CountUpAgeYearId);
+              clearInterval(CountUpAgeDayId);
+              clearInterval(CountDownGameId);
+              clearInterval(CountDownVisaId);
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
+              gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
+              ImmigrantIndex = null;
+              gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
+              gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
+              gridSquare[beaverThree.beaverIndex].classList.remove(
+                "beaverThree"
+              );
+              gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
+              gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
+            }
           }
         }
       }
