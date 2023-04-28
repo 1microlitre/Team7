@@ -97,7 +97,7 @@ h2 {
   border: 2px solid red;
 }
 .blink {
-  animation: blink 0.5s linear infinite;
+  animation: blink 1s linear infinite;
 }
 @keyframes blink {
   5% {
