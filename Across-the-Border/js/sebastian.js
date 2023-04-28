@@ -373,7 +373,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber + 40;
       score.innerHTML = scoreNumber;
       boxInfo = "+40: Canadian job offer!";
-      boxInfo2 = "A Canadian employer now believes in you!";
+      boxInfo2 = "Someone in Canada now believes in you!";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
       immune = true;
@@ -388,7 +388,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
       boxInfo = "+10: Partner's Canadian job offer!";
-      boxInfo2 = "Your partner's Canadian employer believes in them too!";
+      boxInfo2 = "Someone in Canada now believes in your partner!";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
       immune = true;
@@ -797,7 +797,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function CountUpAgeYear() {
     boxInfo = "BIRTHDAY!";
     infoBox.innerHTML = boxInfo;
-    boxBanner = "YOU'RE RUNNING OUT OF TIME!";
+    boxBanner = "TIME IS TICKING!";
     infoBanner.innerHTML = boxBanner;
     boxInfo2 = "YOU GOT OLDER!";
     infoBox2.innerHTML = boxInfo2;
@@ -1041,7 +1041,7 @@ document.addEventListener("DOMContentLoaded", () => {
               gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
               setTimeout(function () {
                 booAudio.play();
-              }, 2000);
+              }, 1500);
             } else if (!gridSquare[ImmigrantIndex].classList.contains("gate")) {
               loseAudio.play();
               boxInfo = "RESIDENCY APPLICATION REJECTED!";
@@ -1083,7 +1083,7 @@ document.addEventListener("DOMContentLoaded", () => {
               gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
               setTimeout(function () {
                 booAudio.play();
-              }, 2000);
+              }, 1500);
             } else if (
               gridSquare[ImmigrantIndex].classList.contains("gate") &&
               scoreNumber >= scoreTarget
