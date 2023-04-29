@@ -235,19 +235,19 @@ h1 {
   background-size: contain;
 }
 .ImmigrantUp {
-  background-image: url("../images/characters/male/aileenbackhead.png");
+  background-image: url("../images/characters/female/aileenbackhead.png");
   background-size: contain;
 }
 .ImmigrantRight {
-  background-image: url("../images/characters/male/aileenrighthead.png");
+  background-image: url("../images/characters/female/aileenrighthead.png");
   background-size: contain;
 }
 .ImmigrantDown {
-  background-image: url("../images/characters/male/aileenheadlarge.png");
+  background-image: url("../images/characters/female/aileenheadlarge.png");
   background-size: contain;
 }
 .ImmigrantLeft {
-  background-image: url("../images/characters/male/aileenlefthead.png");
+  background-image: url("../images/characters/female/aileenlefthead.png");
   background-size: contain;
 }
 .wall {

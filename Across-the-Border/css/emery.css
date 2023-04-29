@@ -231,23 +231,23 @@ h1 {
   border-radius: 15px 15px 0 0;
 }
 .Immigrant {
-  background-image: url("../images/characters/male/emeryheadlarge.png");
+  background-image: url("../images/characters/female/emeryheadlarge.png");
   background-size: contain;
 }
 .ImmigrantUp {
-  background-image: url("../images/characters/male/emerybackhead.png");
+  background-image: url("../images/characters/female/emerybackhead.png");
   background-size: contain;
 }
 .ImmigrantRight {
-  background-image: url("../images/characters/male/emeryrighthead.png");
+  background-image: url("../images/characters/female/emeryrighthead.png");
   background-size: contain;
 }
 .ImmigrantDown {
-  background-image: url("../images/characters/male/emeryheadlarge.png");
+  background-image: url("../images/characters/female/emeryheadlarge.png");
   background-size: contain;
 }
 .ImmigrantLeft {
-  background-image: url("../images/characters/male/emerylefthead.png");
+  background-image: url("../images/characters/female/emerylefthead.png");
   background-size: contain;
 }
 .wall {
