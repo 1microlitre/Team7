@@ -21,7 +21,7 @@
       </section>
       <div class="clear"></div>
       <section class="splashenter" id='blinking'>
-        <p><span style="color: yellow">Press to start!</span></p>
+        <p>Press to start!</p>
       </section>
     <script>
        function playAudio() {
@@ -44,7 +44,7 @@
         } else {
           img.style.visibility = 'hidden';
         }
-      }, 500);
+      }, 200);
       playAudio();
       window.addEventListener("beforeunload", function(event) {
         stopAudio();

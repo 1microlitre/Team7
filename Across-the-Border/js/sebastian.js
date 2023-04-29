@@ -445,7 +445,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (gridSquare[ImmigrantIndex].classList.contains("lottery")) {
       gridSquare[ImmigrantIndex].classList.remove("lottery");
       powerUpSound();
-      scoreTarget = 75; //scoreTarget - 1925;
+      scoreTarget = 75;
       targetScore.innerHTML = scoreTarget;
       boxInfo = "Historic CRS Low!";
       boxInfo2 = "Lucky you!";
@@ -1010,7 +1010,9 @@ document.addEventListener("DOMContentLoaded", () => {
               infoBanner.innerHTML = boxBanner;
               boxInfo2 = "YOU DON'T DESERVE CANADA!";
               infoBox2.innerHTML = boxInfo2;
-              document.body.style.background = "url('images/denied.png')";
+              document.body.style.background =
+                "url('images/denied.gif') repeat left top";
+              document.body.style.backgroundColor = "black";
               setTimeout(function () {
                 window.location.href = "index.html";
               }, 10000);
@@ -1050,7 +1052,9 @@ document.addEventListener("DOMContentLoaded", () => {
               infoBanner.innerHTML = boxBanner;
               boxInfo2 = "YOU DON'T DESERVE CANADA!";
               infoBox2.innerHTML = boxInfo2;
-              document.body.style.background = "url('images/denied.png')";
+              document.body.style.background =
+                "url('images/Denied.gif') repeat left top";
+              document.body.style.backgroundColor = "black";
               setTimeout(function () {
                 window.location.href = "index.html";
               }, 10000);

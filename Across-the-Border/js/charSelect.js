@@ -19,7 +19,7 @@ function selectRandomCharacter() {
   // Remove 'blink' class from all other li elements
   characterListItems.forEach((item) => {
     if (item !== selectedCharacterListItem) {
-      item.classList.add("blink");
+      item.classList.add("faint");
     }
   });
 
