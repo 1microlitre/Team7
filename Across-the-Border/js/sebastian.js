@@ -1062,7 +1062,7 @@ document.addEventListener("DOMContentLoaded", () => {
               gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
               setTimeout(function () {
                 booAudio.play();
-              }, 1500);
+              }, 1000);
             } else if (!gridSquare[ImmigrantIndex].classList.contains("gate")) {
               loseAudio.play();
               boxInfo = "RESIDENCY APPLICATION REJECTED!";
@@ -1106,7 +1106,7 @@ document.addEventListener("DOMContentLoaded", () => {
               gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
               setTimeout(function () {
                 booAudio.play();
-              }, 1500);
+              }, 1000);
             } else if (
               gridSquare[ImmigrantIndex].classList.contains("gate") &&
               scoreNumber >= scoreTarget
@@ -1151,6 +1151,48 @@ document.addEventListener("DOMContentLoaded", () => {
                 cheerAudio.play();
               }, 2000);
             }
+          } else if (!gridSquare[170].classList.contains("gate")) {
+            loseAudio.play();
+            boxInfo = "RESIDENCY APPLICATION REJECTED!";
+            infoBox.innerHTML = boxInfo;
+            boxBanner = "STAY IN YOUR COUNTRY LOSER!";
+            infoBanner.innerHTML = boxBanner;
+            boxInfo2 = "YOU DON'T DESERVE CANADA!";
+            infoBox2.innerHTML = boxInfo2;
+            document.body.style.background =
+              "url('images/Denied.gif') repeat left top";
+            document.body.style.backgroundColor = "black";
+            setTimeout(function () {
+              window.location.href = "index.html";
+            }, 10000);
+            clearInterval(CountDownVisaId);
+            scoreNumber = scoreNumber;
+            timeAgeYear = 0;
+            clearInterval(ImmigrantSoundId);
+            clearInterval(beaverMoveIdOne);
+            clearInterval(beaverMoveIdTwo);
+            clearInterval(beaverMoveIdThree);
+            clearInterval(beaverMoveIdFour);
+            clearInterval(beaverMoveIdFive);
+            clearInterval(CountUpAgeYearId);
+            clearInterval(CountUpAgeDayId);
+            clearInterval(CountDownGameId);
+            clearInterval(CountDownVisaId);
+            gridSquare[ImmigrantIndex].classList.remove("ImmigrantUp");
+            gridSquare[ImmigrantIndex].classList.remove("ImmigrantRight");
+            gridSquare[ImmigrantIndex].classList.remove("ImmigrantDown");
+            gridSquare[ImmigrantIndex].classList.remove("ImmigrantLeft");
+            ImmigrantIndex = null;
+            gridSquare[beaverOne.beaverIndex].classList.remove("beaverOne");
+            gridSquare[beaverTwo.beaverIndex].classList.remove("beaverTwo");
+            gridSquare[beaverThree.beaverIndex].classList.remove("beaverThree");
+            gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
+            gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
+            gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
+            gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
+            setTimeout(function () {
+              booAudio.play();
+            }, 1000);
           }
         }
       }
