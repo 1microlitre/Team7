@@ -334,7 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
       powerUpSound();
       scoreNumber = scoreNumber + 30;
       score.innerHTML = scoreNumber;
-      boxInfo = "+30 : Canadian degree!";
+      boxInfo = "+30: Canadian degree!";
       boxInfo2 = "You're now smart enough by Canadian standards.";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
@@ -364,7 +364,7 @@ document.addEventListener("DOMContentLoaded", () => {
       powerUpSound();
       scoreNumber = scoreNumber + 40;
       score.innerHTML = scoreNumber;
-      boxInfo = "+40: Canadian job experience!";
+      boxInfo = "+40: Canadian work experience!";
       boxInfo2 = "You're not useless in Canada!";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
@@ -379,7 +379,7 @@ document.addEventListener("DOMContentLoaded", () => {
       powerUpSound();
       scoreNumber = scoreNumber + 40;
       score.innerHTML = scoreNumber;
-      boxInfo = "+40: Canadian job offer!";
+      boxInfo = "+40: CAN job offer!";
       boxInfo2 = "You're dependable in Canada!";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
@@ -394,7 +394,7 @@ document.addEventListener("DOMContentLoaded", () => {
       powerUpSound();
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
-      boxInfo = "+10: Partner's Canadian job offer!";
+      boxInfo = "+10: Partner's CAN job offer!";
       boxInfo2 = "Your partner's dependable in Canada!";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
@@ -409,7 +409,7 @@ document.addEventListener("DOMContentLoaded", () => {
       powerUpSound();
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
-      boxInfo = "+10 : Partner's added experience!";
+      boxInfo = "+10: Partner's added experience!";
       boxInfo2 = "Your partner's more dependable now!";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
@@ -424,7 +424,7 @@ document.addEventListener("DOMContentLoaded", () => {
       powerUpSound();
       scoreNumber = scoreNumber + 600;
       score.innerHTML = scoreNumber;
-      boxInfo = "+600 : Nominated by province!";
+      boxInfo = "+600: Nominated by province!";
       boxInfo2 = "1/13 of Canada wants you!";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
@@ -439,7 +439,7 @@ document.addEventListener("DOMContentLoaded", () => {
       powerUpSound();
       scoreNumber = scoreNumber + 200;
       score.innerHTML = scoreNumber;
-      boxInfo = "+200 : LMIA by your Employer!";
+      boxInfo = "+200: LMIA by your Employer!";
       boxInfo2 = "Someone finds you one of a kind!";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
@@ -713,7 +713,7 @@ document.addEventListener("DOMContentLoaded", () => {
         scoreNumber = scoreNumber - 40;
         score.innerHTML = scoreNumber;
         console.log("hit by one");
-        boxInfo = "-40 : Got fired!";
+        boxInfo = "-40: Work exp rejected!";
         boxInfo2 = "You're worthless in Canada!";
         infoBox.innerHTML = boxInfo;
         infoBox2.innerHTML = boxInfo2;
@@ -729,9 +729,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!immune) {
         hitSound();
         console.log("hit by 2");
-        scoreNumber = scoreNumber - 60;
+        scoreNumber = scoreNumber - 30;
         score.innerHTML = scoreNumber;
-        boxInfo = "-60 : Education rejected!";
+        boxInfo = "-30: Academic cred rejected!";
         boxInfo2 = "You're not smart enough in Canada!";
         infoBox.innerHTML = boxInfo;
         infoBox2.innerHTML = boxInfo2;
@@ -749,7 +749,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("hit by 3");
         scoreNumber = scoreNumber - 10;
         score.innerHTML = scoreNumber;
-        boxInfo = "-10 : Partner fired!";
+        boxInfo = "-10: Partner's exp rejected!";
         boxInfo2 = "Your partner's worthless in Canada!";
         infoBox.innerHTML = boxInfo;
         infoBox2.innerHTML = boxInfo2;
@@ -767,7 +767,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("hit by 4");
         scoreNumber = scoreNumber - 450;
         score.innerHTML = scoreNumber;
-        boxInfo = "-450 : Life's unexpected turn!";
+        boxInfo = "-450: Unforeseen event!";
         boxInfo2 = "Life doesn't want you in Canada!";
         infoBox.innerHTML = boxInfo;
         infoBox2.innerHTML = boxInfo2;
@@ -785,8 +785,8 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("hit by 5");
         scoreNumber = scoreNumber - 15;
         score.innerHTML = scoreNumber;
-        infoBox2.innerHTML = "-15 : Irrelevant job experience!";
-        boxInfo2 = "You're useless in Canada!";
+        infoBox2.innerHTML = "-15: Language exam failure!";
+        boxInfo2 = "You can't be understood in Canada!";
         infoBox.innerHTML = boxInfo;
         infoBox2.innerHTML = boxInfo2;
         immune = true;
