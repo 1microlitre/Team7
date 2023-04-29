@@ -41,6 +41,7 @@ const winAudio = new Audio("Immigrant_win.wav");
 const loseAudio = new Audio("Immigrant_loss.wav");
 const cheerAudio = new Audio("Immigrant_cheer.mp3");
 const booAudio = new Audio("Immigrant_boo.mp3");
+const startAudio = new Audio("canadatheme.mp3");
 function ImmigrantSound() {
   const chomp = new Audio("Immigrant_chomp.mp3");
   chomp.play();
@@ -173,6 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
     div.classList.add("gridSquare");
     grid.appendChild(div);
   }
+  startAudio.play();
 
   // Acessing the DOM
   const gridSquare = document.querySelectorAll(".gridSquare");
@@ -206,6 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
         //infoBox.innerHTML = "TOIL TOIL TOIL!!!";
         start.style.backgroundColor = "red";
       }
+      startAudio.pause();
     }
   });
 
