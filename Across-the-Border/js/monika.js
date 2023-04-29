@@ -943,7 +943,9 @@ document.addEventListener("DOMContentLoaded", () => {
               infoBanner.innerHTML = boxBanner;
               boxInfo2 = "CONGRATULATIONS!";
               infoBox2.innerHTML = boxInfo2;
-              document.body.style.background = "url('images/Canada.gif')";
+              document.body.style.background =
+                "url('images/Approved.gif') repeat left top";
+              document.body.style.backgroundColor = "red')";
               setTimeout(function () {
                 cheerAudio.play();
               }, 2000);
@@ -1118,7 +1120,9 @@ document.addEventListener("DOMContentLoaded", () => {
               infoBanner.innerHTML = boxBanner;
               boxInfo2 = "CONGRATULATIONS!";
               infoBox2.innerHTML = boxInfo2;
-              document.body.style.background = "url('images/Canada.gif')";
+              document.body.style.background =
+                "url('images/Approved.gif') repeat left top";
+              document.body.style.backgroundColor = "red";
               setTimeout(function () {
                 window.location.href = "index.html";
               }, 10000);
