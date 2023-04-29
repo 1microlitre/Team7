@@ -25,11 +25,11 @@
       </section>
     <script>
        function playAudio() {
-        var audio = document.getElementById("player");
+        let audio = document.getElementById("player");
         audio.play();
       }
       function stopAudio() {
-        var audio = document.getElementById("player");
+        let audio = document.getElementById("player");
         audio.pause();
       }
       document.addEventListener("keydown", function (event) {
@@ -37,8 +37,8 @@
           window.location.href = "Char-Selection.html";
         }
       });
-      var img = document.getElementById('blinking');
-      var interval = window.setInterval(function(){
+      let img = document.getElementById('blinking');
+      let interval = window.setInterval(function(){
         if(img.style.visibility == 'hidden'){
           img.style.visibility = 'visible';
         } else {
