@@ -3,6 +3,10 @@
 }
 body {
   margin: 0;
+  background-image: url("../images/Across-the-Border-logo_03.png");
+  background-repeat: repeat;
+  background-size: 20px;
+  background-position: center;
   background-color: red;
 }
 .container {
@@ -10,11 +14,23 @@ body {
   margin: 0 auto;
 }
 h1 {
+  font-family: "Press Start 2P", cursive;
+  animation: blink-text 0.5s linear infinite;
+  font-size: 32px;
+  color: yellow;
   text-align: center;
   margin-top: 30px;
-  color: rgb(255, 255, 255);
-  font-family: "Press Start 2P", cursive;
-  font-size: 36px;
+}
+@keyframes blink-text {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 .game {
   text-align: center;
@@ -41,23 +57,10 @@ h1 {
   justify-content: flex-end;
   width: 35%;
 }
-.infoBox {
-  color: white;
-  font-family: "VT323", monospace;
-  font-size: 30px;
-  font-weight: bold;
-  text-align: left;
-  text-transform: uppercase;
-  height: 8%;
-  width: 100%;
-  padding: 10px auto;
-}
-.infoBox2 {
+.infoContainer {
   border-top: 2px solid white;
-  color: yellow;
+  color: white;
   display: block;
-  font-family: "VT323", monospace;
-  font-size: 32px;
   margin-top: 0;
   width: 100%;
   align-content: left;
@@ -66,18 +69,30 @@ h1 {
   padding: 5px 0px;
   text-align: left;
   text-transform: uppercase;
+  font-family: "VT323", monospace;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: left;
+  text-transform: uppercase;
+}
+.infoBox,
+.infoBox2 {
+  color: yellow;
+  height: 8%;
+  width: 100%;
+  padding-bottom: 20px;
 }
 .start {
-  color: white;
+  display: none;
+  /*color: white;
   font-family: "Press Start 2P", cursive;
-  font-size: 20px;
-  /*height: 20%;*/
-  padding: 20px;
+  font-size: 12px;
+  padding: 20px 10px;
   margin: 20px 0 20px;
   width: 100%;
   background-color: red;
   box-shadow: 5px 5px 0 white;
-  border-color: white;
+  border-color: yellow;*/
 }
 .start:active {
   top: 5px;
@@ -93,7 +108,7 @@ h1 {
   line-height: 15px;
   text-align: left;
   font-family: "VT323", monospace;
-  font-size: 32px;
+  font-size: 30px;
 }
 .timerAgeYear,
 .timerAgeMonth,
@@ -103,7 +118,7 @@ h1 {
   font-weight: bold;
   font-family: "VT323", monospace;
   text-transform: uppercase;
-  font-size: 32px;
+  font-size: 30px;
 }
 .timer4hidden {
   color: yellow;
@@ -117,9 +132,10 @@ h1 {
   display: hidden;
 }
 .table {
-  border: 2px solid white;
+  border: 5px solid yellow;
+  background: red;
   width: 100%;
-  height: 18%;
+  /*height: 18%;*/
   margin-top: 0px;
   padding: 5px 10px;
   text-align: left;
@@ -127,6 +143,7 @@ h1 {
 .table > p {
   font-family: "Press Start 2P", cursive;
   color: white;
+  text-transform: uppercase;
 }
 .info > p {
   margin: 10px auto;
@@ -199,7 +216,7 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   background-color: black;
-  box-shadow: 0 0 0 2px White;
+  box-shadow: 0 0 0 5px yellow;
 }
 .gridSquare {
   width: 25px;
@@ -210,26 +227,27 @@ h1 {
 }
 .gate {
   background-color: yellow;
-  border: 1px solid black;
+  border: 2px solid black;
+  border-radius: 15px 15px 0 0;
 }
 .Immigrant {
-  background-image: url("../images/characters/female/emeryheadlarge.png");
+  background-image: url("../images/characters/male/emeryheadlarge.png");
   background-size: contain;
 }
 .ImmigrantUp {
-  background-image: url("../images/characters/female/emerybackhead.png");
+  background-image: url("../images/characters/male/emerybackhead.png");
   background-size: contain;
 }
 .ImmigrantRight {
-  background-image: url("../images/characters/female/emeryrighthead.png");
+  background-image: url("../images/characters/male/emeryrighthead.png");
   background-size: contain;
 }
 .ImmigrantDown {
-  background-image: url("../images/characters/female/emeryheadlarge.png");
+  background-image: url("../images/characters/male/emeryheadlarge.png");
   background-size: contain;
 }
 .ImmigrantLeft {
-  background-image: url("../images/characters/female/emerylefthead.png");
+  background-image: url("../images/characters/male/emerylefthead.png");
   background-size: contain;
 }
 .wall {
@@ -289,6 +307,10 @@ h1 {
   background-size: contain;
 }
 .badge1 {
-  background-image: url("../images/powerups/lottery.png");
+  background-image: url("../images/powerups/badge1.png");
+  background-size: contain;
+}
+.money {
+  background-image: url("../images/powerups/money.png");
   background-size: contain;
 }

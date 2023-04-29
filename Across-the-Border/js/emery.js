@@ -20,7 +20,8 @@ let timeVisa = 30;
 let timeGame = 120;
 let immune = false;
 let boxInfo = "Collect Power-ups that Appear!";
-let boxInfo2 = "Life Updates:";
+let boxInfo2 = "--";
+let boxBanner = "CAN YOU BE CANADIAN ENOUGH, EMERY?";
 
 // Id to end timers
 let CountUpAgeYearId;
@@ -38,25 +39,20 @@ let beaverMoveIdFive;
 let ImmigrantSoundId;
 const winAudio = new Audio("Immigrant_win.wav");
 const loseAudio = new Audio("Immigrant_loss.wav");
-
+const cheerAudio = new Audio("Immigrant_cheer.mp3");
+const booAudio = new Audio("Immigrant_boo.mp3");
 function ImmigrantSound() {
   const chomp = new Audio("Immigrant_chomp.mp3");
   chomp.play();
 }
-
 function powerUpSound() {
   const theme = new Audio("powerup.mp3");
   theme.play();
 }
-
 function hitSound() {
   var theme = new Audio("hit.mp3");
   theme.play();
 }
-
-let bgm;
-const themeAudio = new Audio("canadatheme.wav");
-
 const beaverOne = {
   //beaver intial starting position
   beaverIndex: 170,
@@ -182,6 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const gridSquare = document.querySelectorAll(".gridSquare");
   const infoBox = document.querySelector(".infoBox");
   const infoBox2 = document.querySelector(".infoBox2");
+  const infoBanner = document.querySelector(".infoBanner");
   const score = document.querySelector(".score");
   const targetScore = document.querySelector(".targetScore");
   const timerAgeYear = document.querySelector(".timerAgeYear");
@@ -202,10 +199,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (event.keyCode === 13) {
       // check if Enter key was pressed
       // if it says start run the game for the first time.
-      if (start.innerHTML === "Start") {
+      if (start.innerHTML === "PRESS BUTTON TO BEGIN") {
         startGame();
         document.addEventListener("keydown", moveImmigrant);
-        start.innerHTML = "RUN!";
+        start.innerHTML = "GO! GO! GO!";
         //infoBox.innerHTML = "TOIL TOIL TOIL!!!";
         start.style.backgroundColor = "red";
       }
@@ -220,8 +217,10 @@ document.addEventListener("DOMContentLoaded", () => {
     beaverFour,
     beaverFive
   ) {
-    infoBox.innerHTML = "Press button to begin";
-    infoBox2.innerHTML = "Life updates:";
+    infoBox.innerHTML = "--";
+    infoBox2.innerHTML = boxInfo2;
+    infoBanner.innerHTML = "CAN YOU BE CANADIAN ENOUGH, EMERY?";
+    infoBanner.innerHTML = boxBanner;
     for (let i = 0; i < layout.length; i++) {
       // gridSquare[i].classList.add(layoutClasses[layout[i]])
       if (layout[i] === 1) {
@@ -265,6 +264,8 @@ document.addEventListener("DOMContentLoaded", () => {
         gridSquare[i].classList.add("letter2");
       } else if (layout[i] === 18) {
         gridSquare[i].classList.add("book2");
+      } else if (layout[i] === 19) {
+        gridSquare[i].classList.add("money");
       }
     }
   }
@@ -359,7 +360,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber + 40;
       score.innerHTML = scoreNumber;
       boxInfo = "+40: Canadian job experience!";
-      boxInfo2 = "You're now skilled enough by Canadian standards!";
+      boxInfo2 = "You're not useless in Canada!";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
       immune = true;
@@ -374,7 +375,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber + 40;
       score.innerHTML = scoreNumber;
       boxInfo = "+40: Canadian job offer!";
-      boxInfo2 = "A Canadian employer now believes in you!";
+      boxInfo2 = "You're dependable in Canada!";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
       immune = true;
@@ -389,7 +390,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
       boxInfo = "+10: Partner's Canadian job offer!";
-      boxInfo2 = "Your partner's Canadian employer believes in them too!";
+      boxInfo2 = "Your partner's dependable in Canada!";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
       immune = true;
@@ -404,7 +405,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
       boxInfo = "+10 : Partner's added experience!";
-      boxInfo2 = "Your partner's competence has increased!";
+      boxInfo2 = "Your partner's more dependable now!";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
       immune = true;
@@ -419,7 +420,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber + 600;
       score.innerHTML = scoreNumber;
       boxInfo = "+600 : Nominated by province!";
-      boxInfo2 = "1/13 of Canada recognizes your worth!";
+      boxInfo2 = "1/13 of Canada wants you!";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
       immune = true;
@@ -434,7 +435,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber + 200;
       score.innerHTML = scoreNumber;
       boxInfo = "+200 : LMIA by your Employer!";
-      boxInfo2 = "Your Canadian employer finds you one of a kind!";
+      boxInfo2 = "Someone finds you one of a kind!";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
       immune = true;
@@ -446,10 +447,23 @@ document.addEventListener("DOMContentLoaded", () => {
     if (gridSquare[ImmigrantIndex].classList.contains("lottery")) {
       gridSquare[ImmigrantIndex].classList.remove("lottery");
       powerUpSound();
-      scoreTarget = 75; //scoreTarget - 1925;
+      scoreTarget = 75;
       targetScore.innerHTML = scoreTarget;
       boxInfo = "Historic CRS Low!";
       boxInfo2 = "Lucky you!";
+      infoBox.innerHTML = boxInfo;
+      infoBox2.innerHTML = boxInfo2;
+      immune = true;
+      setTimeout(() => {
+        immune = false;
+      }, 3000);
+    }
+    if (gridSquare[ImmigrantIndex].classList.contains("money")) {
+      gridSquare[ImmigrantIndex].classList.remove("money");
+      gridSquare[170].classList.add("gate");
+      powerUpSound();
+      boxInfo = "Application fees paid!";
+      boxInfo2 = "You paid for your opportunity!";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
       immune = true;
@@ -695,7 +709,7 @@ document.addEventListener("DOMContentLoaded", () => {
         score.innerHTML = scoreNumber;
         console.log("hit by one");
         boxInfo = "-40 : Got fired!";
-        boxInfo2 = "You're not competent enough in Canada!";
+        boxInfo2 = "You're worthless in Canada!";
         infoBox.innerHTML = boxInfo;
         infoBox2.innerHTML = boxInfo2;
         immune = true;
@@ -731,7 +745,7 @@ document.addEventListener("DOMContentLoaded", () => {
         scoreNumber = scoreNumber - 10;
         score.innerHTML = scoreNumber;
         boxInfo = "-10 : Partner fired!";
-        boxInfo2 = "Your partner's not competent enough in Canada!";
+        boxInfo2 = "Your partner's worthless in Canada!";
         infoBox.innerHTML = boxInfo;
         infoBox2.innerHTML = boxInfo2;
         immune = true;
@@ -767,7 +781,7 @@ document.addEventListener("DOMContentLoaded", () => {
         scoreNumber = scoreNumber - 15;
         score.innerHTML = scoreNumber;
         infoBox2.innerHTML = "-15 : Irrelevant job experience!";
-        boxInfo2 = "Your competence is useless in Canada!";
+        boxInfo2 = "You're useless in Canada!";
         infoBox.innerHTML = boxInfo;
         infoBox2.innerHTML = boxInfo2;
         immune = true;
@@ -796,9 +810,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Counts up the Year in Age, affects score by change in year. Don't change the values because they reflect permanent residency computations for age.
   function CountUpAgeYear() {
-    boxInfo = "YOU GOT OLDER!";
+    boxInfo = "BIRTHDAY!";
     infoBox.innerHTML = boxInfo;
-    boxInfo2 = "YOUR CANADA DREAM'S RUNNING OUT OF TIME!";
+    boxBanner = "TIME IS TICKING!";
+    infoBanner.innerHTML = boxBanner;
+    boxInfo2 = "YOU GOT OLDER!";
     infoBox2.innerHTML = boxInfo2;
     if (timeAgeYear < 28) {
       scoreNumber = scoreNumber + 10;
@@ -872,17 +888,32 @@ document.addEventListener("DOMContentLoaded", () => {
     if (timeGame == 30) {
       gridSquare[289].classList.remove("badge1");
       gridSquare[336].classList.add("letter2");
+      if (scoreNumber >= scoreTarget) {
+        boxBanner = "YOU'RE ON TRACK WITH YOUR DREAMS!";
+        infoBanner.innerHTML = boxBanner;
+      } else if (scoreNumber >= scoreTarget) {
+        boxBanner = "ARE YOU WORKING HARD ENOUGH?!";
+        infoBanner.innerHTML = boxBanner;
+      }
     }
     if (timeGame == 20) {
       gridSquare[336].classList.remove("letter2");
       gridSquare[262].classList.add("lottery");
+      gridSquare[218].classList.add("money");
     }
     if (timeGame == 10) {
       gridSquare[262].classList.remove("lottery");
+      if (scoreNumber >= scoreTarget) {
+        boxBanner = "JUST A LITTLE MORE, EMERY!";
+        infoBanner.inneerHTML = boxBanner;
+      } else if (scoreNumber >= scoreTarget) {
+        boxBanner = "YOU BETTER PRAY FOR A MIRACLE!";
+        infoBanner.inneerHTML = boxBanner;
+      }
     }
-    if (timeGame == 8) {
+    /*if (timeGame == 8) {
       gridSquare[170].classList.add("gate");
-    }
+    }*/
 
     // Specifically for visa expiration and game ending.
     if (timeGame == 30) {
@@ -903,11 +934,16 @@ document.addEventListener("DOMContentLoaded", () => {
               gridSquare[ImmigrantIndex].classList.contains("gate")
             ) {
               winAudio.play();
-              boxInfo = "YOU GET TO LIVE IN CANADA!";
+              boxInfo = "RESIDENCY APPLICATION APPROVED!";
               infoBox.innerHTML = boxInfo;
+              boxBanner = "YOU GET TO LIVE IN CANADA!";
+              infoBanner.innerHTML = boxBanner;
               boxInfo2 = "CONGRATULATIONS!";
               infoBox2.innerHTML = boxInfo2;
               document.body.style.background = "url('images/Canada.gif')";
+              setTimeout(function () {
+                cheerAudio.play();
+              }, 2000);
               scoreNumber = scoreNumber;
               timeAgeYear = 0;
               clearInterval(ImmigrantSoundId);
@@ -984,11 +1020,15 @@ document.addEventListener("DOMContentLoaded", () => {
               gridSquare[ImmigrantIndex].classList.contains("gate")
             ) {
               loseAudio.play();
-              boxInfo = "YOU DON'T DESERVE CANADA!";
+              boxInfo = "RESIDENCY APPLICATION REJECTED!";
               infoBox.innerHTML = boxInfo;
-              boxInfo2 = "STAY IN YOUR COUNTRY LOSER!";
+              boxBanner = "STAY IN YOUR COUNTRY LOSER!";
+              infoBanner.innerHTML = boxBanner;
+              boxInfo2 = "YOU DON'T DESERVE CANADA!";
               infoBox2.innerHTML = boxInfo2;
-              document.body.style.background = "url('images/denied.png')";
+              document.body.style.background =
+                "url('images/denied.gif') repeat left top";
+              document.body.style.backgroundColor = "black";
               setTimeout(function () {
                 window.location.href = "index.html";
               }, 10000);
@@ -1017,13 +1057,20 @@ document.addEventListener("DOMContentLoaded", () => {
               );
               gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
               gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
+              setTimeout(function () {
+                booAudio.play();
+              }, 1500);
             } else if (!gridSquare[ImmigrantIndex].classList.contains("gate")) {
               loseAudio.play();
-              boxInfo = "YOU DON'T DESERVE CANADA!";
+              boxInfo = "RESIDENCY APPLICATION REJECTED!";
               infoBox.innerHTML = boxInfo;
-              boxInfo2 = "STAY IN YOUR COUNTRY LOSER!";
+              boxBanner = "STAY IN YOUR COUNTRY LOSER!";
+              infoBanner.innerHTML = boxBanner;
+              boxInfo2 = "YOU DON'T DESERVE CANADA!";
               infoBox2.innerHTML = boxInfo2;
-              document.body.style.background = "url('images/denied.png')";
+              document.body.style.background =
+                "url('images/Denied.gif') repeat left top";
+              document.body.style.backgroundColor = "black";
               setTimeout(function () {
                 window.location.href = "index.html";
               }, 10000);
@@ -1052,13 +1099,20 @@ document.addEventListener("DOMContentLoaded", () => {
               );
               gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
               gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
+              gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
+              gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
+              setTimeout(function () {
+                booAudio.play();
+              }, 1500);
             } else if (
               gridSquare[ImmigrantIndex].classList.contains("gate") &&
               scoreNumber >= scoreTarget
             ) {
               winAudio.play();
-              boxInfo = "YOU GET TO LIVE IN CANADA!";
+              boxInfo = "RESIDENCY APPLICATION APPROVED!";
               infoBox.innerHTML = boxInfo;
+              boxBanner = "YOU GET TO LIVE IN CANADA!";
+              infoBanner.innerHTML = boxBanner;
               boxInfo2 = "CONGRATULATIONS!";
               infoBox2.innerHTML = boxInfo2;
               document.body.style.background = "url('images/Canada.gif')";
@@ -1090,6 +1144,9 @@ document.addEventListener("DOMContentLoaded", () => {
               );
               gridSquare[beaverFour.beaverIndex].classList.remove("beaverFour");
               gridSquare[beaverFive.beaverIndex].classList.remove("beaverFive");
+              setTimeout(function () {
+                cheerAudio.play();
+              }, 2000);
             }
           }
         }

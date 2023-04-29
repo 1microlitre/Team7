@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Across the Border</title>
+    <title>Emery's CAN Residency Journey</title>
     <link rel="stylesheet" href="css/emery.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,7 +10,10 @@
     <script src="js/emery.js" charset="utf-8"></script>
   </head>
   <body>
-    <h1>CAN YOU BE CANADIAN ENOUGH, EMERY?</h1>
+    <!--<audio controls autoplay hidden>
+      <source src="canadatheme.mp3" type="audio/mpeg"> 
+     </audio>-->
+    <h1 class="infoBanner"></h1>
     <div class="game">
       <div class="grid"></div>
       <div class="info">
@@ -18,13 +21,17 @@
           <p>Required: <span class="targetScore">799</span></p>
           <p>Current: <span class="score">329<span></p>
         </div>
-        <div class="start">Start</div>
-        <div class="infoBox"></div>
+        <div class="start">PRESS BUTTON TO BEGIN</div>
         <div class="gameStats">
-          <p>Age: <span class="timerAgeYear">27</span> | <span class="timerAgeMonth">1</span> | <span class="timerAgeDay">15</span></p>
+          <p>AGE: y<span class="timerAgeYear">27</span> | m<span class="timerAgeMonth">1</span> | d<span class="timerAgeDay">15</span></p>
           <p>Visa expires in: <span id="timerVisa" class="timerVisa"></span></p>
         </div>
+        <div class="infoContainer">
+          <div>Milestone:</div>
+          <div class="infoBox"></div>
+          <div>In other words...</div>
         <div class="infoBox2"></div>
+        </div>
         <span class="timerGame"></span><!--Keep this span to activate the timer for the power-up appearance-->
         <div class="controls"><!--Hidden but do not delete – necessary to keep controls-->
           <div class="up">↑</div>

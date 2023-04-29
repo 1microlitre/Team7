@@ -227,7 +227,8 @@ h1 {
 }
 .gate {
   background-color: yellow;
-  border: 1px solid black;
+  border: 2px solid black;
+  border-radius: 15px 15px 0 0;
 }
 .Immigrant {
   background-image: url("../images/characters/male/sebastianheadlarge.png");
@@ -306,6 +307,10 @@ h1 {
   background-size: contain;
 }
 .badge1 {
-  background-image: url("../images/powerups/lottery.png");
+  background-image: url("../images/powerups/badge1.png");
+  background-size: contain;
+}
+.money {
+  background-image: url("../images/powerups/money.png");
   background-size: contain;
 }

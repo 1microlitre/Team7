@@ -264,6 +264,8 @@ document.addEventListener("DOMContentLoaded", () => {
         gridSquare[i].classList.add("letter2");
       } else if (layout[i] === 18) {
         gridSquare[i].classList.add("book2");
+      } else if (layout[i] === 19) {
+        gridSquare[i].classList.add("money");
       }
     }
   }
@@ -358,7 +360,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber + 40;
       score.innerHTML = scoreNumber;
       boxInfo = "+40: Canadian job experience!";
-      boxInfo2 = "You're now useful by Canadian standards!";
+      boxInfo2 = "You're not useless in Canada!";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
       immune = true;
@@ -373,7 +375,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber + 40;
       score.innerHTML = scoreNumber;
       boxInfo = "+40: Canadian job offer!";
-      boxInfo2 = "Someone in Canada now believes in you!";
+      boxInfo2 = "You're dependable in Canada!";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
       immune = true;
@@ -388,7 +390,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
       boxInfo = "+10: Partner's Canadian job offer!";
-      boxInfo2 = "Someone in Canada now believes in your partner!";
+      boxInfo2 = "Your partner's dependable in Canada!";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
       immune = true;
@@ -403,7 +405,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber + 10;
       score.innerHTML = scoreNumber;
       boxInfo = "+10 : Partner's added experience!";
-      boxInfo2 = "Your partner got more useful in Canada!";
+      boxInfo2 = "Your partner's more dependable now!";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
       immune = true;
@@ -418,7 +420,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber + 600;
       score.innerHTML = scoreNumber;
       boxInfo = "+600 : Nominated by province!";
-      boxInfo2 = "1/13 of Canada recognizes your worth!";
+      boxInfo2 = "1/13 of Canada wants you!";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
       immune = true;
@@ -433,7 +435,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreNumber = scoreNumber + 200;
       score.innerHTML = scoreNumber;
       boxInfo = "+200 : LMIA by your Employer!";
-      boxInfo2 = "Your Canadian employer finds you one of a kind!";
+      boxInfo2 = "Someone finds you one of a kind!";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
       immune = true;
@@ -449,6 +451,19 @@ document.addEventListener("DOMContentLoaded", () => {
       targetScore.innerHTML = scoreTarget;
       boxInfo = "Historic CRS Low!";
       boxInfo2 = "Lucky you!";
+      infoBox.innerHTML = boxInfo;
+      infoBox2.innerHTML = boxInfo2;
+      immune = true;
+      setTimeout(() => {
+        immune = false;
+      }, 3000);
+    }
+    if (gridSquare[ImmigrantIndex].classList.contains("money")) {
+      gridSquare[ImmigrantIndex].classList.remove("money");
+      gridSquare[170].classList.add("gate");
+      powerUpSound();
+      boxInfo = "Application fees paid!";
+      boxInfo2 = "You paid for your opportunity!";
       infoBox.innerHTML = boxInfo;
       infoBox2.innerHTML = boxInfo2;
       immune = true;
@@ -694,7 +709,7 @@ document.addEventListener("DOMContentLoaded", () => {
         score.innerHTML = scoreNumber;
         console.log("hit by one");
         boxInfo = "-40 : Got fired!";
-        boxInfo2 = "You're not competent enough in Canada!";
+        boxInfo2 = "You're worthless in Canada!";
         infoBox.innerHTML = boxInfo;
         infoBox2.innerHTML = boxInfo2;
         immune = true;
@@ -730,7 +745,7 @@ document.addEventListener("DOMContentLoaded", () => {
         scoreNumber = scoreNumber - 10;
         score.innerHTML = scoreNumber;
         boxInfo = "-10 : Partner fired!";
-        boxInfo2 = "Your partner's not useful in Canada!";
+        boxInfo2 = "Your partner's worthless in Canada!";
         infoBox.innerHTML = boxInfo;
         infoBox2.innerHTML = boxInfo2;
         immune = true;
@@ -884,6 +899,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (timeGame == 20) {
       gridSquare[336].classList.remove("letter2");
       gridSquare[262].classList.add("lottery");
+      gridSquare[218].classList.add("money");
     }
     if (timeGame == 10) {
       gridSquare[262].classList.remove("lottery");
@@ -895,9 +911,9 @@ document.addEventListener("DOMContentLoaded", () => {
         infoBanner.inneerHTML = boxBanner;
       }
     }
-    if (timeGame == 8) {
+    /*if (timeGame == 8) {
       gridSquare[170].classList.add("gate");
-    }
+    }*/
 
     // Specifically for visa expiration and game ending.
     if (timeGame == 30) {
