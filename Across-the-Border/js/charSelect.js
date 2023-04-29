@@ -4,7 +4,7 @@ let characterListContainer = document.querySelector(
 );
 let characterListItems = document.querySelectorAll(".character-list li");
 let charSelectorHead = document.querySelector(".charSelectorHead");
-let SelectorHeaderBox = "Choosing your immigrant profile...";
+let SelectorHeaderBox = "ASSIGNING IMMIGRANT PROFILE...";
 charSelectorHead.innerHTML = SelectorHeaderBox;
 
 const selectAudio = new Audio("charSelectTone.mp3");
@@ -26,7 +26,7 @@ function selectRandomCharacter() {
     }
   });
 
-  SelectorHeaderBox = "Press button to proceed!";
+  SelectorHeaderBox = "PRESS BUTTON TO PLAY";
   charSelectorHead.innerHTML = SelectorHeaderBox;
 
   // Hide character list container

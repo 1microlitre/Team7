@@ -19,9 +19,9 @@ let timeAgeDay = 15;
 let timeVisa = 30;
 let timeGame = 120;
 let immune = false;
-let boxInfo = "Collect Power-ups that Appear!";
+let boxInfo = "--";
 let boxInfo2 = "--";
-let boxBanner = "CAN YOU BE CANADIAN ENOUGH, EMERY?";
+let boxBanner = "--";
 
 // Id to end timers
 let CountUpAgeYearId;
@@ -220,9 +220,11 @@ document.addEventListener("DOMContentLoaded", () => {
     beaverFour,
     beaverFive
   ) {
-    infoBox.innerHTML = "--";
+    boxInfo = "Starting your Canadian residency journey...";
+    infoBox.innerHTML = boxInfo;
+    boxInfo2 = "CAN YOU BE CANADIAN ENOUGH, EMERY?";
     infoBox2.innerHTML = boxInfo2;
-    infoBanner.innerHTML = "CAN YOU BE CANADIAN ENOUGH, EMERY?";
+    boxBanner = "PRESS BUTTON TO START GAME";
     infoBanner.innerHTML = boxBanner;
     for (let i = 0; i < layout.length; i++) {
       // gridSquare[i].classList.add(layoutClasses[layout[i]])
@@ -939,9 +941,9 @@ document.addEventListener("DOMContentLoaded", () => {
               winAudio.play();
               boxInfo = "RESIDENCY APPLICATION APPROVED!";
               infoBox.innerHTML = boxInfo;
-              boxBanner = "YOU GET TO LIVE IN CANADA!";
+              boxBanner = "CONGRATULATIONS!!!";
               infoBanner.innerHTML = boxBanner;
-              boxInfo2 = "CONGRATULATIONS!";
+              boxInfo2 = "YOU DESERVE TO BE ONE OF US!";
               infoBox2.innerHTML = boxInfo2;
               document.body.style.background =
                 "url('images/Approved.gif') repeat left top";
@@ -980,7 +982,7 @@ document.addEventListener("DOMContentLoaded", () => {
               scoreNumber < scoreTarget &&
               gridSquare[ImmigrantIndex].classList.contains("gate")
             ) {
-              boxInfo = "YOU DON'T HAVE ENOUGH POINTS YET!";
+              boxInfo = "CRS INSUFFICIENT";
               infoBox.innerHTML = boxInfo;
               boxInfo2 = "YOU NEED TO WORK HARDER!";
               infoBox2.innerHTML = boxInfo2;
@@ -1027,7 +1029,7 @@ document.addEventListener("DOMContentLoaded", () => {
               loseAudio.play();
               boxInfo = "RESIDENCY APPLICATION REJECTED!";
               infoBox.innerHTML = boxInfo;
-              boxBanner = "STAY IN YOUR COUNTRY LOSER!";
+              boxBanner = "STAY IN YOUR COUNTRY, LOSER!";
               infoBanner.innerHTML = boxBanner;
               boxInfo2 = "YOU DON'T DESERVE CANADA!";
               infoBox2.innerHTML = boxInfo2;
@@ -1069,7 +1071,7 @@ document.addEventListener("DOMContentLoaded", () => {
               loseAudio.play();
               boxInfo = "RESIDENCY APPLICATION REJECTED!";
               infoBox.innerHTML = boxInfo;
-              boxBanner = "STAY IN YOUR COUNTRY LOSER!";
+              boxBanner = "STAY IN YOUR COUNTRY, LOSER!";
               infoBanner.innerHTML = boxBanner;
               boxInfo2 = "YOU DON'T DESERVE CANADA!";
               infoBox2.innerHTML = boxInfo2;
@@ -1116,9 +1118,9 @@ document.addEventListener("DOMContentLoaded", () => {
               winAudio.play();
               boxInfo = "RESIDENCY APPLICATION APPROVED!";
               infoBox.innerHTML = boxInfo;
-              boxBanner = "YOU GET TO LIVE IN CANADA!";
+              boxBanner = "CONGRATULATIONS!!!";
               infoBanner.innerHTML = boxBanner;
-              boxInfo2 = "CONGRATULATIONS!";
+              boxInfo2 = "YOU DESERVE TO BE ONE OF US!";
               infoBox2.innerHTML = boxInfo2;
               document.body.style.background =
                 "url('images/Approved.gif') repeat left top";
@@ -1159,7 +1161,7 @@ document.addEventListener("DOMContentLoaded", () => {
             loseAudio.play();
             boxInfo = "RESIDENCY APPLICATION REJECTED!";
             infoBox.innerHTML = boxInfo;
-            boxBanner = "STAY IN YOUR COUNTRY LOSER!";
+            boxBanner = "STAY IN YOUR COUNTRY, LOSER!";
             infoBanner.innerHTML = boxBanner;
             boxInfo2 = "YOU DON'T DESERVE CANADA!";
             infoBox2.innerHTML = boxInfo2;

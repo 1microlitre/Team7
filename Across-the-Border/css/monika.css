@@ -137,7 +137,7 @@ h1 {
   width: 100%;
   /*height: 18%;*/
   margin-top: 0px;
-  padding: 5px 10px;
+  padding: 5px 20px;
   text-align: left;
 }
 .table > p {
@@ -211,6 +211,7 @@ h1 {
   margin: 0 10px;
 }
 .grid {
+  margin-top: 5px;
   width: 500px;
   height: 500px;
   display: flex;
