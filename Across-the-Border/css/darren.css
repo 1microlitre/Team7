@@ -257,22 +257,27 @@ h1 {
 .beaverOne {
   background-image: url("../images/monsters/beavercyanhead.png");
   background-size: contain;
+  background-repeat: no-repeat;
 }
 .beaverTwo {
   background-image: url("../images/monsters/beaverorangehead.png");
   background-size: contain;
+  background-repeat: no-repeat;
 }
 .beaverThree {
   background-image: url("../images/monsters/beaverpinkhead.png");
   background-size: contain;
+  background-repeat: no-repeat;
 }
 .beaverFour {
   background-image: url("../images/monsters/beaverkinghead.png");
   background-size: contain;
+  background-repeat: no-repeat;
 }
 .beaverFive {
   background-image: url("../images/monsters/beaveroriginalhead.png");
   background-size: contain;
+  background-repeat: no-repeat;
 }
 .book {
   background-image: url("../images/powerups/book.png");
