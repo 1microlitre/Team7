@@ -7,6 +7,9 @@ let charSelectorHead = document.querySelector(".charSelectorHead");
 let SelectorHeaderBox = "Choosing your immigrant profile...";
 charSelectorHead.innerHTML = SelectorHeaderBox;
 
+const selectAudio = new Audio("charSelectTone.mp3");
+const chosenAudio = new Audio("charChosen.wav");
+
 // Function to select a random character
 function selectRandomCharacter() {
   // Get a random character list item
@@ -19,7 +22,7 @@ function selectRandomCharacter() {
   // Remove 'blink' class from all other li elements
   characterListItems.forEach((item) => {
     if (item !== selectedCharacterListItem) {
-      item.classList.add("blink");
+      item.classList.add("faint");
     }
   });
 
@@ -43,6 +46,7 @@ function startBlinking() {
   characterListItems.forEach((item) => {
     item.querySelector("label").classList.add("blink");
   });
+  selectAudio.play();
 }
 
 // Function to stop blinking animation
@@ -56,17 +60,9 @@ function stopBlinking() {
       item.querySelector("label").classList.remove("blink");
     }
   });
+  selectAudio.pause();
+  chosenAudio.play();
 }
-
-// Function to open character page on click
-/*function handleClick(event) {
-  const selectedCharacterListItem = document.querySelector(
-    ".character-list li.selected"
-  );
-  const selectedCharacterName =
-    selectedCharacterListItem.querySelector("input").value;
-  window.location.href = `${selectedCharacterName}.html`;
-}*/
 
 function handleKeyPress(event) {
   if (event.keyCode === 13) {

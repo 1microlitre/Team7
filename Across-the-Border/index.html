@@ -11,6 +11,8 @@
   <body class="bodySplash">
     <div>
       <audio id="player" autoplay src="canadatheme.mp3" type="audio/mp3"></audio>
+      <!--Input to terminal:
+        /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --autoplay-policy=no-user-gesture-required-->
     </div>
     <div class="splash">
       <section id="splashanimation" class="splashlogo">
@@ -19,15 +21,16 @@
       </section>
       <div class="clear"></div>
       <section class="splashenter" id='blinking'>
-        <p><span style="color: yellow">Press to start!</span></p>
+        <p>Press button to start!</p>
       </section>
     <script>
        function playAudio() {
-        var audio = document.getElementById("player");
+        let audio = document.getElementById("player");
         audio.play();
+        audio.loop;
       }
       function stopAudio() {
-        var audio = document.getElementById("player");
+        let audio = document.getElementById("player");
         audio.pause();
       }
       document.addEventListener("keydown", function (event) {
@@ -35,18 +38,23 @@
           window.location.href = "Char-Selection.html";
         }
       });
-      var img = document.getElementById('blinking');
-      var interval = window.setInterval(function(){
+      let img = document.getElementById('blinking');
+      let interval = window.setInterval(function(){
         if(img.style.visibility == 'hidden'){
           img.style.visibility = 'visible';
         } else {
           img.style.visibility = 'hidden';
         }
-      }, 500);
+      }, 200);
       playAudio();
       window.addEventListener("beforeunload", function(event) {
         stopAudio();
       });
+
+      function timedRefresh(timeoutPeriod) {
+	        setTimeout("location.reload(true);",timeoutPeriod);
+      }
+      window.onload = timedRefresh(1250000);
     </script>
   </body>
 </html>

@@ -29,13 +29,13 @@ h1 {
 /*For Splash Page*/
 .bodySplash {
   margin: 0;
-  background-image: url("../images/Across-the-Border-BG.png");
-  background-size: 100%;
-  /*background-image: url("../images/Across-the-Border-logo_03.png");
+  /*background-image: url("../images/Across-the-Border-BG.png");
+  background-size: 100%;*/
+  background-image: url("../images/Across-the-Border-logo_03.png");
   background-repeat: repeat;
   background-size: 20px;
   background-position: center;
-  background-color: red;*/
+  background-color: red;
 }
 .splash {
   text-align: center;
@@ -53,17 +53,16 @@ h1 {
   width: 80%;
 }
 .splashenter {
-  width: 40%;
-  height: 25%;
-  padding: 10px;
-  border: 5px solid yellow;
-  background-color: red;
-  margin: 0% 30%;
+  width: 80%;
+  background-color: yellow;
+  padding: 5px;
+  /*border: 1px solid yellow;*/
+  margin: 0% 10%;
 }
 .splashenter > p {
-  font-size: 32px;
-  color: white;
-  font-family: "VT323", monospace;
+  font-size: 27px;
+  color: red;
+  font-family: "Press Start 2P", cursive;
   text-align: center;
   text-transform: uppercase;
 }
@@ -94,10 +93,13 @@ h2 {
   font-size: 36px;
 }
 .character input[type="radio"]:checked + label {
-  border: 2px solid red;
+  border: 2px solid yellow;
+}
+.faint {
+  opacity: 30%;
 }
 .blink {
-  animation: blink 0.5s linear infinite;
+  animation: blink 0.25s linear infinite;
 }
 @keyframes blink {
   5% {
@@ -106,8 +108,30 @@ h2 {
 }
 .character-list {
   width: 100%;
-  display: block;
+  display: flex;
   justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.character-list li {
+  display: block;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1em;
+}
+.character-list li label {
+  display: block;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+.character-list li span {
+  margin-top: 0.5em;
+  text-align: center;
 }
 .character-list > li {
   width: 30%;
@@ -141,19 +165,22 @@ label {
   margin-right: 5%;
 }
 .labelDesc > h3 {
-  font-size: 24px;
+  color: red;
+  font-size: 27px;
   font-family: "VT323", monospace;
   text-transform: uppercase;
-  padding-top: 20px;
-  padding-bottom: 5px;
+  padding-top: 5px;
   margin: 0px;
 }
 .labelDesc > p {
-  font-size: 14px;
-  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  font-family: "VT323", monospace;
+  /*font-family: "Inter", sans-serif;*/
   line-height: 21px;
-  padding: 0px;
   margin: 0px;
+}
+.labelDescBody {
+  padding-top: 10px;
 }
 img {
   width: 40%;
@@ -161,32 +188,6 @@ img {
 }
 img:hover {
   transform: scale(1.1);
-}
-.character-list {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-.character-list li {
-  display: block;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 1em;
-}
-.character-list li label {
-  display: block;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-}
-.character-list li span {
-  margin-top: 0.5em;
-  text-align: center;
 }
 .selected {
   width: 40%;
