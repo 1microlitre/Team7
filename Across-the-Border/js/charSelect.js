@@ -8,7 +8,7 @@ let SelectorHeaderBox = "Choosing your immigrant profile...";
 charSelectorHead.innerHTML = SelectorHeaderBox;
 
 const selectAudio = new Audio("charSelectTone.mp3");
-selectAudio.play();
+const chosenAudio = new Audio("charChosen.wav");
 
 // Function to select a random character
 function selectRandomCharacter() {
@@ -61,6 +61,7 @@ function stopBlinking() {
     }
   });
   selectAudio.pause();
+  chosenAudio.play();
 }
 
 function handleKeyPress(event) {
@@ -79,7 +80,6 @@ document.querySelector(".character-list").addEventListener("click", (event) => {
   if (event.target.tagName === "INPUT") {
     selectRandomCharacter();
     stopBlinking();
-    clearInterval(selectTone);
   }
 });
 

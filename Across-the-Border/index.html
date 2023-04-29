@@ -21,12 +21,13 @@
       </section>
       <div class="clear"></div>
       <section class="splashenter" id='blinking'>
-        <p>Press to start!</p>
+        <p>Press button to start!</p>
       </section>
     <script>
        function playAudio() {
         let audio = document.getElementById("player");
         audio.play();
+        audio.loop;
       }
       function stopAudio() {
         let audio = document.getElementById("player");
@@ -49,6 +50,11 @@
       window.addEventListener("beforeunload", function(event) {
         stopAudio();
       });
+
+      function timedRefresh(timeoutPeriod) {
+	        setTimeout("location.reload(true);",timeoutPeriod);
+      }
+      window.onload = timedRefresh(1250000);
     </script>
   </body>
 </html>
