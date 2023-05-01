@@ -43,7 +43,7 @@ h1 {
   margin: 10px auto 30px auto;
   height: 600px;
   width: 900px;
-  padding-top: 300px;
+  padding-top: 250px;
 }
 .splashlogo {
   position: relative;
@@ -81,7 +81,7 @@ h1 {
 }
 .container {
   width: 1200px;
-  margin-top: 80px;
+  margin-top: 180px;
   text-align: center;
 }
 h2 {
