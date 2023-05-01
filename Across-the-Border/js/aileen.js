@@ -201,10 +201,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (event.keyCode === 13) {
       // check if Enter key was pressed
       // if it says start run the game for the first time.
-      if (start.innerHTML === "PRESS BUTTON TO BEGIN") {
+      if (infoBanner.innerHTML === "PRESS BUTTON TO START GAME") {
         startGame();
         document.addEventListener("keydown", moveImmigrant);
-        start.innerHTML = "GO! GO! GO!";
+        infoBanner.innerHTML = "GO! GO! GO!";
         //infoBox.innerHTML = "TOIL TOIL TOIL!!!";
         start.style.backgroundColor = "red";
       }
