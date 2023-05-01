@@ -917,18 +917,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
     if (timeGame == 2) {
-      gridSquare[262].classList.remove("money");
-      if (scoreNumber >= scoreTarget) {
-        boxBanner = "YOU MISSED THE APPLICATION DEADLINE!";
-        infoBanner.inneerHTML = boxBanner;
-      } else if (scoreNumber >= scoreTarget) {
-        boxBanner = "NO HOPE FOR YOU!";
-        infoBanner.inneerHTML = boxBanner;
-      }
+      gridSquare[218].classList.remove("money");
     }
-    /*if (timeGame == 8) {
-      gridSquare[170].classList.add("gate");
-    }*/
 
     // Specifically for visa expiration and game ending.
     if (timeGame == 30) {
