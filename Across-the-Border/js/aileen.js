@@ -204,7 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (infoBanner.innerHTML === "PRESS BUTTON TO START GAME") {
         startGame();
         document.addEventListener("keydown", moveImmigrant);
-        infoBanner.innerHTML = "GO! GO! GO!";
+        infoBanner.innerHTML = "CHASE YOUR CANADIAN DREAM!";
         //infoBox.innerHTML = "TOIL TOIL TOIL!!!";
         start.style.backgroundColor = "red";
       }
