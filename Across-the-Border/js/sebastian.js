@@ -947,7 +947,7 @@ document.addEventListener("DOMContentLoaded", () => {
               infoBox2.innerHTML = boxInfo2;
               document.body.style.background =
                 "url('images/Approved.gif') repeat left top";
-              document.body.style.backgroundColor = "red')";
+              document.body.style.backgroundColor = "yellow";
               setTimeout(function () {
                 cheerAudio.play();
               }, 2000);
@@ -1124,7 +1124,7 @@ document.addEventListener("DOMContentLoaded", () => {
               infoBox2.innerHTML = boxInfo2;
               document.body.style.background =
                 "url('images/Approved.gif') repeat left top";
-              document.body.style.backgroundColor = "red";
+              document.body.style.backgroundColor = "yellow";
               setTimeout(function () {
                 window.location.href = "index.html";
               }, 10000);
