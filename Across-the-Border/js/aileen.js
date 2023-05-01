@@ -916,6 +916,16 @@ document.addEventListener("DOMContentLoaded", () => {
         infoBanner.inneerHTML = boxBanner;
       }
     }
+    if (timeGame == 2) {
+      gridSquare[262].classList.remove("money");
+      if (scoreNumber >= scoreTarget) {
+        boxBanner = "YOU MISSED THE APPLICATION DEADLINE!";
+        infoBanner.inneerHTML = boxBanner;
+      } else if (scoreNumber >= scoreTarget) {
+        boxBanner = "NO HOPE FOR YOU!";
+        infoBanner.inneerHTML = boxBanner;
+      }
+    }
     /*if (timeGame == 8) {
       gridSquare[170].classList.add("gate");
     }*/

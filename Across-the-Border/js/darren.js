@@ -201,10 +201,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (event.keyCode === 13) {
       // check if Enter key was pressed
       // if it says start run the game for the first time.
-      if (start.innerHTML === "PRESS BUTTON TO BEGIN") {
+      if (infoBanner.innerHTML === "PRESS BUTTON TO START GAME") {
         startGame();
         document.addEventListener("keydown", moveImmigrant);
-        start.innerHTML = "GO! GO! GO!";
+        infoBanner.innerHTML = "CHASE YOUR CANADIAN DREAM!";
         //infoBox.innerHTML = "TOIL TOIL TOIL!!!";
         start.style.backgroundColor = "red";
       }
@@ -913,6 +913,16 @@ document.addEventListener("DOMContentLoaded", () => {
         infoBanner.inneerHTML = boxBanner;
       } else if (scoreNumber >= scoreTarget) {
         boxBanner = "YOU BETTER PRAY FOR A MIRACLE!";
+        infoBanner.inneerHTML = boxBanner;
+      }
+    }
+    if (timeGame == 2) {
+      gridSquare[262].classList.remove("money");
+      if (scoreNumber >= scoreTarget) {
+        boxBanner = "YOU MISSED THE APPLICATION DEADLINE!";
+        infoBanner.inneerHTML = boxBanner;
+      } else if (scoreNumber >= scoreTarget) {
+        boxBanner = "NO HOPE FOR YOU!";
         infoBanner.inneerHTML = boxBanner;
       }
     }
