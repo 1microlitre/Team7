@@ -4,7 +4,7 @@ let characterListContainer = document.querySelector(
 );
 let characterListItems = document.querySelectorAll(".character-list li");
 let charSelectorHead = document.querySelector(".charSelectorHead");
-let SelectorHeaderBox = "ASSIGNING IMMIGRANT PROFILE...";
+let SelectorHeaderBox = "ASSIGNING, IMMIGRANT PROFILE...";
 charSelectorHead.innerHTML = SelectorHeaderBox;
 
 const selectAudio = new Audio("charSelectTone.mp3");

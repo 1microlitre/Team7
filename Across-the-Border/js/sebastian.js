@@ -817,7 +817,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function CountUpAgeYear() {
     boxInfo = "BIRTHDAY!";
     infoBox.innerHTML = boxInfo;
-    boxBanner = "TIME IS TICKING!";
+    boxBanner = "MOVE FASTER!";
     infoBanner.innerHTML = boxBanner;
     boxInfo2 = "YOU GOT OLDER!";
     infoBox2.innerHTML = boxInfo2;
